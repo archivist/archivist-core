@@ -19,7 +19,7 @@ var indentationCleanerTool = Tool.extend({
 
   performAction: function(app) {
     var doc = this.context.doc;
-    containerId = 'content';
+    var containerId = 'content';
     doc.transaction(function(tx) {
       indentationCleaner(tx, containerId);
     });
