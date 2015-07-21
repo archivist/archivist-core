@@ -42,24 +42,65 @@ class ArchivistWriter extends React.Component {
 
   componentDidMount() {
     var backend = this.context.backend;
+    var notifications = this.context.notifications;
+
+    notifications.addMessage({
+      type: "info",
+      message: "Loading..."
+    });
+
     backend.getDocument(this.props.documentId || "example_document", function(err, doc) {
-      // After here we won't allow non-transactional changes
-      doc.FORCE_TRANSACTIONS = true;
-      this.setState({
-        doc: doc
-      });
+      if (err) {
+        notifications.addMessage({
+          type: "error",
+          message: err.message || err.toString()
+        });
+      } else {
+
+        // After here we won't allow non-transactional changes
+        doc.FORCE_TRANSACTIONS = true;
+        this.setState({
+          doc: doc
+        });
+        
+        notifications.addMessage({
+          type: "info",
+          message: "No changes"
+        });
+      }
     }.bind(this));
   }
 
   componentWillReceiveProps() {
     var backend = this.context.backend;
+    var notifications = this.context.notifications;
+
+    notifications.addMessage({
+      type: "info",
+      message: "Loading..."
+    });
+
     this.setState({
       doc: null
     });
+
     backend.getDocument(this.props.documentId || "example_document", function(err, doc) {
-      this.setState({
-        doc: doc
-      });
+      if (err) {
+        notifications.addMessage({
+          type: "error",
+          message: err.message || err.toString()
+        });
+      } else {
+
+        this.setState({
+          doc: doc
+        });
+        
+        notifications.addMessage({
+          type: "info",
+          message: "No changes"
+        });
+      }
     }.bind(this));
   }
 
