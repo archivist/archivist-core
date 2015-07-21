@@ -127,7 +127,8 @@ class ArchivistWriter extends React.Component {
 ArchivistWriter.displayName = "ArchivistWriter";
 
 ArchivistWriter.contextTypes = {
-  backend: React.PropTypes.object.isRequired
+  backend: React.PropTypes.object.isRequired,
+  notifications: React.PropTypes.object.isRequired
 };
 
 
