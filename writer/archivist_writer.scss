@@ -1,7 +1,8 @@
+// General purpose Substance Styles
 @import '../node_modules/substance-ui/styles/index';
 
-// // Pull in common writer styles
-// @import '../node_modules/substance-ui/writer/writer';
+// Pull in common writer styles
+@import '../node_modules/substance-ui/writer/writer';
 
 /* Custom Scrollbar styles
 -----------------------------------------------------*/
@@ -10,11 +11,9 @@
   background: #aaa;
 }
 
-
 .scrollbar-component.cite_bib_item .highlight {
   background-color: #0b9dd9;
 }
-
 
 /* Text Annotations
 -----------------------------------------------------*/
@@ -26,10 +25,6 @@
 .annotation.emphasis {
   font-style: italic;
 }
-
-
-
-
 
 
 /* Node Components
