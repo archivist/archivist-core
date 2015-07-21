@@ -9,10 +9,9 @@
   "devDependencies": {
   },
   "browserify": {
-    "transform": ["babelify"]
-  },
-  "scripts": {
-    "bundle": "gulp"
+   "transform": [
+      ["babelify", { "only": "writer" }]
+    ]
   },
   "version": "1.0.0"
 }

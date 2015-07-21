@@ -7,7 +7,8 @@ var Document = Substance.Document;
 // --------------
 
 var DocumentNode = require("./nodes/document_node");
-var TextNode = require("./nodes/text_node");
+var Paragraph = Document.Paragraph;
+var TextNode = require("./nodes/text_node"); // legacy!
 var Emphasis = Document.Emphasis;
 var Strong = Document.Strong;
 var Remark = require("./nodes/remark");
@@ -21,11 +22,13 @@ var Waypoint = require("./nodes/waypoint");
 var schema = new Document.Schema("archivist-interview", "0.2.0");
 
 schema.getDefaultTextType = function() {
-  return "text";
+  return "paragraph";
 };
 
 schema.addNodes([
   DocumentNode,
+  TextNode, // Legacy
+  Paragraph,
   Emphasis,
   Strong,
   Remark, // Legacy
