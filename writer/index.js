@@ -104,7 +104,7 @@ class ArchivistWriter extends React.Component {
     } else if (this.state.errorMessage) {
       return $$('div', {className: 'error-message'}, this.state.errorMessage);
     } else {
-      return $$('div', {className: 'loading-message'}, 'Loading document... This may take a few secons.');
+      return $$('div', {className: 'loading-message'}, 'Loading document... This may take a few seconds.');
     }
   }
 }
