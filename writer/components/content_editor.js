@@ -83,6 +83,7 @@ var ContentEditor = React.createClass({
     
     _.each(subjectReferences, function(sref) {
       subjectRefComponents.push($$('a', {
+        key: sref.id,
         className: "subject-reference"+(_.includes(highlightedNodes, sref.id) ? ' selected' : ''),
         href: "#",
         "data-id": sref.id,
