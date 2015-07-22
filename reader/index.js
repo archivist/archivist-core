@@ -17,6 +17,7 @@ var SubstanceReader = require("substance-ui/reader");
 // ---------------
 //
 
+var tools = require('./tools');
 var components = require('./components');
 var stateHandlers = require('./state_handlers');
 var panelOrder = ["subjects", "entities"];
@@ -91,6 +92,7 @@ class ArchivistReader extends React.Component {
       return $$(SubstanceReader, {
         config: {
           components: components,
+          tools: tools,
           stateHandlers: stateHandlers,
           panelOrder: panelOrder
         },
