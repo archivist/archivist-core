@@ -11,19 +11,26 @@ var TextNode = Document.TextNode.extend({
 
 TextNode.static.blockType = true;
 
-TextNode.static.matchElement = function(el) {
-  var tagName = el.tagName.toLowerCase();
-  return (tagName === 'p');
-};
-
-TextNode.static.fromHtml = function(el, converter) {
-  var text = {
-    id: el.dataset.id || Substance.uuid('text'),
+TextNode.static.fromHtml = function($el, converter) {
+  var id = converter.defaultId($el, 'p');
+  var paragraph = {
+    id: id,
     content: ''
   };
-  text.content = converter.annotatedText(el, [text.id, 'content']);
-  return text;
+  paragraph.content = converter.annotatedText($el, [id, 'content']);
+  return paragraph;
 };
+
+// HtmlExporter
+
+TextNode.static.toHtml = function(paragraph, converter) {
+  var id = paragraph.id;
+  var $el = $('<p>')
+    .attr('id', id);
+  $el.append(converter.annotatedText([id, 'content']));
+  return $el;
+};
+
 
 
 module.exports = TextNode;
