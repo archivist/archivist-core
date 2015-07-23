@@ -78,6 +78,8 @@ class ContentEditor extends React.Component {
 
   componentDidMount() {
     this.initializeComponent();
+    // Custom event
+    this.props.doc.emit('document:rendered');
   }
 
   componentDidUpdate() {
