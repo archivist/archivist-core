@@ -25,8 +25,9 @@ class Brackets {
   // }
 
   onToggleSubjectReference(e) {
-    console.log('TODO: handle toggling', e);
+    var subjectRefId = e.currentTarget.dataset.id;
     e.preventDefault();
+    this.props.onBracketToggled(subjectRefId);
   }
 
   onDocumentChanged(change) {
@@ -67,7 +68,6 @@ class Brackets {
       }
 
       var startTop = $(startAnchorEl).position().top;
-      console.log('startTop', startTop);
       var endTop = $(endAnchorEl).position().top + $(endAnchorEl).height();
       var height = endTop - startTop;
 
@@ -144,9 +144,7 @@ class Brackets {
 
   render() {
     var doc = this.props.doc;
-
     var subjectReferences = doc.getIndex('type').get('subject_reference');
-    var subjectRefComponents = [];
 
     // Clear content first, so the rerender works properly
     this.$el.empty();

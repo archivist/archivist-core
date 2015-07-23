@@ -6,6 +6,8 @@ var prevSelection;
 var stateHandlers = {
 
   handleSelectionChange: function(app, sel, annotations) {
+    console.log('handle selection change..');
+    
     var surface = app.getSurface();
     var contentContainer = surface.getContainer();
     var doc = app.doc;

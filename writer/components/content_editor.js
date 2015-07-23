@@ -10,6 +10,7 @@ var UnsupportedNode = require('./nodes/unsupported_node');
 var ContainerEditor = Surface.ContainerEditor;
 var ContainerComponent = require('substance-ui/container_component');
 
+var ENABLED_TOOLS = ["strong", "emphasis", "timecode", "remark", "entity_reference", "subject_reference"];
 
 
 class ContentEditor extends React.Component {
@@ -38,15 +39,18 @@ class ContentEditor extends React.Component {
     var contentContainerEl = React.findDOMNode(this.refs.contentContainer);
     var compEl = React.findDOMNode(this);
 
-    surfaceManager.registerSurface(surface, {
-      enabledTools: this.props.enabledTools
+    // surfaceManager.registerSurface(surface);
+
+    this.context.app.registerSurface(surface, {
+      enabledTools: ENABLED_TOOLS
     });
 
     surface.attach(contentContainerEl);
 
     this.brackets = new Brackets({
       doc: this.props.doc,
-      contentContainerEl: contentContainerEl
+      contentContainerEl: contentContainerEl,
+      onBracketToggled: this.onBracketToggled.bind(this)
     });
     $(compEl).append(this.brackets.render().$el);
 
@@ -56,8 +60,30 @@ class ContentEditor extends React.Component {
     // }.bind(this));
   }
 
+  onBracketToggled(subjectReferenceId) {
+    var app = this.context.app;
+    var state = app.state;
+
+    if (state.contextId === "editSubjectReference" && state.subjectReferenceId === subjectReferenceId) {
+      app.replaceState({
+        contextId: "subjects"
+      });
+    } else {
+      app.replaceState({
+        contextId: "editSubjectReference",
+        subjectReferenceId: subjectReferenceId,
+        noScroll: true
+      });
+    }
+  }
+
   // Lifecycle
   // -------------
+
+
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
 
   // Creation
 
@@ -71,15 +97,24 @@ class ContentEditor extends React.Component {
 
   // Updating
 
-  componentWillReceiveProps(nextProps) {
-    this.dispose(); // clean up before setting up new state
-    this.setState(this.computeStateFromProps(nextProps));
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   // When a new doc arrives
+  //   if (this.props.doc !== nextProps.doc) {
+  //     this.dispose(); // clean up before setting up new state
+  //     this.setState(this.computeStateFromProps(nextProps));      
+  //   }
+  // }
 
   // a new doc has arrived
-  componentDidUpdate() {
-    this.initializeComponent();
-  }
+  // componentDidUpdate() {
+  //   // console.log('comp did update');
+  //   // this.initializeComponent();
+  //   // console.log('aaa');
+  //   // setTimeout(function() {
+  //   // }.bind(this), 200);
+  //   // this.state.surface.rerenderDomSelection();
+    
+  // }
 
   componentWillUnmount() {
     this.dispose();
@@ -103,7 +138,7 @@ class ContentEditor extends React.Component {
         containerId: 'content',
         doc: this.props.doc
       })
-      // brackets go here
+      // <Brackets> brackets go here
     );
   }
 }

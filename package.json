@@ -4,14 +4,9 @@
   "repository": "https://github.com/substance/archivist-core.git",
   "dependencies": {
     "substance": "substance/substance#master",
-    "substance-ui": "substance/ui#master"
+    "substance-ui": "substance/ui#content-editor-refactor"
   },
   "devDependencies": {
-  },
-  "browserify": {
-   "transform": [
-      ["babelify", { "only": "writer" }]
-    ]
   },
   "version": "1.0.0"
 }
