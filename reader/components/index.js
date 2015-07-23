@@ -1,7 +1,0 @@
-var _ = require('substance/helpers');
-var nodes = require('./nodes');
-var panels = require('./panels');
-
-module.exports = _.extend({
-  "content_editor": require('./content_editor')
-}, nodes, panels);

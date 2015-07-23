@@ -8,10 +8,5 @@
   },
   "devDependencies": {
   },
-  "browserify": {
-   "transform": [
-      ["babelify", { "only": "writer" }]
-    ]
-  },
   "version": "1.0.0"
 }

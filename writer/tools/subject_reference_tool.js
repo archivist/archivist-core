@@ -100,7 +100,8 @@ var TagSubjectTool = AnnotationTool.extend({
     var app = this.context.app;
     app.replaceState({
       contextId: "editSubjectReference",
-      subjectReferenceId: anno.id
+      subjectReferenceId: anno.id,
+      noScroll: true
     });
   }
 });

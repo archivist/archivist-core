@@ -83,6 +83,7 @@ var ContentEditor = React.createClass({
     
     _.each(subjectReferences, function(sref) {
       subjectRefComponents.push($$('a', {
+        key: sref.id,
         className: "subject-reference"+(_.includes(highlightedNodes, sref.id) ? ' selected' : ''),
         href: "#",
         "data-id": sref.id,
@@ -118,13 +119,13 @@ var ContentEditor = React.createClass({
     return $$('div', {className: 'content-editor-component panel-content-inner'},
       $$(TitleEditor, {doc: doc}),
       // The full fledged interview (ContainerEditor)
-      $$("div", {ref: "interviewContent", className: "interview-content", contentEditable: true, "data-id": "content"},
+      $$("div", {ref: "interviewContent", className: "interview-content", "data-id": "content"},
         $$("div", {
             className: "container-node " + this.props.node.id,
             spellCheck: false,
             "data-id": this.props.node.id
           },
-          $$('div', {className: "nodes"}, components),
+          $$('div', {ref: "contentNodes", className: "nodes", contentEditable: true}, components),
           $$('div', {className: "subject-references", contentEditable: false}, subjectRefComponents)
         )
       )
@@ -248,7 +249,8 @@ var ContentEditor = React.createClass({
     app.registerSurface(surface, {
       enabledTools: ENABLED_TOOLS
     });
-    surface.attach(this.refs.interviewContent.getDOMNode());
+    // surface.attach(this.refs.interviewContent.getDOMNode());
+    surface.attach(this.refs.contentNodes.getDOMNode());
 
     doc.connect(this, {
       'container-annotation-update': this.handleContainerAnnotationUpdate

@@ -61,6 +61,56 @@ var stateHandlers = {
 
   },
 
+  handleStateChange: function(app, newState, oldState) {
+    var doc = app.doc;
+
+    function getActiveAnnotations(state) {
+      // Subjects-specific
+      // --------------------
+      //
+      // When a subject has been clicked in the subjects panel
+      if (state.contextId === "editSubjectReference" && state.subjectReferenceId) {
+        return [ doc.get(state.subjectReferenceId) ];
+      }
+      if (state.contextId === "subjects" && state.subjectId) {
+        return _.map(doc.subjects.getReferencesForSubject(state.subjectId), function(id) {
+          return doc.get(id);
+        });
+      }
+      // Entities-specific
+      // --------------------
+      //
+      // When a subject has been clicked in the subjects panel
+
+      // Let the extension handle which nodes should be highlighted
+      if (state.contextId === "entities" && state.entityId) {
+        // Use reference handler
+        return _.map(doc.entityReferencesIndex.get(state.entityId));
+      } else if (state.entityReferenceId) {
+        return [ doc.get(state.entityReferenceId) ];
+      }
+
+      return [];
+    }
+    var oldActiveAnnos = _.compact(getActiveAnnotations(oldState));
+    var activeAnnos = getActiveAnnotations(newState);
+    if (oldActiveAnnos.length || activeAnnos.length) {
+      var tmp = _.without(oldActiveAnnos, activeAnnos);
+      activeAnnos = _.without(activeAnnos, oldActiveAnnos);
+      oldActiveAnnos = tmp;
+
+      _.each(oldActiveAnnos, function(anno) {
+        anno.setActive(false);
+      });
+      _.each(activeAnnos, function(anno) {
+        anno.setActive(true);
+      });
+      return true;
+    } else {
+      return false;
+    }
+  },
+
   // Determine highlighted nodes
   // -----------------
   //
