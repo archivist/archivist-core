@@ -35,7 +35,8 @@ var TagEntityPanelMixin = _.extend({}, SelectEntityMixin, {
       // Switch state to highlight newly created reference
       app.replaceState({
         contextId: "showEntityReference",
-        entityReferenceId: annotation.id
+        entityReferenceId: annotation.id,
+        noScroll: true
       });
     }
   }

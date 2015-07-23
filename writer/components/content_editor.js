@@ -12,7 +12,6 @@ var ContainerComponent = require('substance-ui/container_component');
 
 var ENABLED_TOOLS = ["strong", "emphasis", "timecode", "remark", "entity_reference", "subject_reference"];
 
-
 class ContentEditor extends React.Component {
 
   getChildContext() {
@@ -39,8 +38,6 @@ class ContentEditor extends React.Component {
     var contentContainerEl = React.findDOMNode(this.refs.contentContainer);
     var compEl = React.findDOMNode(this);
 
-    // surfaceManager.registerSurface(surface);
-
     this.context.app.registerSurface(surface, {
       enabledTools: ENABLED_TOOLS
     });
@@ -53,11 +50,6 @@ class ContentEditor extends React.Component {
       onBracketToggled: this.onBracketToggled.bind(this)
     });
     $(compEl).append(this.brackets.render().$el);
-
-    // Needed?
-    // this.forceUpdate(function() {
-    //   this.surface.rerenderDomSelection();
-    // }.bind(this));
   }
 
   onBracketToggled(subjectReferenceId) {
@@ -80,13 +72,6 @@ class ContentEditor extends React.Component {
   // Lifecycle
   // -------------
 
-
-  // shouldComponentUpdate() {
-  //   return false;
-  // }
-
-  // Creation
-
   componentWillMount() {
     this.setState(this.computeStateFromProps(this.props));
   }
@@ -95,27 +80,9 @@ class ContentEditor extends React.Component {
     this.initializeComponent();
   }
 
-  // Updating
-
-  // componentWillReceiveProps(nextProps) {
-  //   // When a new doc arrives
-  //   if (this.props.doc !== nextProps.doc) {
-  //     this.dispose(); // clean up before setting up new state
-  //     this.setState(this.computeStateFromProps(nextProps));      
-  //   }
-  // }
-
-  // a new doc has arrived
   componentDidUpdate() {
     this.brackets.render();
     this.brackets.updateBrackets();
-    
-    // console.log('comp did update');
-    // this.initializeComponent();
-    // console.log('aaa');
-    // setTimeout(function() {
-    // }.bind(this), 200);
-    // this.state.surface.rerenderDomSelection();
   }
 
   componentWillUnmount() {

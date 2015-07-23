@@ -27,15 +27,13 @@ class Brackets {
   }
 
   onDocumentChanged(change) {
-    console.log('onDocumentChanged', change);
-
     this.prevDate = Date.now();
     
     // Rerender
     this.render();
     this.updateBrackets();
 
-    console.log('time for bracket rendering', Date.now() - this.prevDate);
+    console.log('time for brackets updating', Date.now() - this.prevDate);
   }
 
   // Event Handlers
@@ -74,16 +72,7 @@ class Brackets {
     var events = [];
 
     _.each(anchorPairs, function(anchorPair) {
-      // var anchors = $(this.props.contentContainerEl).find('.anchor[data-id='+subjRef.id+']');
       var subjRefId = anchorPair.subjRefId;
-      // var startAnchorEl, endAnchorEl;
-      // if ($(anchors[0]).hasClass('start-anchor')) {
-      //   startAnchorEl = anchors[0];
-      //   endAnchorEl = anchors[1];
-      // } else {
-      //   startAnchorEl = anchors[1];
-      //   endAnchorEl = anchors[0];
-      // }
 
       if (!anchorPair.start || !anchorPair.end) {
         console.warn("FIXME: Could not find anchors for subject reference ", subjRefId);
@@ -116,7 +105,6 @@ class Brackets {
 
 
     function bookSlot(subjRefId) {
-      // debugger;
       // Use slot 0 by default
       var minVal = Math.min.apply(null, bracketSlots);
       var slot;
@@ -184,7 +172,6 @@ class Brackets {
     }, this);
 
     this.updateBrackets();
-
     return this;
   }
 

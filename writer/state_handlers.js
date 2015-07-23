@@ -92,7 +92,7 @@ var stateHandlers = {
 
       return [];
     }
-    var oldActiveAnnos = getActiveAnnotations(oldState);
+    var oldActiveAnnos = _.compact(getActiveAnnotations(oldState));
     var activeAnnos = getActiveAnnotations(newState);
     if (oldActiveAnnos.length || activeAnnos.length) {
       var tmp = _.without(oldActiveAnnos, activeAnnos);
