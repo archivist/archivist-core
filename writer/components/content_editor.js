@@ -106,15 +106,17 @@ class ContentEditor extends React.Component {
   // }
 
   // a new doc has arrived
-  // componentDidUpdate() {
-  //   // console.log('comp did update');
-  //   // this.initializeComponent();
-  //   // console.log('aaa');
-  //   // setTimeout(function() {
-  //   // }.bind(this), 200);
-  //   // this.state.surface.rerenderDomSelection();
+  componentDidUpdate() {
+    this.brackets.render();
+    this.brackets.updateBrackets();
     
-  // }
+    // console.log('comp did update');
+    // this.initializeComponent();
+    // console.log('aaa');
+    // setTimeout(function() {
+    // }.bind(this), 200);
+    // this.state.surface.rerenderDomSelection();
+  }
 
   componentWillUnmount() {
     this.dispose();
@@ -123,7 +125,7 @@ class ContentEditor extends React.Component {
   dispose() {
     var surface = this.state.surface;
     this.context.surfaceManager.unregisterSurface(surface);
-
+    this.brackets.dispose();
     if (surface) {
       surface.disconnect(this);
       surface.dispose();

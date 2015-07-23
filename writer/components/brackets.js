@@ -6,23 +6,19 @@ class Brackets {
 
   constructor(props) {
     this.props = props;
-
     this.$el = $('<div>');
     this.$el.addClass('brackets subject-references');
 
     this.$el.on('click', '.subject-reference', this.onToggleSubjectReference.bind(this));
+
+    this.debouncedOnDocumentChanged = _.debounce(this.onDocumentChanged, 500).bind(this);
+    this.props.doc.connect(this, {
+      'document:changed': this.debouncedOnDocumentChanged
+    });
   }
 
   // Event Handlers
   // -----------
-
-  // componentDidMount() {
-
-  //   this.props.doc.connect(this, {
-  //     'document:changed': this.onDocumentChanged
-  //   });
-  //   // start listening to document changes
-  // }
 
   onToggleSubjectReference(e) {
     var subjectRefId = e.currentTarget.dataset.id;
@@ -31,8 +27,15 @@ class Brackets {
   }
 
   onDocumentChanged(change) {
+    console.log('onDocumentChanged', change);
+
+    this.prevDate = Date.now();
+    
     // Rerender
     this.render();
+    this.updateBrackets();
+
+    console.log('time for bracket rendering', Date.now() - this.prevDate);
   }
 
   // Event Handlers
@@ -40,51 +43,71 @@ class Brackets {
 
   updateBrackets() {
     var doc = this.props.doc;
-    var subjectReferences = doc.getIndex('type').get('subject_reference');
+    // var subjectReferences = doc.getIndex('type').get('subject_reference');
 
     var brackets = {};
 
     // 3 available slots (0 means not used)
     var bracketSlots = [0,0,0];
 
+    var anchorEls = $(this.props.contentContainerEl).find('.anchor');
+
+    var anchorPairs = {};
+    _.each(anchorEls, function(anchorEl) {
+      var subjRefId = anchorEl.dataset.id;
+      if (!anchorPairs[subjRefId]) {
+        anchorPairs[subjRefId] = {
+          start: null,
+          end: null,
+          subjRefId: subjRefId
+        };
+      }
+      if ($(anchorEl).hasClass('start-anchor')) {
+        anchorPairs[subjRefId].start = anchorEl;
+      } else {
+        anchorPairs[subjRefId].end = anchorEl;
+      }
+    });
+
+
     // Collects all events for the sweep algorithm
     var events = [];
 
-    _.each(subjectReferences, function(subjRef) {
-      var anchors = $(this.props.contentContainerEl).find('.anchor[data-id='+subjRef.id+']');
+    _.each(anchorPairs, function(anchorPair) {
+      // var anchors = $(this.props.contentContainerEl).find('.anchor[data-id='+subjRef.id+']');
+      var subjRefId = anchorPair.subjRefId;
+      // var startAnchorEl, endAnchorEl;
+      // if ($(anchors[0]).hasClass('start-anchor')) {
+      //   startAnchorEl = anchors[0];
+      //   endAnchorEl = anchors[1];
+      // } else {
+      //   startAnchorEl = anchors[1];
+      //   endAnchorEl = anchors[0];
+      // }
 
-      var startAnchorEl, endAnchorEl;
-      if ($(anchors[0]).hasClass('start-anchor')) {
-        startAnchorEl = anchors[0];
-        endAnchorEl = anchors[1];
-      } else {
-        startAnchorEl = anchors[1];
-        endAnchorEl = anchors[0];
-      }
-
-      if (!startAnchorEl || !endAnchorEl) {
-        console.warn("FIXME: Could not find anchors for subject reference ", subjRef.id);
+      if (!anchorPair.start || !anchorPair.end) {
+        console.warn("FIXME: Could not find anchors for subject reference ", subjRefId);
         return;
       }
 
-      var startTop = $(startAnchorEl).position().top;
-      var endTop = $(endAnchorEl).position().top + $(endAnchorEl).height();
+      var startTop = $(anchorPair.start).position().top;
+      var endTop = $(anchorPair.end).position().top + $(anchorPair.end).height();
       var height = endTop - startTop;
 
       // Add start and end events
       events.push({
-        subjRefId: subjRef.id,
+        subjRefId: subjRefId,
         pos: startTop,
         type: "start"
       });
 
       events.push({
-        subjRefId: subjRef.id,
+        subjRefId: subjRefId,
         pos: endTop,
         type: "end"
       });
 
-      brackets[subjRef.id] = {
+      brackets[subjRefId] = {
         top: startTop,
         height: height,
         slot: null        
@@ -163,6 +186,11 @@ class Brackets {
     this.updateBrackets();
 
     return this;
+  }
+
+  dispose() {
+    this.props.doc.disconnect(this);
+    this.$el.off('click', '.subject-reference', this.onToggleSubjectReference);
   }
 }
 
