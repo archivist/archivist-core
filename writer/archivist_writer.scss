@@ -90,7 +90,7 @@
 /* Brackets for subject annotations
 -----------------------------------------------------*/
 
-.container-node.content .subject-references {
+.content-editor-component .subject-references {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -98,7 +98,7 @@
   width: 30px;
 }
 
-.container-node.content .subject-references .subject-reference {
+.content-editor-component .subject-references .subject-reference {
   border-bottom: 1px solid rgba(145, 187, 4, 1);
   border-top: 1px solid rgba(145, 187, 4, 1);
   border-right: 1px solid rgba(145, 187, 4, 1);
@@ -111,26 +111,22 @@
   cursor: pointer;
 }
 
-.container-node.content .subject-references .subject-reference.level-0 {
+.content-editor-component .subject-references .subject-reference.level-0 {
 }
 
-.container-node.content .subject-references .subject-reference.level-1 {
+.content-editor-component .subject-references .subject-reference.level-1 {
   right: 30px;
 }
 
-.container-node.content .subject-references .subject-reference.level-2 {
+.content-editor-component .subject-references .subject-reference.level-2 {
   right: 45px;
 }
 
-.container-node.content .subject-references .subject-reference:hover {
+.content-editor-component .subject-references .subject-reference:hover {
   border-width: 2px;
 }
 
-/*.container-node.content .subject-references .subject-reference:nth-child(even) {
-  right: 15px;
-}*/
-
-.container-node.content .subject-references .subject-reference.selected {
+.content-editor-component .subject-references .subject-reference.selected {
   border-width: 3px;
 }
 

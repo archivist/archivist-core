@@ -10,6 +10,8 @@ var UnsupportedNode = require('./nodes/unsupported_node');
 var ContainerEditor = Surface.ContainerEditor;
 var ContainerComponent = require('substance-ui/container_component');
 
+
+
 class ContentEditor extends React.Component {
 
   getChildContext() {
@@ -34,12 +36,19 @@ class ContentEditor extends React.Component {
     var surfaceManager = this.context.surfaceManager;
     var surface = this.state.surface;
     var contentContainerEl = React.findDOMNode(this.refs.contentContainer);
+    var compEl = React.findDOMNode(this);
 
     surfaceManager.registerSurface(surface, {
       enabledTools: this.props.enabledTools
     });
 
     surface.attach(contentContainerEl);
+
+    this.brackets = new Brackets({
+      doc: this.props.doc,
+      contentContainerEl: contentContainerEl
+    });
+    $(compEl).append(this.brackets.render().$el);
 
     // Needed?
     // this.forceUpdate(function() {
@@ -88,17 +97,15 @@ class ContentEditor extends React.Component {
 
   render() {
     return $$('div', {className: 'content-editor-component panel-content-inner'},
-      $$(TitleEditor, {doc: doc}),
+      $$(TitleEditor, {doc: this.props.doc}),
       $$(ContainerComponent, {
         ref: 'contentContainer',
         containerId: 'content',
         doc: this.props.doc
-      }),
-      $$(Brackets)
+      })
+      // brackets go here
     );
   }
-
-
 }
 
 ContentEditor.contextTypes = {
