@@ -6,6 +6,9 @@
     "substance": "substance/substance#master",
     "substance-ui": "substance/ui#master"
   },
+  "browserify": {
+    "transform": ["babelify"]
+  },
   "devDependencies": {
   },
   "version": "1.0.0"
