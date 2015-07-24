@@ -39,7 +39,7 @@ var MetadataPanel = React.createClass({
   getInitialState: function() {
     var app = this.context.app;
 
-    this.surface = new Surface(this.context.surfaceManager, doc, new Surface.FormEditor());
+    this.surface = new Surface(this.context.surfaceManager, doc, new Surface.FormEditor(), {name: 'metadata'});
     return null;
   },
 
@@ -256,7 +256,7 @@ var MetadataPanel = React.createClass({
 
   renderProjectLocation: function() {
     var elems = [label("Project Location")];
-    
+
     if (this.state.projectLocation) {
       var projectLocation = $$('span', {className: 'entity-tag', contentEditable: false},
         $$('span', {className: 'project-location name'}, this.state.projectLocation.name),

@@ -23,7 +23,7 @@ class ContentEditor extends React.Component {
   computeStateFromProps(props) {
     var doc = props.doc;
     var editor = new ContainerEditor('content');
-    var surface = new Surface(this.context.surfaceManager, doc, editor);
+    var surface = new Surface(this.context.surfaceManager, doc, editor, { name: 'content' });
 
     return {
       editor: editor,
