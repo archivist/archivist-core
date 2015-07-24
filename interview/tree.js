@@ -12,6 +12,8 @@ var Tree = function(nodes) {
 Tree.Prototype = function() {
 
   this.buildIndexes = function() {
+    var self = this;
+
     // Build a map of parents referencing their kids
     this.parentIndex = {};
     Substance.each(this.nodes, function(node) {
@@ -22,6 +24,11 @@ Tree.Prototype = function() {
         this.parentIndex[parent].push(node);
       }
     }, this);
+
+    // Sort each leaf by node position
+    Substance.each(this.parentIndex, function(leaf, parent) {
+      self.parentIndex[parent] = _.sortBy(leaf, function(node){ return node.position; });
+    });
   };
 
   // Get a node by id
