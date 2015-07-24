@@ -68,7 +68,7 @@ var ShowEntityReferencePanel = React.createClass({
     // HACK: we should not pollute entity objects at all
     // fix this in the entities panel and see remarks panel
     // for a better implementation
-    
+
     entity.active = false;
     if (entity.type === "prison") {
       return $$(Prison, entity);
@@ -103,17 +103,13 @@ var ShowEntityReferencePanel = React.createClass({
     e.preventDefault();
     var app = this.context.app;
     var doc = app.doc;
-    var tx = doc.startTransaction();
-
-    try {
-      tx.delete(this.props.entityReferenceId);
-      tx.save();
-      app.replaceState({
-        contextId: "entities"
-      });
-    } finally {
-      tx.cleanup();
-    }
+    var refId = this.props.entityReferenceId;
+    doc.transaction(function(tx) {
+      tx.delete(refId);
+    });
+    app.replaceState({
+      contextId: "entities"
+    });
   },
 
   render: function() {
