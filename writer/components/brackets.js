@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require("substance/helpers");
+var Substance = require("substance");
 
 class Brackets {
 
@@ -27,13 +28,11 @@ class Brackets {
   }
 
   onDocumentChanged(change) {
-    this.prevDate = Date.now();
-    
+    Substance.tic();
     // Rerender
     this.render();
     this.updateBrackets();
-
-    console.log('time for brackets updating', Date.now() - this.prevDate);
+    console.log('time for brackets updating', Substance.toc());
   }
 
   // Event Handlers
@@ -99,7 +98,7 @@ class Brackets {
       brackets[subjRefId] = {
         top: startTop,
         height: height,
-        slot: null        
+        slot: null
       };
     }, this);
 
@@ -125,7 +124,7 @@ class Brackets {
       var bracket = brackets[subjRefId];
       bracketSlots[bracket.slot] = bracketSlots[bracket.slot] - 1;
     }
-    
+
     // Sort brackets and events
     events = _.sortBy(events, 'pos');
 
@@ -159,7 +158,7 @@ class Brackets {
 
     // Clear content first, so the rerender works properly
     this.$el.empty();
-    
+
     _.each(subjectReferences, function(sref) {
       var $bracketEl = $('<a>').attr({
         'href': '#',
