@@ -2,15 +2,16 @@ var SelectEntityMixin = require("../select_entity_mixin");
 var _ = require("substance/helpers");
 
 var TagEntityPanelMixin = _.extend({}, SelectEntityMixin, {
-  
+
   // Called with entityId when an entity has been clicked
   handleSelection: function(entityId) {
     var app = this.context.app;
     var doc = app.doc;
     var entityReferenceId = this.props.entityReferenceId;
+    var surface = app.surfaceManager.getFocusedSurface();
 
     if (entityReferenceId) {
-      doc.transaction(function(tx) {
+      surface.transaction(function(tx) {
         tx.set([entityReferenceId, "target"], entityId);
       });
 
