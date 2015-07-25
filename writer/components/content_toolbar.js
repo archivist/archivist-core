@@ -40,7 +40,8 @@ var ContentToolbarComponent = React.createClass({
       ),
       $$('div', {className: 'tool-group formatting clearfix float-right'},
         $$(ToolComponent, { tool: 'indentation', title: i18n.t('menu.indentation'), classNames: ['button', 'tool']}, $$(Icon, {icon: "fa-dedent"})),
-        $$(ToolComponent, { tool: 'whitespace', title: i18n.t('menu.whitespace'), classNames: ['button', 'tool']}, $$(Icon, {icon: "fa-eraser"}))
+        $$(ToolComponent, { tool: 'whitespace', title: i18n.t('menu.whitespace'), classNames: ['button', 'tool']}, $$(Icon, {icon: "fa-eraser"})),
+        $$(ToolComponent, { tool: 'timecode_annotator', title: i18n.t('menu.timecode_annotator'), classNames: ['button', 'tool']}, $$(Icon, {icon: "fa-history"}))
       ),
       $$('div', {className: 'tool-group formatting clearfix float-right'},
         $$(ToolComponent, { tool: 'comment', title: 'Comment', classNames: ['button', 'tool']}, $$(Icon, {icon: "fa-comment"})),
