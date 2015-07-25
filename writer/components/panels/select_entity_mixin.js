@@ -193,16 +193,16 @@ var SelectEntityMixin = {
           $$('span', { className: "state" }, stateMessage),
           $$('span', { className: "add-entity" },
             $$('span', { className: "label" }, "Add new: "),
-            $$('a', { href: "/prisons/add", target: "_blank" },
+            $$('a', { href: "/archivist/prisons/add", target: "_blank" },
               $$('i', { className: "fa fa-th" }, "")
             ),
-            $$('a', { href: "/toponyms/add", target: "_blank" },
+            $$('a', { href: "/archivist/toponyms/add", target: "_blank" },
               $$('i', { className: "fa fa-globe" }, "")
             ),
-            $$('a', { href: "/definitions/add", target: "_blank" },
+            $$('a', { href: "/archivist/definitions/add", target: "_blank" },
               $$('i', { className: "fa fa-bookmark" }, "")
             ),
-            $$('a', { href: "/persons/add", target: "_blank" },
+            $$('a', { href: "/archivist/persons/add", target: "_blank" },
               $$('i', { className: "fa fa-users" }, "")
             )
           )
