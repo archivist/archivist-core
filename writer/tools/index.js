@@ -10,6 +10,7 @@ var IndentationTool = require('./indentation_tool');
 module.exports = _.extend({}, BuiltInTools, {
   "export": require("./export_tool"),
   "whitespace": require("./whitespace"),
+  "timecode_annotator": require("./timecode_annotator"),
   "timecode": TimecodeTool,
   "emphasis": SubstanceTools.Emphasis,
   "strong": SubstanceTools.Strong,
