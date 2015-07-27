@@ -9,26 +9,18 @@ var SelectPrisonPanelMixin = _.extend({}, SelectEntityMixin, {
     var app = this.context.app;
     var doc = app.doc;
     
-    if (app.state.contextId === "selectPrison") {
-      var prisonIds = doc.get('document').interviewee_prisons;
-      prisonIds.push(entityId);
-      
-      doc.transaction(function(tx) {
-        tx.set(["document", "interviewee_prisons"], prisonIds);
-      });
-    } else if (app.state.contextId === "selectWaypoint") {
+    if (app.state.contextId === "selectWaypoint") {
       var waypointIds = doc.get('document').interviewee_waypoints;
 
-      var newWaypoint = tx.create({
-        id: Substance.uuid("waypoint"),
-        type: "waypoint",
-        density: 1,
-        entityId: entityId
-      });
-
-      waypointIds.push(newWaypoint.id);
-
       doc.transaction(function(tx) {
+        var newWaypoint = tx.create({
+          id: Substance.uuid("waypoint"),
+          type: "waypoint",
+          density: 1,
+          entityId: entityId
+        });
+
+        waypointIds.push(newWaypoint.id);
         tx.set(["document", "interviewee_waypoints"], waypointIds);
       });
     } else if (app.state.contextId === "selectProjectLocation") {

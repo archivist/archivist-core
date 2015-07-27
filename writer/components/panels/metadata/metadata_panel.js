@@ -90,14 +90,6 @@ var MetadataPanel = React.createClass({
     this.surface.detach();
   },
 
-  loadPrisons: function(cb) {
-    var app = this.context.app;
-    var backend = this.context.backend;
-    var doc = app.doc;
-    var prisonIds = doc.get('document').interviewee_prisons;
-    backend.getEntities(prisonIds, cb);
-  },
-
   loadProjectLocation: function(cb) {
     var backend = this.context.backend;
     var app = this.context.app;
@@ -135,14 +127,11 @@ var MetadataPanel = React.createClass({
     var self = this;
     // console.log('loading/reloading external metadata and rerender');
 
-    this.loadPrisons(function(err, prisons) {
-      self.loadWaypointLocations(function(err, waypointLocations) {
-        self.loadProjectLocation(function(err, projectLocation) {
-          self.setState({
-            prisons: prisons,
-            waypointLocations: waypointLocations,
-            projectLocation: projectLocation
-          });
+    self.loadWaypointLocations(function(err, waypointLocations) {
+      self.loadProjectLocation(function(err, projectLocation) {
+        self.setState({
+          waypointLocations: waypointLocations,
+          projectLocation: projectLocation
         });
       });
     });
@@ -238,19 +227,6 @@ var MetadataPanel = React.createClass({
     doc.transaction(function(tx) {
       tx.delete(waypointId);
       tx.set(["document", "interviewee_waypoints"], waypointIds);
-    });
-  },
-
-  handleRemovePrison: function(e) {
-    var app = this.context.app;
-    var doc = app.doc;
-    var prisonId = e.currentTarget.dataset.id;
-    var prisonIds = doc.get('document').interviewee_prisons;
-    prisonIds = _.without(prisonIds, prisonId);
-    e.preventDefault();
-
-    doc.transaction(function(tx) {
-      tx.set(["document", "interviewee_prisons"], prisonIds);
     });
   },
 
