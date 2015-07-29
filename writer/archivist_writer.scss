@@ -551,7 +551,6 @@
 }
 
 .metadata-panel-component .collapse {
-  cursor: pointer;
   max-height:30px;
   overflow:hidden;
 }
@@ -561,6 +560,7 @@
 }
 
 .metadata-panel-component .collapse .label {
+  cursor: pointer;
   font-size: 13px;
   color: #777;
 }
