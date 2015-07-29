@@ -550,9 +550,25 @@
 
 }
 
-.metadata-panel-component .label {
+.metadata-panel-component .collapse {
+  cursor: pointer;
+  max-height:30px;
+  overflow:hidden;
+  transition: all 0.4s;
+}
+
+.metadata-panel-component .collapse.active {
+  max-height: 1000px;
+  transition: all 0.4s, max-height 4.8s;
+}
+
+.metadata-panel-component .collapse .label {
   font-size: 13px;
   color: #777;
+}
+
+.metadata-panel-component .collapse .label i {
+  padding: 0px 5px 0px 1px;
 }
 
 .metadata-panel-component .text-property {

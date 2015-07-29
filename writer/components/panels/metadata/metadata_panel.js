@@ -11,6 +11,24 @@ function label(name) {
   return $$('div', {className: 'label', contentEditable: false}, name);
 }
 
+function collapsibleLabel(name) {
+  return $$('div', {className: 'label', contentEditable: false, onClick: handleCollapsible}, 
+    $$('i', {className: 'fa fa-plus-circle'}),
+    name
+  );
+}
+
+function collapsible() {
+  return $$('div', {className: 'collapse'}, arguments);
+}
+
+function handleCollapsible(e) {
+  e.preventDefault();
+  var label = $(e.currentTarget);
+  label.find('i').toggleClass('fa-plus-circle fa-minus-circle');
+  label.parent().toggleClass('active');
+}
+
 // Metadata Panel
 // ------------------
 
@@ -296,27 +314,37 @@ var MetadataPanel = React.createClass({
         $$('div', {className: 'summary section'},
           $$('h3', {contentEditable: false}, "Short summary"),
           // Short summary in russian
-          label("Russian"),
-          this.renderTextProperty('short_summary'),
+          collapsible(
+            collapsibleLabel("Russian"),
+            this.renderTextProperty('short_summary')
+          ),
 
           // Short summary in english
-          label("English"),
-          this.renderTextProperty('short_summary_en')
+          collapsible(
+            collapsibleLabel("English"),
+            this.renderTextProperty('short_summary_en')
+          )
         ),
 
         $$('div', {className: 'abstracts section'},
           $$('h3', {contentEditable: false}, "Summary"),
           // Russian abstract
-          label("Russian"),
-          this.renderTextProperty('abstract'),
+          collapsible(
+            collapsibleLabel("Russian"),
+            this.renderTextProperty('abstract')
+          ),
 
           // English abstract
-          label("English"),
-          this.renderTextProperty('abstract_en'),
+          collapsible(
+            collapsibleLabel("English"),
+            this.renderTextProperty('abstract_en')
+          ),
 
           // German abstract
-          label("German"),
-          this.renderTextProperty('abstract_de')
+          collapsible(
+            collapsibleLabel("German"),
+            this.renderTextProperty('abstract_de')
+          )
         ),
 
         $$('div', {className: 'biography section'},
@@ -325,16 +353,22 @@ var MetadataPanel = React.createClass({
           this.renderTextProperty("title"),
 
           // Russian biography
-          label("Russian"),
-          this.renderTextProperty("interviewee_bio"),
+          collapsible(
+            collapsibleLabel("Russian"),
+            this.renderTextProperty("interviewee_bio")
+          ),
 
           // English biography
-          label("English"),
-          this.renderTextProperty("interviewee_bio_en"),
+          collapsible(
+            collapsibleLabel("English"),
+            this.renderTextProperty("interviewee_bio_en")
+          ),
 
           // German biography
-          label("German"),
-          this.renderTextProperty("interviewee_bio_de"),
+          collapsible(
+            collapsibleLabel("German"),
+            this.renderTextProperty("interviewee_bio_de")
+          ),
 
           this.renderWaypoints()
         ),
