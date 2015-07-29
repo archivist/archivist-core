@@ -554,12 +554,10 @@
   cursor: pointer;
   max-height:30px;
   overflow:hidden;
-  transition: all 0.4s;
 }
 
 .metadata-panel-component .collapse.active {
-  max-height: 1000px;
-  transition: all 0.4s, max-height 4.8s;
+  max-height: 100%;
 }
 
 .metadata-panel-component .collapse .label {
