@@ -30,7 +30,7 @@ SubjectsModel.prototype.getTree = function() {
     Substance.each(nodes, function(node) {
       var entry = {
         id: node.id,
-        text: node.name,
+        text: node.workname,
         children: getChildren(node.id) // get children for subj
       };
       res.push(entry);
