@@ -57,7 +57,7 @@ var TreeNode = React.createClass({
         className: 'name',
         "data-id": node.id,
         onClick: this.props.handleSelection,
-      }, node.name),
+      }, node.workname),
       $$('div', {className: 'children'}, childrenEls)
     );
   }
