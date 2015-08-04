@@ -107,5 +107,7 @@ Interview.fromXml = function(xml) {
   // return doc;
 };
 
+Interview.HtmlExporter = Substance.Document.HtmlExporter;
+
 
 module.exports = Interview;
