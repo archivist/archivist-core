@@ -4,10 +4,13 @@
   "repository": "https://github.com/substance/archivist-core.git",
   "dependencies": {
     "substance": "substance/substance#master",
-    "substance-ui": "substance/ui#master"
+    "substance-ui": "substance/ui#master",
+    "underscore": "*",
+    "substance-application": "git+https://github.com/substance/application.git#json-in-app-states",
+    "substance-util": "git+https://github.com/substance/util.git#lens"
   },
   "browserify": {
-    "transform": ["babelify"]
+    "transform": [["babelify", { "only": ["writer"] }]]
   },
   "devDependencies": {
   },

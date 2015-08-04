@@ -1,0 +1,596 @@
+/* Reset
+---------------------------------
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+:focus {
+  outline: 0;
+}
+body {
+  line-height: 1;
+  color: black;
+  background: white;
+}
+/*ol, ul {
+  list-style: none;
+}*/
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+}
+blockquote, q {
+  quotes: "" "";
+}
+
+/* Use borderbox model */
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  text-decoration: none;
+}
+
+
+/* Fonts and colors
+---------------------------------
+*/
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
+  color: #505050;  
+}
+
+a {
+  color: #1B6685;
+  font-weight: normal;
+  text-decoration: none;
+  -moz-transition: background-color 100ms linear, color 100ms linear, opacity 100ms linear;
+  -o-transition: background-color 100ms linear, color 100ms linear, opacity 100ms linear;
+  -webkit-transition: background-color 100ms linear, color 100ms linear, opacity 100ms linear;
+  transition: background-color 100ms linear, color 100ms linear, opacity 100ms linear;
+}
+
+a:hover {
+  color: rgba(11, 157, 217, 1);
+}
+
+/* Layout stuff 
+---------------------------------
+*/
+
+.searchbar {
+  overflow: visible;
+  z-index: 30000;
+  padding: 20px 40px;
+  padding-top: 30px;
+  padding-bottom: 0px;
+
+}
+
+#container .panel-wrapper {
+  overflow: auto;
+}
+
+
+/* Loading indicator */
+
+div {
+
+}
+
+.progress-bar {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 2px;
+  z-index: 31000;
+}
+
+.progress-bar .progress {
+  height: 2px;
+  width: 0%;
+  background: rgba(11, 157, 217, 1);
+}
+
+.progress-bar.loading .progress {
+  transition: width 2s;
+  -webkit-transition: width 2s;
+  width: 30%;
+}
+
+.progress-bar.done .progress {
+  transition: width 0.2s;
+  -webkit-transition: width 0.2s;
+  width: 100%;
+}
+
+
+/* Documents result list */
+
+#facets {
+  float: right;
+  width: 400px;
+  padding: 20px;
+  overflow: auto;
+}
+
+#documents {
+
+}
+
+
+/* Preview
+---------------------------------
+*/
+
+.document .preview {
+  font-size: 14px;
+  margin-top: 15px;
+  padding: 0 20px;
+
+  line-height: 20px;
+  margin-left: 20px;
+  border-left: 1px solid #ddd;
+}
+
+.document .preview .fragment {
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.document .preview .fragment .separator {
+  position: absolute;
+  top: 10px;
+  left: -21px;
+  bottom: 0px;
+  width: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.document .preview .fragment .links a {
+  font-weight: 600;
+}
+
+.document .preview .fragment:last-child {
+  padding-bottom: 0px;
+}
+
+/* Fragments container */
+
+.document .preview .fragments {
+
+}
+
+.document .preview .fragments .intro {
+  color: #888;
+  font-size: 16px;
+  padding: 20px 0px;
+}
+
+.document .preview .fragment .links {
+  padding-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+  padding-top: 10px;
+}
+
+
+/* Search bar
+---------------------------------
+*/
+
+.search-field {
+  display: block;
+  border: none;
+  height: 35px;
+
+  /*padding: 0 5px;*/
+  font-size: 13px;
+  background: #fff;
+  border: 1px solid #ddd;
+  position: relative;
+}
+
+.search-field-filters {
+  position: absolute;
+  right: 60px;
+  top: 0px;
+  bottom: 0px;
+  overflow: hidden;
+}
+
+.search-field-filter {
+  float: left;
+  font-style: italic;
+  color: #777;
+  font-size: 12px;
+  margin-right: 5px;
+  line-height: 33px;
+}
+
+/* Separatator tweaks */
+.search-field-filter::after { 
+  content: ", ";
+}
+
+.search-field-filter:last-child::after {
+  content: "";
+}
+
+.search-field-filter:nth-last-child(2)::after {
+  content: "";
+}
+
+.search-field-filter a {
+  font-weight: 600;
+  font-style: normal;
+}
+
+.search-field-input {
+  display: block;
+  font-weight: 600;
+  height: 33px;
+  border-radius: 0px;
+  padding-left: 5px;
+  font-family: 'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
+  width: 100%;
+  font-size: 18px;
+  border: none;
+}
+
+/* Suggestions */
+.search-field-suggestions {
+  position: absolute;
+  top: 33px;
+  left: -1px;
+  right: 57px;
+
+  background: white;
+  border: 1px solid #ddd;
+  z-index: 30000;
+}
+
+.search-field-suggestion {
+  color: #444;
+  padding: 5px 5px;
+  font-size: 14px;
+  display: block;
+}
+
+.search-field-suggestion:hover, .search-field-suggestion.active {
+  color: #444;
+  background: #eee;
+}
+
+.searchbar .search-button {
+  display: block;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  font-weight: 600;
+  /*margin-top: 15px;*/
+  
+  background: #4A90E2;
+  line-height: 35px;
+  padding: 0px 10px;
+  color: #fff;
+}
+
+.searchbar .search-button:hover {
+  background: #2A6AB6;
+}
+
+/* Documents result list
+---------------------------------
+*/
+
+#documents {
+  position: relative;
+  overflow: auto;
+  padding: 20px;
+}
+
+#documents .no-result {
+  padding: 20px;
+  font-size: 20px;
+  font-style: italic;
+  color: #888;
+}
+
+#documents .document {
+  padding: 20px;
+  position: relative;
+}
+
+#documents .document .meta-info {
+  overflow: auto;
+  color: #888;
+  font-style: italic;
+  font-size: 14px;
+}
+
+#documents .document .meta-info > div {
+  float: left;
+  /*display: inline-block;*/
+  margin-right: 20px;
+}
+
+#documents .document .meta-info .article-type {
+  font-style: normal;
+  color: #273b81;
+}
+
+/* Various colors for different article types */
+
+#documents .document .meta-info .article-type.feature-article {
+  color: #cf0c4e;
+}
+
+#documents .document .meta-info .article-type.insight {
+  color: #629f43;
+}
+
+#documents .document .meta-info .article-type.editorial {
+  color: #0961ab;
+}
+
+
+#documents .document .published-on {
+  padding-bottom: 5px;
+}
+
+#documents .document .title {
+  display: block;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+  padding-bottom: 5px;
+}
+
+#documents .document .title a {
+  font-weight: 600;
+}
+
+#documents .document .authors {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+#documents .document .authors .author {
+  margin-right: 10px;
+}
+
+#documents .document .toggle-preview {
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+  padding-top: 10px;
+}
+#documents .document .filters {
+  padding: 10px 0px;
+  padding-bottom: 3px;
+  overflow: auto;
+}
+
+#documents .document .filter {
+  float: left;
+  font-style: italic;
+  font-size: 14px;
+  margin-right: 10px;
+  background: rgba(234, 231, 35, 0.16);
+}
+
+#documents .document .facet-occurence.highlighted {
+  background: #444;
+  color: white;
+}
+
+#documents .document .facet-occurence.article_type.highlighted {
+  background: #249fd7;
+  /*border-bottom: 3px solid #4A90E2;*/
+  color: white;
+}
+
+#documents .document .facet-occurence.subjects.highlighted {
+  background: #659e47;
+  color: white;
+}
+
+#documents .document .intro {
+  font-style: italic;
+  color: rgba(0,0,0,0.6);
+  padding-bottom: 10px;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+#documents .document .categories {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+#documents .document .categories > div {
+  float: left;
+  margin-right: 10px;
+}
+
+#documents .document .subject {
+  font-style: italic;
+  color: #999;
+}
+
+.query-string {
+  background: rgba(234, 231, 35, 0.16);
+}
+
+
+/* Facets panel
+---------------------------------
+*/
+
+#facets .facet {
+  padding: 20px;
+}
+
+#facets .facet .facet-name {
+  /*text-transform: uppercase;*/
+  font-size: 16px;
+  color: #888;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+  margin-bottom: 5px;
+}
+
+#facets .facet .facet-values {
+  overflow: hidden;
+}
+
+#facets .facet .facet-values .value {
+  display: block;
+  margin-bottom: 1px;
+  padding: 4px 5px;
+  font-size: 13px;
+  color: #444;
+  position: relative;
+}
+
+#facets .facet .facet-values .value:hover, #facets .facet .facet-values .value.selected {
+  /*background: #eee;*/
+  color: #222;
+}
+
+#facets .facet .facet-values .value.selected {
+  /*background: rgba(234, 231, 35, 0.16);*/
+}
+
+#facets .facet .facet-values .value.not-included {
+  color: #aaa;
+}
+
+#facets .facet .facet-values .value.not-included:hover {
+ color: #999; 
+}
+
+#facets .facet .facet-values .value .icon {
+  position: absolute;
+  left: 2px;
+  top: 4px;
+}
+
+#facets .facet .facet-values .value .label {
+  margin-right: 90px;
+  margin-left: 13px;
+}
+
+#facets .facet .facet-values .value .frequency {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  bottom: 0px;
+  width: 50px;
+  /*background: #ccc;*/
+}
+
+#facets .facet .facet-values .value .frequency .total-frequency-label {
+  /*color: #777;*/
+  position: absolute;
+  right: -20px;
+  font-size: 9px;
+  top: -4px;
+}
+
+#facets .facet .facet-values .value .frequency .scoped-frequency-label {
+  /*color: #777;*/
+  position: absolute;
+  right: 55px;
+  font-size: 9px;
+  top: -4px;
+}
+
+#facets .facet .facet-values .value .frequency .total-frequency-bar {
+  height: 1px;
+  background: #aaa;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 1px;
+}
+
+#facets .facet .facet-values .value .frequency .scoped-frequency-bar {
+  height: 3px;
+  background: #666;
+  width: 33%;
+  position: relative;
+}
+
+#facets .facet .facet-values .value:hover .frequency .scoped-frequency-bar {
+  background: #222;
+}
+
+/* DELETE soon */
+#facets .facet .facet-values a {
+  display: inline-block;
+  font-size: 13px;
+  padding-top: 10px;
+  padding: 4px 5px;
+}
+
+/* Mobile (iPad Portrait, iPhone) */
+@media (max-width: 900px) {
+  #facets {
+    display: none;
+    float: none;
+  }
+
+  #documents {
+    padding: 0px;
+  }
+
+  .searchbar {
+    padding: 20px 20px;
+    padding-bottom: 40px;
+  }
+
+  /*Hide search field filters */
+  .search-field-filters {
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    z-index: 30000;
+    overflow: visible;
+    height: 40px;
+  }
+}
