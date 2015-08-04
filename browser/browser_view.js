@@ -88,8 +88,6 @@ BrowserView.Prototype = function() {
     var documentId = $documentEl.attr('data-id');
     var self = this;
 
-    ga('send', 'event', 'preview', 'click', 'preview');
-
     var $preview = $documentEl.find('.preview');
     if ($preview.length > 0) {
       $preview.toggle();
@@ -106,8 +104,6 @@ BrowserView.Prototype = function() {
     e.preventDefault();
     var facet = $(e.currentTarget).attr("data-facet");
     var facetValue = $(e.currentTarget).attr("data-value");
-
-    ga('send', 'event', 'filter:'+facet+':'+facetValue, 'click', 'filters');
 
     this.controller.searchQuery.toggleFilter(facet, facetValue);
   };
