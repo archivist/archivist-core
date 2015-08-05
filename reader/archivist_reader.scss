@@ -1,0 +1,16 @@
+// We derive from the writer styles and override for now
+@import '../writer/archivist_writer';
+
+// Overrides for ArchivistReader
+
+.reader-component {
+  bottom: 0px;
+}
+
+.content-panel-component {
+  top: 0px;
+}
+
+.container-annotation.comment.annotation-fragment {
+  background: none;
+}
