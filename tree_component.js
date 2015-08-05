@@ -171,8 +171,6 @@ var Tree = React.createClass({
     var tree = this.state.tree;
     var childNodes = tree.getChildren("root");
 
-    console.log('tree rendering', childNodes);
-
     var childEls = childNodes.map(function(node) {
       return $$(TreeNode, {
         treeComp: this,

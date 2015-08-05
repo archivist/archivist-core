@@ -152,17 +152,24 @@ BrowserController.Prototype = function() {
     // var documentId = newState.documentId;
     var self = this;
 
-    this.config.backend.findDocuments(searchQuery, function(err, result) {
+    this.config.backend.findDocuments(searchQuery, function(err, result, subjects) {
       console.log('search result:', result);
       // console.log(JSON.stringify(result.aggregations, null, "  "));
 
-      self.searchResult = new SearchResult({
-        searchQuery: self.searchQuery,
-        result: result
-      }, {});
+      self.config.backend.getSubjectsModel(function(err, subjects) {
 
-      self.previewData = null;
-      cb(null);
+        self.searchResult = new SearchResult({
+          searchQuery: self.searchQuery,
+          result: result
+        }, {});
+
+        // Add subjects model to the search result
+        self.searchResult.subjects = subjects;
+        console.log('yay subjects', subjects);
+
+        self.previewData = null;
+        cb(null);
+      });
     });
   };
 

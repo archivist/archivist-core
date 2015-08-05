@@ -7,10 +7,13 @@ var SubjectsModel = function(doc, subjects) {
   
   // Convert subjects to hash
   this.subjects = {};
+
   Substance.each(subjects, function(subject) {
-    var references = doc.subjectReferencesIndex.get(subject.id);
     this.subjects[subject.id] = subject;
-    this.subjects[subject.id].references = Substance._.pluck(references, 'id');
+    if (doc) {
+      var references = doc.subjectReferencesIndex.get(subject.id);
+      this.subjects[subject.id].references = Substance._.pluck(references, 'id');      
+    }
   }, this);
   this.tree = new Tree(this.subjects);
 };

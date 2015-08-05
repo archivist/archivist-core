@@ -8,6 +8,9 @@ var PreviewView = require("./preview_view");
 var FacetsView = require("./facets_view");
 var util = require("./util");
 
+// React Component
+var TreeComponent = require("../tree_component");
+
 var ARTICLE_TYPES = {
   "Research article": "research-article",
   "Feature article": "feature-article",
@@ -163,6 +166,19 @@ BrowserView.Prototype = function() {
     this.facetsView = new FacetsView(this.controller.searchResult.getFacets());
     this.facetsEl.innerHTML = "";
     this.facetsEl.appendChild(this.facetsView.render().el);
+
+    React.render(
+      React.createElement(TreeComponent, {
+        // ref: "treeWidget",
+        selectedNodes: [],
+        tree: this.controller.searchResult.subjects.getTree(),
+        onSelectionChanged: function(selectedNodes) {
+          console.log('selected nodes', selectedNodes);
+        } // this.updateSubjectReference
+      }),
+      // document.getElementById('container')
+      this.facetsEl
+    );
   };
 
   // Display initial search result
