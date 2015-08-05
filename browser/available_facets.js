@@ -1,200 +1,200 @@
 var AVAILABLE_FACETS = {
-  "article_type": {
-    "doc_count_error_upper_bound": 0,
-    "sum_other_doc_count": 0,
-    "buckets": [
-      {
-        "key": "Research article",
-        "doc_count": 838
-      },
-      {
-        "key": "Insight",
-        "doc_count": 186
-      },
-      {
-        "key": "Correction",
-        "doc_count": 44
-      },
-      {
-        "key": "Feature article",
-        "doc_count": 41
-      },
-      {
-        "key": "Short report",
-        "doc_count": 32
-      },
-      {
-        "key": "Editorial",
-        "doc_count": 11
-      },
-      {
-        "key": "Research advance",
-        "doc_count": 13
-      },
-      {
-        "key": "Registered report",
-        "doc_count": 8
-      },
-      {
-        "key": "Feature Article",
-        "doc_count": 1
-      }
-    ]
-  },
-  "subjects": {
-    "doc_count_error_upper_bound": 0,
-    "sum_other_doc_count": 0,
-    "buckets": [
-      {
-        "key": "Cell biology",
-        "doc_count": 286
-      },
-      {
-        "key": "Neuroscience",
-        "doc_count": 251
-      },
-      {
-        "key": "Biophysics and structural biology",
-        "doc_count": 215
-      },
-      {
-        "key": "Biochemistry",
-        "doc_count": 183
-      },
-      {
-        "key": "Developmental biology and stem cells",
-        "doc_count": 162
-      },
-      {
-        "key": "Genomics and evolutionary biology",
-        "doc_count": 152
-      },
-      {
-        "key": "Genes and chromosomes",
-        "doc_count": 123
-      },
-      {
-        "key": "Microbiology and infectious disease",
-        "doc_count": 124
-      },
-      {
-        "key": "Human biology and medicine",
-        "doc_count": 88
-      },
-      {
-        "key": "Immunology",
-        "doc_count": 62
-      },
-      {
-        "key": "Plant biology",
-        "doc_count": 51
-      },
-      {
-        "key": "Ecology",
-        "doc_count": 33
-      },
-      {
-        "key": "Epidemiology and global health",
-        "doc_count": 21
-      },
-      {
-        "key": "Computational and systems biology",
-        "doc_count": 2
-      }
-    ]
-  },
-  "organisms": {
-    "doc_count_error_upper_bound": 0,
-    "sum_other_doc_count": 246,
-    "buckets": [
-      {
-        "key": "mouse",
-        "doc_count": 195
-      },
-      {
-        "key": "human",
-        "doc_count": 182
-      },
-      {
-        "key": "Mouse",
-        "doc_count": 128
-      },
-      {
-        "key": "Human",
-        "doc_count": 114
-      },
-      {
-        "key": "other",
-        "doc_count": 116
-      },
-      {
-        "key": "D. melanogaster",
-        "doc_count": 113
-      },
-      {
-        "key": "S. cerevisiae",
-        "doc_count": 98
-      },
-      {
-        "key": "E. coli",
-        "doc_count": 81
-      },
-      {
-        "key": "Other",
-        "doc_count": 51
-      },
-      {
-        "key": "Arabidopsis",
-        "doc_count": 39
-      }
-    ]
-  },
-  "authors": {
-    "doc_count_error_upper_bound": 4,
-    "sum_other_doc_count": 6627,
-    "buckets": [
-      {
-        "key": "Randy Schekman",
-        "doc_count": 14
-      },
-      {
-        "key": "Eve Marder",
-        "doc_count": 9
-      },
-      {
-        "key": "Detlef Weigel",
-        "doc_count": 9
-      },
-      {
-        "key": "Bill S Hansson",
-        "doc_count": 7
-      },
-      {
-        "key": "Chris P Ponting",
-        "doc_count": 6
-      },
-      {
-        "key": "Fiona M Watt",
-        "doc_count": 5
-      },
-      {
-        "key": "Peter Walter",
-        "doc_count": 6
-      },
-      {
-        "key": "Alma L Burlingame",
-        "doc_count": 4
-      },
-      {
-        "key": "Irene Farabella",
-        "doc_count": 4
-      },
-      {
-        "key": "Maya Topf",
-        "doc_count": 4
-      }
-    ]
-  }
+  // "article_type": {
+  //   "doc_count_error_upper_bound": 0,
+  //   "sum_other_doc_count": 0,
+  //   "buckets": [
+  //     {
+  //       "key": "Research article",
+  //       "doc_count": 838
+  //     },
+  //     {
+  //       "key": "Insight",
+  //       "doc_count": 186
+  //     },
+  //     {
+  //       "key": "Correction",
+  //       "doc_count": 44
+  //     },
+  //     {
+  //       "key": "Feature article",
+  //       "doc_count": 41
+  //     },
+  //     {
+  //       "key": "Short report",
+  //       "doc_count": 32
+  //     },
+  //     {
+  //       "key": "Editorial",
+  //       "doc_count": 11
+  //     },
+  //     {
+  //       "key": "Research advance",
+  //       "doc_count": 13
+  //     },
+  //     {
+  //       "key": "Registered report",
+  //       "doc_count": 8
+  //     },
+  //     {
+  //       "key": "Feature Article",
+  //       "doc_count": 1
+  //     }
+  //   ]
+  // },
+  // "subjects": {
+  //   "doc_count_error_upper_bound": 0,
+  //   "sum_other_doc_count": 0,
+  //   "buckets": [
+  //     {
+  //       "key": "Cell biology",
+  //       "doc_count": 286
+  //     },
+  //     {
+  //       "key": "Neuroscience",
+  //       "doc_count": 251
+  //     },
+  //     {
+  //       "key": "Biophysics and structural biology",
+  //       "doc_count": 215
+  //     },
+  //     {
+  //       "key": "Biochemistry",
+  //       "doc_count": 183
+  //     },
+  //     {
+  //       "key": "Developmental biology and stem cells",
+  //       "doc_count": 162
+  //     },
+  //     {
+  //       "key": "Genomics and evolutionary biology",
+  //       "doc_count": 152
+  //     },
+  //     {
+  //       "key": "Genes and chromosomes",
+  //       "doc_count": 123
+  //     },
+  //     {
+  //       "key": "Microbiology and infectious disease",
+  //       "doc_count": 124
+  //     },
+  //     {
+  //       "key": "Human biology and medicine",
+  //       "doc_count": 88
+  //     },
+  //     {
+  //       "key": "Immunology",
+  //       "doc_count": 62
+  //     },
+  //     {
+  //       "key": "Plant biology",
+  //       "doc_count": 51
+  //     },
+  //     {
+  //       "key": "Ecology",
+  //       "doc_count": 33
+  //     },
+  //     {
+  //       "key": "Epidemiology and global health",
+  //       "doc_count": 21
+  //     },
+  //     {
+  //       "key": "Computational and systems biology",
+  //       "doc_count": 2
+  //     }
+  //   ]
+  // },
+  // "organisms": {
+  //   "doc_count_error_upper_bound": 0,
+  //   "sum_other_doc_count": 246,
+  //   "buckets": [
+  //     {
+  //       "key": "mouse",
+  //       "doc_count": 195
+  //     },
+  //     {
+  //       "key": "human",
+  //       "doc_count": 182
+  //     },
+  //     {
+  //       "key": "Mouse",
+  //       "doc_count": 128
+  //     },
+  //     {
+  //       "key": "Human",
+  //       "doc_count": 114
+  //     },
+  //     {
+  //       "key": "other",
+  //       "doc_count": 116
+  //     },
+  //     {
+  //       "key": "D. melanogaster",
+  //       "doc_count": 113
+  //     },
+  //     {
+  //       "key": "S. cerevisiae",
+  //       "doc_count": 98
+  //     },
+  //     {
+  //       "key": "E. coli",
+  //       "doc_count": 81
+  //     },
+  //     {
+  //       "key": "Other",
+  //       "doc_count": 51
+  //     },
+  //     {
+  //       "key": "Arabidopsis",
+  //       "doc_count": 39
+  //     }
+  //   ]
+  // },
+  // "authors": {
+  //   "doc_count_error_upper_bound": 4,
+  //   "sum_other_doc_count": 6627,
+  //   "buckets": [
+  //     {
+  //       "key": "Randy Schekman",
+  //       "doc_count": 14
+  //     },
+  //     {
+  //       "key": "Eve Marder",
+  //       "doc_count": 9
+  //     },
+  //     {
+  //       "key": "Detlef Weigel",
+  //       "doc_count": 9
+  //     },
+  //     {
+  //       "key": "Bill S Hansson",
+  //       "doc_count": 7
+  //     },
+  //     {
+  //       "key": "Chris P Ponting",
+  //       "doc_count": 6
+  //     },
+  //     {
+  //       "key": "Fiona M Watt",
+  //       "doc_count": 5
+  //     },
+  //     {
+  //       "key": "Peter Walter",
+  //       "doc_count": 6
+  //     },
+  //     {
+  //       "key": "Alma L Burlingame",
+  //       "doc_count": 4
+  //     },
+  //     {
+  //       "key": "Irene Farabella",
+  //       "doc_count": 4
+  //     },
+  //     {
+  //       "key": "Maya Topf",
+  //       "doc_count": 4
+  //     }
+  //   ]
+  // }
 };
 
 

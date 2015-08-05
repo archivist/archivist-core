@@ -63,6 +63,7 @@ SearchResult.Prototype = function() {
     var self = this;
     var aggregations = this.rawResult.aggregations;
 
+    if (!aggregations) return facets;
     // console.log(JSON.stringify(this.rawResult.aggregations, null, "  "));
 
     _.each(LABEL_MAPPING, function(label, property) {

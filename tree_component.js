@@ -57,7 +57,7 @@ var TreeNode = React.createClass({
         className: 'name',
         "data-id": node.id,
         onClick: this.props.handleSelection,
-      }, node.workname),
+      }, node.workname || node.name),
       $$('div', {className: 'children'}, childrenEls)
     );
   }
@@ -170,6 +170,8 @@ var Tree = React.createClass({
   render: function() {
     var tree = this.state.tree;
     var childNodes = tree.getChildren("root");
+
+    console.log('tree rendering', childNodes);
 
     var childEls = childNodes.map(function(node) {
       return $$(TreeNode, {

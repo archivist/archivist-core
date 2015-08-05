@@ -44,7 +44,6 @@ BrowserController.Prototype = function() {
 
   this.startSearch = function() {
     // console.log('query changed', this.searchQuery);
-    ga('send', 'event', 'search:'+this.searchQuery.searchStr, 'search', 'search');
 
     this.switchState({
       id: "main",
@@ -118,27 +117,27 @@ BrowserController.Prototype = function() {
   // -----------------------
   // 
 
-  this.loadPreview = function(documentId, searchStr, cb) {
-    var self = this;
+  // this.loadPreview = function(documentId, searchStr, cb) {
+  //   var self = this;
 
-    $.ajax({
-      url: self.config.api_url+"/search/document?documentId="+encodeURIComponent(documentId)+"&searchString="+encodeURIComponent(searchStr),
-      dataType: 'json',
-      success: function(data) {
-        var elifeID = _.last(documentId.split("."));
-        data.document.id = documentId;
-        data.document.url = "http://lens.elifesciences.org/" + elifeID;
-        data.document.pdf_url = "http://cdn.elifesciences.org/elife-articles/"+elifeID+"/pdf/elife"+elifeID+".pdf";
-        data.searchStr = searchStr;
-        self.previewData = data;
-        cb(null);
-      },
-      error: function(err) {
-        console.error(err.responseText);
-        cb(err.responseText);
-      }
-    });
-  };
+  //   $.ajax({
+  //     url: self.config.api_url+"/search/document?documentId="+encodeURIComponent(documentId)+"&searchString="+encodeURIComponent(searchStr),
+  //     dataType: 'json',
+  //     success: function(data) {
+  //       var elifeID = _.last(documentId.split("."));
+  //       data.document.id = documentId;
+  //       data.document.url = "http://lens.elifesciences.org/" + elifeID;
+  //       data.document.pdf_url = "http://cdn.elifesciences.org/elife-articles/"+elifeID+"/pdf/elife"+elifeID+".pdf";
+  //       data.searchStr = searchStr;
+  //       self.previewData = data;
+  //       cb(null);
+  //     },
+  //     error: function(err) {
+  //       console.error(err.responseText);
+  //       cb(err.responseText);
+  //     }
+  //   });
+  // };
 
   // Search result gets loaded
   // -----------------------
@@ -150,35 +149,20 @@ BrowserController.Prototype = function() {
 
     // Get filters from app state    
     var searchQuery = newState.searchQuery;
-    var documentId = newState.documentId;
+    // var documentId = newState.documentId;
     var self = this;
 
-    $.ajax({
-      url: this.config.api_url+"/search?searchQuery="+encodeURIComponent(JSON.stringify(searchQuery)),
-      dataType: 'json',
-      success: function(result) {
+    this.config.backend.findDocuments(searchQuery, function(err, result) {
+      console.log('search result:', result);
+      // console.log(JSON.stringify(result.aggregations, null, "  "));
 
-        console.log('search result:', result);
-        // console.log(JSON.stringify(result.aggregations, null, "  "));
+      self.searchResult = new SearchResult({
+        searchQuery: self.searchQuery,
+        result: result
+      }, {});
 
-        // Patching docs
-        _.each(result.hits.hits, function(doc) {
-          var elifeID = _.last(doc._id.split("."));
-          doc._source.url = "http://lens.elifesciences.org/" + elifeID;
-        }, this);
-
-        self.searchResult = new SearchResult({
-          searchQuery: self.searchQuery,
-          result: result
-        }, {});
-
-        self.previewData = null;
-        cb(null);
-      },
-      error: function(err) {
-        console.error(err.responseText);
-        cb(err.responseText);
-      }
+      self.previewData = null;
+      cb(null);
     });
   };
 
