@@ -10,6 +10,7 @@ var ContainerEditor = Surface.ContainerEditor;
 var ContainerComponent = require('substance-ui/container_component');
 var TextProperty = require("substance-ui/text_property");
 
+
 class ContentContainer extends React.Component {
 
   getChildContext() {
@@ -36,7 +37,6 @@ class ContentContainer extends React.Component {
     var compEl = React.findDOMNode(this);
 
     this.context.app.registerSurface(surface, {});
-
     surface.attach(contentContainerEl);
 
     this.brackets = new Brackets({
@@ -48,20 +48,22 @@ class ContentContainer extends React.Component {
   }
 
   onBracketToggled(subjectReferenceId) {
-    var app = this.context.app;
-    var state = app.state;
+    console.log('TODO: override. doing nothing for now...');
 
-    if (state.contextId === "editSubjectReference" && state.subjectReferenceId === subjectReferenceId) {
-      app.replaceState({
-        contextId: "subjects"
-      });
-    } else {
-      app.replaceState({
-        contextId: "editSubjectReference",
-        subjectReferenceId: subjectReferenceId,
-        noScroll: true
-      });
-    }
+    // var app = this.context.app;
+    // var state = app.state;
+
+    // if (state.contextId === "editSubjectReference" && state.subjectReferenceId === subjectReferenceId) {
+    //   app.replaceState({
+    //     contextId: "subjects"
+    //   });
+    // } else {
+    //   app.replaceState({
+    //     contextId: "editSubjectReference",
+    //     subjectReferenceId: subjectReferenceId,
+    //     noScroll: true
+    //   });
+    // }
   }
 
   // Lifecycle

@@ -10,7 +10,7 @@
     "substance-util": "git+https://github.com/substance/util.git#lens"
   },
   "browserify": {
-    "transform": [["babelify", { "only": ["writer"] }]]
+    "transform": [["babelify", { "only": ["writer", "reader"] }]]
   },
   "devDependencies": {
   },
