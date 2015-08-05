@@ -1,4 +1,4 @@
-var SelectEntityMixin = require("../select_entity_mixin");
+var SelectEntityMixin = require("./select_entity_mixin");
 var _ = require("substance/helpers");
 
 var TagEntityPanelMixin = _.extend({}, SelectEntityMixin, {

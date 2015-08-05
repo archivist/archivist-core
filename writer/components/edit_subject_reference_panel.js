@@ -1,7 +1,7 @@
 var $$ = React.createElement;
 
 var _ = require("substance/helpers");
-var Tree = require("../../../../tree_component");
+var Tree = require("../../shared/components/tree");
 
 // Edit Subject Reference Panel
 // ----------------

@@ -2,7 +2,7 @@ var ToolComponent = require("substance-ui/tool_component");
 var DropdownComponent = require("substance-ui/dropdown_component");
 
 // A simple tool for navigating app states
-var NavigateTool = require("./tools/navigate_tool_component");
+var NavigateTool = require("./navigate_tool");
 var Icon = require("substance-ui/font_awesome_icon");
 
 var _ = require("substance/helpers");

@@ -2,10 +2,10 @@ var Substance = require("substance");
 var $$ = React.createElement;
 
 // Entity types
-var Prison = require("./entity_types/prison");
-var Toponym = require("./entity_types/toponym");
-var Person = require("./entity_types/person");
-var Definition = require("./entity_types/definition");
+var Prison = require("./prison");
+var Toponym = require("./toponym");
+var Person = require("./person");
+var Definition = require("./definition");
 var _ = require("substance/helpers");
 
 var EntitiesPanel = React.createClass({

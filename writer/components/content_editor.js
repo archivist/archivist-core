@@ -5,8 +5,8 @@ var $$ = React.createElement;
 var Surface = Substance.Surface;
 var _ = require('substance/helpers');
 var TitleEditor = require("./title_editor");
-var Brackets = require('./brackets');
-var UnsupportedNode = require('./nodes/unsupported_node');
+var Brackets = require('../../shared/components/brackets');
+var UnsupportedNode = require('../../shared/components/unsupported_node');
 var ContainerEditor = Surface.ContainerEditor;
 var ContainerComponent = require('substance-ui/container_component');
 

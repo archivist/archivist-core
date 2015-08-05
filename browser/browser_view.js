@@ -9,7 +9,7 @@ var FacetsView = require("./facets_view");
 var util = require("./util");
 
 // React Component
-var TreeComponent = require("../tree_component");
+var TreeComponent = require("../shared/components/tree");
 
 var ARTICLE_TYPES = {
   "Research article": "research-article",

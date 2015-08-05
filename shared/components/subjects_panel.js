@@ -33,7 +33,7 @@ var SubjectsPanelMixin = _.extend({}, PanelMixin, {
   // -------------------
 
   render: function() {
-  	var props = this.props;
+    var props = this.props;
     var self = this;
     var app = this.context.app;
     var doc = app.doc;
