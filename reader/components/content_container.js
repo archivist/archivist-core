@@ -8,6 +8,8 @@ var Brackets = require('../../shared/components/brackets');
 var UnsupportedNode = require('../../shared/components/unsupported_node');
 var ContainerEditor = Surface.ContainerEditor;
 var ContainerComponent = require('substance-ui/container_component');
+var TextProperty = require("substance-ui/text_property");
+
 
 class ContentContainer extends React.Component {
 
@@ -30,13 +32,11 @@ class ContentContainer extends React.Component {
 
   initializeComponent() {
     // We may have already initialized the stuff
-    var surfaceManager = this.context.surfaceManager;
     var surface = this.state.surface;
     var contentContainerEl = React.findDOMNode(this.refs.contentContainer);
     var compEl = React.findDOMNode(this);
 
     this.context.app.registerSurface(surface, {});
-
     surface.attach(contentContainerEl);
 
     this.brackets = new Brackets({
@@ -48,20 +48,22 @@ class ContentContainer extends React.Component {
   }
 
   onBracketToggled(subjectReferenceId) {
-    var app = this.context.app;
-    var state = app.state;
+    console.log('TODO: override. doing nothing for now...');
 
-    if (state.contextId === "editSubjectReference" && state.subjectReferenceId === subjectReferenceId) {
-      app.replaceState({
-        contextId: "subjects"
-      });
-    } else {
-      app.replaceState({
-        contextId: "editSubjectReference",
-        subjectReferenceId: subjectReferenceId,
-        noScroll: true
-      });
-    }
+    // var app = this.context.app;
+    // var state = app.state;
+
+    // if (state.contextId === "editSubjectReference" && state.subjectReferenceId === subjectReferenceId) {
+    //   app.replaceState({
+    //     contextId: "subjects"
+    //   });
+    // } else {
+    //   app.replaceState({
+    //     contextId: "editSubjectReference",
+    //     subjectReferenceId: subjectReferenceId,
+    //     noScroll: true
+    //   });
+    // }
   }
 
   // Lifecycle
@@ -99,10 +101,22 @@ class ContentContainer extends React.Component {
   render() {
     return $$('div', {className: 'content-editor-component panel-content-inner'},
       // $$(TitleEditor, {doc: this.props.doc}),
+      // doc.get([metaNode.id, "title"])
+
+      $$("div", {className: "document-title"},
+        $$(TextProperty, {
+          doc: this.props.doc,
+          tagName: "div",
+          className: "title",
+          path: ["document", "title"]
+        })
+      ),
+
       $$(ContainerComponent, {
         ref: 'contentContainer',
         containerId: 'content',
-        doc: this.props.doc
+        doc: this.props.doc,
+        readOnly: true
       })
       // <Brackets> brackets go here
     );
