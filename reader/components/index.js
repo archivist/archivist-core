@@ -5,9 +5,11 @@ module.exports = {
   
   // Panels
   "subjects": require("../../shared/components/subjects_panel"),
-  "prisons": require("./prisons_panel"),
+  "prisons": require("./prisons/prisons_panel"),
+  "locations": require("./locations/locations_panel"),
 
-  "prison": require("./prison"),
+  "prison": require("./prisons/prison"),
+  "location": require("./locations/location"),
 
   // Misc
   // "content_toolbar": require("./content_toolbar"),
