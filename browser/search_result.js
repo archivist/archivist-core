@@ -5,12 +5,6 @@ var _ = require("underscore");
 // 
 // An model abstraction for the search result that the controller can operate on
 
-var AVAILABLE_FACETS = require("./available_facets");
-
-var LABEL_MAPPING = {
-  subjects: "Subjects",
-  entities: "Entities"
-};
 
 var SearchResult = function(data) {
   this.rawResult = data.result;
@@ -32,64 +26,10 @@ SearchResult.Prototype = function() {
     return this.rawResult.interviews;
   };
 
-  // this.getScopedFrequency = function(facet, value) {
-  //   var facet = this.rawResult.aggregations[facet];
-  //   if (!facet) return "0";
-  //   var bucket = _.select(facet.buckets, function(bucket) {
-  //     return bucket.key === value;
-  //   });
-  //   return bucket.length > 0 ? bucket[0].doc_count : "0";
-  // };
-
-  this.getScopedFrequency = function(facet, value) {
-    return this.rawResult.facets[facet][value];
-    // var facet = this.rawResult.aggregations[facet];
-
-    // if (!facet) return "0";
-    // var bucket = _.select(facet.buckets, function(bucket) {
-    //   return bucket.key === value;
-    // });
-    // return bucket.length > 0 ? bucket[0].doc_count : "0";
-  };
-
 
   this.getFacetCounts = function(facet) {
     return this.rawResult.facets[facet];
   };
-
-  // this.getFacets = function() {
-
-
-  //   var facets = [];
-  //   var self = this;
-  //   var aggregations = this.rawResult.aggregations;
-
-  //   if (!aggregations) return facets;
-  //   // console.log(JSON.stringify(this.rawResult.aggregations, null, "  "));
-
-  //   _.each(LABEL_MAPPING, function(label, property) {
-  //     var entries = [];
-
-  //     if (AVAILABLE_FACETS[property]) {
-  //       _.each(AVAILABLE_FACETS[property].buckets, function(bucket) {
-  //         entries.push({
-  //           name: bucket.key,
-  //           frequency: bucket.doc_count,
-  //           scoped_frequency: self.getScopedFrequency(property, bucket.key),
-  //           selected: self.isSelected(property, bucket.key)
-  //         });
-  //       });
-  //     }
-
-  //     facets.push({
-  //       name: label,
-  //       property: property,
-  //       entries: entries
-  //     });
-  //   });
-
-  //   return facets;
-  // };
 
   this.getFacets = function() {
     return this.rawResult.facets;
@@ -103,6 +43,13 @@ SearchResult.Prototype = function() {
     if (!filter) return false;
     return filter.indexOf(value) >= 0;
   };
+
+  this.getNameForFilterValue = function(id) {
+    // Try to find in subjects
+    var obj = this.subjects.get(id);
+    if (obj) return obj.name;
+  };
+
 };
 
 SearchResult.prototype = new SearchResult.Prototype();

@@ -15,9 +15,16 @@ var SubjectsModel = function(doc, subjects) {
       this.subjects[subject.id].references = Substance._.pluck(references, 'id');      
     }
   }, this);
+  
   this.tree = new Tree(this.subjects);
 };
 
+// Get tree representation suitable for jsTree widget
+// ----------------
+
+SubjectsModel.prototype.get = function(subjectId) {
+  return this.subjects[subjectId];
+};
 
 // Get tree representation suitable for jsTree widget
 // ----------------

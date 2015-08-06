@@ -14,11 +14,14 @@ var ICON_MAPPING = {
 // ========
 //
 
-var SearchbarView = function(searchQuery, options) {
+var SearchbarView = function(controller, options) {
   View.call(this);
 
+  this.controller = controller;
   // Model contains the search query
-  this.searchQuery = searchQuery;
+  this.searchQuery = controller.searchQuery;
+  // this.searchResult = controller.searchResult;
+
   this.options = options;
 
   // Elements
@@ -165,7 +168,7 @@ SearchbarView.Prototype = function() {
     _.each(this.searchQuery.filters, function(filterValues, facet) {
       _.each(filterValues, function(filterVal) {
         var filterEl = $$('.search-field-filter', {
-          html: filterVal
+          html: this.controller.searchResult.getNameForFilterValue(filterVal)
         });
         if (filterCount<3) {
           this.searchFieldFilters.appendChild(filterEl);  
@@ -195,7 +198,7 @@ SearchbarView.Prototype = function() {
     $(this.searchFieldInputEl).val(this.searchQuery.searchStr);
 
     // Re-render filters
-    this.renderFilters();
+    // this.renderFilters();
   };
 
   // TODO: find simpler implementation for keyboard nav

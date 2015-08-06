@@ -38,7 +38,7 @@ var BrowserView = function(controller) {
   // Search bar
   // ------------
 
-  this.searchbarView = new SearchbarView(this.controller.searchQuery, {
+  this.searchbarView = new SearchbarView(this.controller, {
     getSuggestions: _.bind(this.controller.getSuggestions, this.controller)
   });
 
@@ -297,6 +297,7 @@ BrowserView.Prototype = function() {
     }
 
     this.renderFacets();
+    this.searchbarView.renderFilters();
   };
 
   this.render = function() {
