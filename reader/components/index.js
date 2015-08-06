@@ -7,6 +7,8 @@ module.exports = {
   "subjects": require("../../shared/components/subjects_panel"),
   "prisons": require("./prisons_panel"),
 
+  "prison": require("./prison"),
+
   // Misc
   // "content_toolbar": require("./content_toolbar"),
   "content_container": require("./content_container")

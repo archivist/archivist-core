@@ -14,3 +14,15 @@
 .container-annotation.comment.annotation-fragment {
   background: none;
 }
+
+.content-editor-component .subject-references .subject-reference {
+  display: none;
+}
+
+.content-editor-component .subject-references .subject-reference.active {
+  display: block;
+}
+
+.container-annotation.active.annotation-fragment {
+  background: none;
+}

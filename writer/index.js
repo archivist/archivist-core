@@ -96,6 +96,7 @@ class ArchivistWriter extends React.Component {
           stateHandlers: stateHandlers,
           panelOrder: panelOrder
         },
+        route: window.location.hash.slice(1),
         doc: this.state.doc,
         id: "writer",
         contentContainer: 'content',

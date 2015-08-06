@@ -24,20 +24,9 @@ class PrisonsPanel extends EntitiesPanel {
   //   });
   // }
 
-  render() {
-    return $$("div", {className: "panel prisons-panel-component"},
-      $$('div', {className: 'panel-content'},
-        $$('div', {className: 'prisons entities'},
-          // entityNodes
-          $$('div', null, "LOCATIONS GO HERE!")
-        )
-      )
-    );
-  }
 }
 
 PrisonsPanel.displayName = 'Prisons';
-
 PrisonsPanel.contextId = "prisons";
 PrisonsPanel.icon = "fa-location-arrow";
 

@@ -16,7 +16,6 @@ var EntitiesModel = function(entities) {
 
   _.each(entities, function(entity) {
     this.entities[entity.id] = entity;
-    console.log('entity', entity);
     this.byType[entity.type].push(entity);
   }, this);
 
