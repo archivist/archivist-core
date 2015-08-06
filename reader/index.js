@@ -20,7 +20,7 @@ var SubstanceReader = require("substance-ui/reader");
 var tools = {}; // require('./tools');
 var components = require('./components');
 var stateHandlers = require('./state_handlers');
-var panelOrder = ["subjects", "prisons"];
+var panelOrder = ["subjects", "prisons", "locations"];
 
 
 // Specify a Notification service

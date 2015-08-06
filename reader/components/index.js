@@ -9,7 +9,7 @@ module.exports = {
   "locations": require("./locations/locations_panel"),
 
   "prison": require("./prisons/prison"),
-  "location": require("./locations/location"),
+  "toponym": require("./locations/location"),
 
   // Misc
   // "content_toolbar": require("./content_toolbar"),
