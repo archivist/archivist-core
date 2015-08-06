@@ -149,6 +149,9 @@ BrowserController.Prototype = function() {
 
     // Get filters from app state    
     var searchQuery = newState.searchQuery;
+
+    console.log(JSON.stringify(searchQuery));
+
     // var documentId = newState.documentId;
     var self = this;
 

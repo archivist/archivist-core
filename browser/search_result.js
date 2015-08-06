@@ -78,15 +78,6 @@ SearchResult.Prototype = function() {
             selected: self.isSelected(property, bucket.key)
           });
         });
-      } else if (property === "authors") {
-        _.each(aggregations["authors"].buckets, function(bucket) {
-          entries.push({
-            name: bucket.key,
-            frequency: bucket.doc_count,
-            scoped_frequency: self.getScopedFrequency(property, bucket.key),
-            selected: self.isSelected(property, bucket.key)
-          });
-        });
       }
 
       facets.push({

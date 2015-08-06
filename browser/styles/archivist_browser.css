@@ -597,14 +597,7 @@ div {
 
 
 
-
-
-
-
-
-
-
-
+.hidden { display: none !important; }
 
 
 /* Tree component
@@ -613,6 +606,7 @@ div {
 .tree-component {
   font-size: 12px;
   padding: 10px;
+  line-height: 24px;
 }
 
 .tree-component .tree-node {

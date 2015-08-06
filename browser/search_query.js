@@ -13,9 +13,15 @@ var SearchQuery = function(data, options) {
 
 SearchQuery.Prototype = function() {
 
-  this.addFilter = function(facet, value) {
+  this.addFilter = function(facet, values) {
     if (!this.filters[facet]) this.filters[facet] = [];
-    this.filters[facet].push(value);
+
+    if (!_.isArray(values)) {
+      values = [values];
+    }
+
+    // this.filters[facet].push(value);
+    this.filters[facet] = values;
     this.trigger("query:changed");
   };
 

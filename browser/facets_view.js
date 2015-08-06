@@ -5,7 +5,6 @@ var View = require("substance-application").View;
 var $$ = require("substance-application").$$;
 
 
-
 // FacetsView
 // ========
 //

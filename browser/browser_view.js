@@ -70,7 +70,6 @@ var BrowserView = function(controller) {
 
   this.$el.on('click', '.available-facets .value', _.bind(this.toggleFilter, this));
   this.$el.on('click', '.document .toggle-preview', _.bind(this.togglePreview, this));
-
   this.$el.on('click', '.show-more', _.bind(this._preventDefault, this));
 
   // Each time the search query changes we re-render the facets panel
@@ -167,16 +166,21 @@ BrowserView.Prototype = function() {
     this.facetsEl.innerHTML = "";
     this.facetsEl.appendChild(this.facetsView.render().el);
 
+    // Subjects Filters
+    // -------------
+    // 
+
+    var subjectFilters = this.controller.state.searchQuery.filters["subjects"] || [];
     React.render(
       React.createElement(TreeComponent, {
-        // ref: "treeWidget",
-        selectedNodes: [],
+        selectedNodes: subjectFilters,
         tree: this.controller.searchResult.subjects.getTree(),
         onSelectionChanged: function(selectedNodes) {
-          console.log('selected nodes', selectedNodes);
-        } // this.updateSubjectReference
+          var selectedSubjects = Object.keys(selectedNodes);
+          console.log('selected nodes', selectedSubjects);
+          this.controller.searchQuery.addFilter("subjects", selectedSubjects);
+        }.bind(this)
       }),
-      // document.getElementById('container')
       this.facetsEl
     );
   };
@@ -211,17 +215,17 @@ BrowserView.Prototype = function() {
         // --------------
 
         var filtersEl = $$('.filters');
-        _.each(filters, function(filterVals, key) {
-          var docVals = doc[key];
-          if (!_.isArray(docVals)) docVals = [docVals];
+        // _.each(filters, function(filterVals, key) {
+        //   var docVals = doc[key];
+        //   if (!_.isArray(docVals)) docVals = [docVals];
 
-          _.each(filterVals, function(filterVal) {
-            if (_.include(docVals, filterVal)) {
-              var filterEl = $$('.filter', {text: filterVal});
-              filtersEl.appendChild(filterEl);
-            }
-          });
-        });
+        //   _.each(filterVals, function(filterVal) {
+        //     if (_.include(docVals, filterVal)) {
+        //       var filterEl = $$('.filter', {text: filterVal});
+        //       filtersEl.appendChild(filterEl);
+        //     }
+        //   });
+        // });
 
         var elems = [
           $$('.meta-info', {
