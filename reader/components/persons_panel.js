@@ -2,7 +2,7 @@
 
 var $$ = React.createElement;
 var _ = require("substance/helpers");
-var EntitiesPanel = require("../entities_panel");
+var EntitiesPanel = require("./entities_panel");
 
 class PersonsPanel extends EntitiesPanel {
 
@@ -26,8 +26,8 @@ class PersonsPanel extends EntitiesPanel {
 
 }
 
-PrisonsPanel.displayName = 'Persons';
-PrisonsPanel.contextId = "persons";
-PrisonsPanel.icon = "fa-user";
+PersonsPanel.displayName = 'Persons';
+PersonsPanel.contextId = "persons";
+PersonsPanel.icon = "fa-user";
 
 module.exports = PersonsPanel;

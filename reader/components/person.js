@@ -17,7 +17,7 @@ class Person extends React.Component {
     var person = this.props.entity;
 
     var className = ["entity person"];
-    if (prison.active) className.push("active");
+    if (person.active) className.push("active");
     return $$("div", {className: className.join(" "), onClick: this.handleToggle},
       $$("div", {className: "type"}, "Person"),
       $$("div", {className: "name"}, person.name),
@@ -26,4 +26,4 @@ class Person extends React.Component {
   }
 }
 
-module.exports = Prison;
+module.exports = Person;

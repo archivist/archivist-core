@@ -2,7 +2,7 @@
 
 var $$ = React.createElement;
 var _ = require("substance/helpers");
-var EntitiesPanel = require("../entities_panel");
+var EntitiesPanel = require("./entities_panel");
 
 class PrisonsPanel extends EntitiesPanel {
 
