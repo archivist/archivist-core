@@ -22,7 +22,6 @@ var ARTICLE_TYPES = {
   "Registered report": "registered-report",
 };
 
-
 // Browser.View Constructor
 // ========
 //
@@ -176,6 +175,7 @@ BrowserView.Prototype = function() {
       React.createElement(TreeComponent, {
         selectedNodes: subjectFilters,
         tree: this.controller.searchResult.subjects.getTree(),
+        counts: this.controller.searchResult.getFacetCounts("subjects"),
         onSelectionChanged: function(selectedNodes) {
           var selectedSubjects = Object.keys(selectedNodes);
           console.log('selected nodes', selectedSubjects);

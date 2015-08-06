@@ -9,9 +9,7 @@ var AVAILABLE_FACETS = require("./available_facets");
 
 var LABEL_MAPPING = {
   subjects: "Subjects",
-  article_type: "Article Type",
-  organisms: "Organisms",
-  authors: "Top Authors"
+  entities: "Entities"
 };
 
 var SearchResult = function(data) {
@@ -52,6 +50,11 @@ SearchResult.Prototype = function() {
     //   return bucket.key === value;
     // });
     // return bucket.length > 0 ? bucket[0].doc_count : "0";
+  };
+
+
+  this.getFacetCounts = function(facet) {
+    return this.rawResult.facets[facet];
   };
 
   // this.getFacets = function() {

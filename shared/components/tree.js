@@ -1,5 +1,4 @@
 var $$ = React.createElement;
-
 var _ = require("substance/helpers");
 
 // Tree Node Component
@@ -22,7 +21,8 @@ var TreeNode = React.createClass({
           key: node.id,
           node: node,
           handleSelection: this.props.handleSelection,
-          handleExpansion: this.props.handleExpansion
+          handleExpansion: this.props.handleExpansion,
+          counts: this.props.counts
         });
       }.bind(this));
 
@@ -57,7 +57,11 @@ var TreeNode = React.createClass({
         className: 'name',
         "data-id": node.id,
         onClick: this.props.handleSelection,
-      }, node.workname || node.name),
+      },
+        (node.workname || node.name),
+        $$('span', {}, ' ('+(this.props.counts[node.id] || 0)+')')
+      ),
+      
       $$('div', {className: 'children'}, childrenEls)
     );
   }
@@ -177,7 +181,8 @@ var Tree = React.createClass({
         key: node.id,
         node: node,
         handleSelection: this.handleSelection,
-        handleExpansion: this.handleExpansion
+        handleExpansion: this.handleExpansion,
+        counts: this.props.counts
       });
     }.bind(this));
     return $$("div", {className: 'tree-component'}, childEls);    
