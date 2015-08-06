@@ -4,11 +4,11 @@ var $$ = React.createElement;
 var _ = require("substance/helpers");
 var EntitiesPanel = require("./entities_panel");
 
-class LocationsPanel extends EntitiesPanel {
+class DefinitionsPanel extends EntitiesPanel {
 
   constructor(props) {
     super(props);
-    this.entityType = "toponym";
+    this.entityType = "definition";
   }
 
   // Event handlers
@@ -26,8 +26,8 @@ class LocationsPanel extends EntitiesPanel {
 
 }
 
-LocationsPanel.displayName = 'Locations';
-LocationsPanel.contextId = "locations";
-LocationsPanel.icon = "fa-globe";
+DefinitionsPanel.displayName = 'Definitions';
+DefinitionsPanel.contextId = "definitions";
+DefinitionsPanel.icon = "fa-comment";
 
-module.exports = LocationsPanel;
+module.exports = DefinitionsPanel;

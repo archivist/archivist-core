@@ -8,10 +8,12 @@ module.exports = {
   "prisons": require("./prisons_panel"),
   "locations": require("./locations_panel"),
   "persons": require("./persons_panel"),
+  "definitions": require("./definitions_panel"),
 
   "prison": require("./prison"),
   "toponym": require("./location"),
   "person": require("./person"),
+  "definition": require("./definition"),
 
   // Misc
   // "content_toolbar": require("./content_toolbar"),
