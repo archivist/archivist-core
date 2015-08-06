@@ -23,7 +23,7 @@ SearchResult.Prototype = function() {
 
   this.getSearchMetrics = function() {
     return {
-      hits: this.rawResult.hits.total
+      hits: this.rawResult.count
     };
   };
 
@@ -31,63 +31,65 @@ SearchResult.Prototype = function() {
   // ------------
 
   this.getDocuments = function() {
-    var documents = [];
-    _.each(this.rawResult.hits.hits, function(rawDoc) {
-      var doc = JSON.parse(JSON.stringify(rawDoc._source));
-      console.log('doc', doc);
-      documents.push(_.extend(doc, {
-        id: rawDoc._id,
-        fragments: rawDoc.fragments,
-        _score: rawDoc._score,
-        title: rawDoc.highlight && rawDoc.highlight.title ? rawDoc.highlight.title[0] : rawDoc._source.title,
-        intro: rawDoc.highlight && rawDoc.highlight.summary ? rawDoc.highlight.summary[0] : rawDoc._source.summary,
-        doi: rawDoc.highlight && rawDoc.highlight.doi ? rawDoc.highlight.doi[0] : rawDoc._source.doi,
-      }));
-    });
-    return documents;
+    return this.rawResult.interviews;
   };
+
+  // this.getScopedFrequency = function(facet, value) {
+  //   var facet = this.rawResult.aggregations[facet];
+  //   if (!facet) return "0";
+  //   var bucket = _.select(facet.buckets, function(bucket) {
+  //     return bucket.key === value;
+  //   });
+  //   return bucket.length > 0 ? bucket[0].doc_count : "0";
+  // };
 
   this.getScopedFrequency = function(facet, value) {
-    var facet = this.rawResult.aggregations[facet];
+    return this.rawResult.facets[facet][value];
+    // var facet = this.rawResult.aggregations[facet];
 
-    if (!facet) return "0";
-    var bucket = _.select(facet.buckets, function(bucket) {
-      return bucket.key === value;
-    });
-
-    return bucket.length > 0 ? bucket[0].doc_count : "0";
+    // if (!facet) return "0";
+    // var bucket = _.select(facet.buckets, function(bucket) {
+    //   return bucket.key === value;
+    // });
+    // return bucket.length > 0 ? bucket[0].doc_count : "0";
   };
 
+  // this.getFacets = function() {
+
+
+  //   var facets = [];
+  //   var self = this;
+  //   var aggregations = this.rawResult.aggregations;
+
+  //   if (!aggregations) return facets;
+  //   // console.log(JSON.stringify(this.rawResult.aggregations, null, "  "));
+
+  //   _.each(LABEL_MAPPING, function(label, property) {
+  //     var entries = [];
+
+  //     if (AVAILABLE_FACETS[property]) {
+  //       _.each(AVAILABLE_FACETS[property].buckets, function(bucket) {
+  //         entries.push({
+  //           name: bucket.key,
+  //           frequency: bucket.doc_count,
+  //           scoped_frequency: self.getScopedFrequency(property, bucket.key),
+  //           selected: self.isSelected(property, bucket.key)
+  //         });
+  //       });
+  //     }
+
+  //     facets.push({
+  //       name: label,
+  //       property: property,
+  //       entries: entries
+  //     });
+  //   });
+
+  //   return facets;
+  // };
+
   this.getFacets = function() {
-    var facets = [];
-    var self = this;
-    var aggregations = this.rawResult.aggregations;
-
-    if (!aggregations) return facets;
-    // console.log(JSON.stringify(this.rawResult.aggregations, null, "  "));
-
-    _.each(LABEL_MAPPING, function(label, property) {
-      var entries = [];
-
-      if (AVAILABLE_FACETS[property]) {
-        _.each(AVAILABLE_FACETS[property].buckets, function(bucket) {
-          entries.push({
-            name: bucket.key,
-            frequency: bucket.doc_count,
-            scoped_frequency: self.getScopedFrequency(property, bucket.key),
-            selected: self.isSelected(property, bucket.key)
-          });
-        });
-      }
-
-      facets.push({
-        name: label,
-        property: property,
-        entries: entries
-      });
-    });
-
-    return facets;
+    return this.rawResult.facets;
   };
 
   // Returns true when a given facet value is set as a filter

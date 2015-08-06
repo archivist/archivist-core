@@ -16,6 +16,7 @@ var MONTH_MAPPING = {
 var util = {};
 
 util.formatDate = function (pubDate) {
+  if (!pubDate) return "N/A";
   var parts = pubDate.split("-");
   if (parts.length >= 3) {
     // new Date(year, month [, day [, hours[, minutes[, seconds[, ms]]]]])

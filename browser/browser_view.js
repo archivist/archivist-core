@@ -231,8 +231,8 @@ BrowserView.Prototype = function() {
         var elems = [
           $$('.meta-info', {
             children: [
-              $$('.article-type.'+ARTICLE_TYPES[doc.article_type], {html: doc.article_type+" "}),
-              $$('.doi', {html: doc.doi+" "}),
+              // $$('.article-type.'+ARTICLE_TYPES[doc.article_type], {html: doc.article_type+" "}),
+              // $$('.doi', {html: doc.doi+" "}),
 
               $$('.published-on', {text: "published on "+ util.formatDate(doc.published_on)})
             ]
