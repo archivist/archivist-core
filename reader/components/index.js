@@ -9,6 +9,7 @@ module.exports = {
   "locations": require("./locations_panel"),
   "persons": require("./persons_panel"),
   "definitions": require("./definitions_panel"),
+  "info": require("./info_panel"),
 
   "prison": require("./prison"),
   "toponym": require("./location"),
