@@ -37,12 +37,20 @@ var TreeNode = React.createClass({
     var selectedIcon = node._selected ? "fa-check-square-o" : "fa-square-o";
     var hideExpand = childNodes.length === 0;
     var countEl = $$('span');
-
+    var classNames = ['tree-node'];
     if (this.props.counts) {
-      countEl = $$('span', {}, ' ('+(this.props.counts[node.id] || 0)+')');
+      var count = this.getCount(node.id);
+      if (count === 0) classNames.push("disabled");
+      countEl = $$('span', {}, ' ('+count+')');
+    }
+    if (node._selected) {
+      classNames.push('selected');
+    }
+    if (node._expanded) {
+      classNames.push('expanded');
     }
 
-    return $$("div", {className: 'tree-node'+ (node._selected ? ' selected' : '') + (node._expanded ? ' expanded' : '')},
+    return $$("div", {className: classNames.join(' ')},
       $$('a', {
         "data-id": node.id,
         className: 'expand-toggle'+ (hideExpand ? ' hidden' : ''),
@@ -66,10 +74,24 @@ var TreeNode = React.createClass({
         (node.workname || node.name),
         countEl
       ),
-      
+
       $$('div', {className: 'children'}, childrenEls)
     );
+  },
+
+  getCount: function(id) {
+    if (this.props.counts) {
+      var stats = this.props.counts[id];
+      if (stats) {
+        return stats.count;
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
   }
+
 });
 
 // Tree Component
@@ -172,7 +194,7 @@ var Tree = React.createClass({
       selectedNodes: selectedNodes,
       tree: tree
     });
-    
+
     this.props.onSelectionChanged(selectedNodes);
   },
 
@@ -190,7 +212,7 @@ var Tree = React.createClass({
         counts: this.props.counts
       });
     }.bind(this));
-    return $$("div", {className: 'tree-component'}, childEls);    
+    return $$("div", {className: 'tree-component'}, childEls);
   }
 });
 

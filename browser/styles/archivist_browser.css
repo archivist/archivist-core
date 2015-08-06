@@ -66,7 +66,7 @@ html {
 
 body {
   font-family: 'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
-  color: #505050;  
+  color: #505050;
 }
 
 a {
@@ -83,7 +83,7 @@ a:hover {
   color: rgba(11, 157, 217, 1);
 }
 
-/* Layout stuff 
+/* Layout stuff
 ---------------------------------
 */
 
@@ -240,7 +240,7 @@ div {
 }
 
 /* Separatator tweaks */
-.search-field-filter::after { 
+.search-field-filter::after {
   content: ", ";
 }
 
@@ -301,7 +301,7 @@ div {
   bottom: -1px;
   font-weight: 600;
   /*margin-top: 15px;*/
-  
+
   background: #4A90E2;
   line-height: 35px;
   padding: 0px 10px;
@@ -500,7 +500,7 @@ div {
 }
 
 #facets .facet .facet-values .value.not-included:hover {
- color: #999; 
+ color: #999;
 }
 
 #facets .facet .facet-values .value .icon {
@@ -617,7 +617,7 @@ div {
 }
 
 .tree-component .tree-node a {
-  color: #999;
+  color: #333;
 }
 
 .tree-component .tree-node.selected > a {
@@ -650,60 +650,11 @@ div {
 
 .tree-component .tree-node .name {
   display: block;
-  font-weight: 600;
+  /*font-weight: 600;*/
   /*color: #777;*/
   padding-left: 25px;
 }
 
-/* Tree list component
------------------------------------------------------*/
-
-.tree-list-component {
-  font-size: 12px;
-  padding: 10px;
-}
-
-.tree-list-component .tree-node {
-  padding: 2px 0px;
-  padding-left: 20px;
-  overflow: auto;
-  position: relative;
-}
-
-.tree-list-component .tree-node a {
+.tree-component .tree-node.disabled > a {
   color: #999;
 }
-
-.tree-list-component .tree-node.selected > a {
-  color: #333;
-}
-
-
-.tree-list-component .tree-node:hover {
-  /*background: #eee;*/
-}
-
-.tree-list-component .tree-node .expand-toggle {
-  display: block;
-  position: absolute;
-  padding: 2px 6px;
-  top: -2px;
-  /*color: #444;*/
-  left: 5px;
-}
-
-
-.tree-list-component .tree-node .select-toggle {
-  position: absolute;
-  left: 25px;
-  /*color: #444;*/
-  margin-right: 10px;
-  font-size: 15px;
-}
-
-.tree-list-component .tree-node .name {
-  display: block;
-  font-weight: 600;
-}
-
-
