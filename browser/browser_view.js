@@ -65,6 +65,7 @@ var BrowserView = function(controller) {
     html: '<div class="progress loading"></div>'
   });
 
+
   // Event handlers
   // ------------
 
@@ -73,7 +74,7 @@ var BrowserView = function(controller) {
   this.$el.on('click', '.show-more', _.bind(this._preventDefault, this));
 
   // Each time the search query changes we re-render the facets panel
-  this.controller.searchQuery.on('query:changed', _.bind(this.renderFacets, this));
+  // this.controller.searchQuery.on('query:changed', _.bind(this.renderFacets, this));
 };
 
 BrowserView.Prototype = function() {
@@ -162,9 +163,9 @@ BrowserView.Prototype = function() {
   };
 
   this.renderFacets = function() {
-    this.facetsView = new FacetsView(this.controller.searchResult.getFacets());
-    this.facetsEl.innerHTML = "";
-    this.facetsEl.appendChild(this.facetsView.render().el);
+    // this.facetsView = new FacetsView(this.controller.searchResult.getFacets());
+    // this.facetsEl.innerHTML = "";
+    // this.facetsEl.appendChild(this.facetsView.render().el);
 
     // Subjects Filters
     // -------------
@@ -249,9 +250,9 @@ BrowserView.Prototype = function() {
           }));
         }
 
-        elems.push($$('.authors', {
-          html: doc.authors_string
-        }));
+        // elems.push($$('.authors', {
+        //   html: doc.authors_string
+        // }));
 
         // console.log('FILTERS', filtersEl.childNodes);
         if (filtersEl.childNodes.length > 0) {

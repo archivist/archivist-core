@@ -3,7 +3,6 @@
 var _ = require("substance/helpers");
 var Controller = require("substance-application").Controller;
 var BrowserView = require("./browser_view");
-
 var SearchQuery = require("./search_query");
 var SearchResult = require("./search_result");
 
@@ -73,7 +72,7 @@ BrowserController.Prototype = function() {
   };
 
   this.transition = function(newState, cb) {
-    console.log("BrowserController.transition(%s -> %s)", this.state.id, newState.id);
+    // console.log("BrowserController.transition(%s -> %s)", this.state.id, newState.id);
 
     // idem-potence
     // if (newState.id === this.state.id) {
@@ -88,7 +87,7 @@ BrowserController.Prototype = function() {
       if (this.state.id === "uninitialized") {
         // Set the initial search query from app state
         // TODO: this could be done in a onInitialize hook?
-        console.log('setting initial query', newState.searchQuery);
+        // console.log('setting initial query', newState.searchQuery);
 
         var query;
         if (newState.searchQuery) {
@@ -109,35 +108,8 @@ BrowserController.Prototype = function() {
     } else {
       console.log('state not explicitly handled', this.state, newState);
       return cb(null);
-      // cb(null);
     }
   };
-
-  // Load preview
-  // -----------------------
-  // 
-
-  // this.loadPreview = function(documentId, searchStr, cb) {
-  //   var self = this;
-
-  //   $.ajax({
-  //     url: self.config.api_url+"/search/document?documentId="+encodeURIComponent(documentId)+"&searchString="+encodeURIComponent(searchStr),
-  //     dataType: 'json',
-  //     success: function(data) {
-  //       var elifeID = _.last(documentId.split("."));
-  //       data.document.id = documentId;
-  //       data.document.url = "http://lens.elifesciences.org/" + elifeID;
-  //       data.document.pdf_url = "http://cdn.elifesciences.org/elife-articles/"+elifeID+"/pdf/elife"+elifeID+".pdf";
-  //       data.searchStr = searchStr;
-  //       self.previewData = data;
-  //       cb(null);
-  //     },
-  //     error: function(err) {
-  //       console.error(err.responseText);
-  //       cb(err.responseText);
-  //     }
-  //   });
-  // };
 
   // Search result gets loaded
   // -----------------------
@@ -150,26 +122,25 @@ BrowserController.Prototype = function() {
     // Get filters from app state    
     var searchQuery = newState.searchQuery;
 
-    console.log(JSON.stringify(searchQuery));
+    // console.log(JSON.stringify(searchQuery));
 
     // var documentId = newState.documentId;
     var self = this;
 
     this.config.backend.findDocuments(searchQuery, function(err, result, subjects) {
-      console.log('search result:', result);
+      // console.log('search result:', result);
       // console.log(JSON.stringify(result.aggregations, null, "  "));
 
       self.config.backend.getSubjectsModel(function(err, subjects) {
-
         self.searchResult = new SearchResult({
           searchQuery: self.searchQuery,
           result: result
         }, {});
 
+        console.log('searchresult', self.searchResult);
+
         // Add subjects model to the search result
         self.searchResult.subjects = subjects;
-        console.log('yay subjects', subjects);
-
         self.previewData = null;
         cb(null);
       });
@@ -184,7 +155,6 @@ BrowserController.Prototype = function() {
 
 BrowserController.Prototype.prototype = Controller.prototype;
 BrowserController.prototype = new BrowserController.Prototype();
-
 BrowserController.Controller = BrowserController;
 
 module.exports = BrowserController;

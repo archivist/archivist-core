@@ -72,7 +72,6 @@ SearchbarView.Prototype = function() {
     this.searchQuery.updateSearchStr(searchStr);
 
     e.preventDefault();
-    console.log('updating searchstr');
   };
 
   this._removeFilter = function(e) {
@@ -192,8 +191,6 @@ SearchbarView.Prototype = function() {
   // ------------------
 
   this.updateView = function() {
-    console.log('query changed... updating the view');
-
     // Set search string
     $(this.searchFieldInputEl).val(this.searchQuery.searchStr);
 
@@ -202,7 +199,6 @@ SearchbarView.Prototype = function() {
   };
 
   // TODO: find simpler implementation for keyboard nav
-
   this.prevSuggestion = function() {
     var suggestionEls = this.searchFieldSuggestionsEl.childNodes;
 
