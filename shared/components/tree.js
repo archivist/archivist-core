@@ -36,6 +36,11 @@ var TreeNode = React.createClass({
     var expandedIcon = node._expanded ? "fa-caret-down" : "fa-caret-right";
     var selectedIcon = node._selected ? "fa-check-square-o" : "fa-square-o";
     var hideExpand = childNodes.length === 0;
+    var countEl = $$('span');
+
+    if (this.props.counts) {
+      countEl = $$('span', {}, ' ('+(this.props.counts[node.id] || 0)+')');
+    }
 
     return $$("div", {className: 'tree-node'+ (node._selected ? ' selected' : '') + (node._expanded ? ' expanded' : '')},
       $$('a', {
@@ -59,7 +64,7 @@ var TreeNode = React.createClass({
         onClick: this.props.handleSelection,
       },
         (node.workname || node.name),
-        $$('span', {}, ' ('+(this.props.counts[node.id] || 0)+')')
+        countEl
       ),
       
       $$('div', {className: 'children'}, childrenEls)
