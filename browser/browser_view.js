@@ -72,6 +72,8 @@ var BrowserView = function(controller) {
   this.$el.on('click', '.document .toggle-preview', _.bind(this.togglePreview, this));
   this.$el.on('click', '.show-more', _.bind(this._preventDefault, this));
 
+  // this.$el.on('click', '.available-facets .value', _.bind(this.addEntity, this));
+
   // Each time the search query changes we re-render the facets panel
   // this.controller.searchQuery.on('query:changed', _.bind(this.renderFacets, this));
 };
@@ -205,28 +207,32 @@ BrowserView.Prototype = function() {
       this.documentsEl.appendChild($$('.no-result', {text: searchMetrics.hits + " articles found"}));
 
       _.each(documents, function(doc, index) {
-        var authors = [];
-
-        // _.each(doc.authors, function(author) {
-        //   var authorEl = $$('span.author.facet-occurence', {text: author});
-        //   authors.push(authorEl);
-        // }, this);
 
         // Matching filters
         // --------------
 
         var filtersEl = $$('.filters');
-        // _.each(filters, function(filterVals, key) {
-        //   var docVals = doc[key];
-        //   if (!_.isArray(docVals)) docVals = [docVals];
 
-        //   _.each(filterVals, function(filterVal) {
-        //     if (_.include(docVals, filterVal)) {
-        //       var filterEl = $$('.filter', {text: filterVal});
-        //       filtersEl.appendChild(filterEl);
-        //     }
-        //   });
-        // });
+        _.each(doc.facets, function(facet, facetKey) {
+          _.each(facet, function(count, id) {
+            var filterEl = $$('.filter', {text: id+" occured "+count+" times"});
+            filtersEl.appendChild(filterEl);
+          });
+        });
+
+        // Suggested filters
+        // --------------
+
+        var relatedFiltersEl = $$('.related-filters', {text: "Related: "});
+
+        _.each(doc.suggestedEntities, function(entity, id) {
+          var filterEl = $$('a.related-filter', {
+            href: '#',
+            text: id,
+            "data-id": id
+          });
+          relatedFiltersEl.appendChild(filterEl);
+        });
 
         var elems = [
           $$('.meta-info', {
@@ -239,7 +245,8 @@ BrowserView.Prototype = function() {
           }),
           $$('.title', {
             children: [
-              $$('a', { href: doc.url, target: "_blank", html: doc.title })
+
+              $$('a', { href: 'http://ost.d4s.io/archivist/editor/'+doc.id, target: "_blank", html: doc.title })
             ]
           }),
         ];
@@ -254,9 +261,12 @@ BrowserView.Prototype = function() {
         //   html: doc.authors_string
         // }));
 
-        // console.log('FILTERS', filtersEl.childNodes);
         if (filtersEl.childNodes.length > 0) {
           elems.push(filtersEl);  
+        }
+
+        if (relatedFiltersEl.childNodes.length > 0) {
+          elems.push(relatedFiltersEl);  
         }
 
         var documentEl = $$('.document', {
