@@ -1,87 +1,6 @@
-/* Reset
----------------------------------
-*/
+// General purpose Substance Styles
+@import '../node_modules/substance-ui/styles/index';
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-}
-:focus {
-  outline: 0;
-}
-body {
-  line-height: 1;
-  color: black;
-  background: white;
-}
-/*ol, ul {
-  list-style: none;
-}*/
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: "";
-}
-blockquote, q {
-  quotes: "" "";
-}
-
-/* Use borderbox model */
-* {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  text-decoration: none;
-}
-
-
-/* Fonts and colors
----------------------------------
-*/
-
-html {
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  font-family: 'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
-  color: #505050;
-}
-
-a {
-  color: #1B6685;
-  font-weight: normal;
-  text-decoration: none;
-  -moz-transition: background-color 100ms linear, color 100ms linear, opacity 100ms linear;
-  -o-transition: background-color 100ms linear, color 100ms linear, opacity 100ms linear;
-  -webkit-transition: background-color 100ms linear, color 100ms linear, opacity 100ms linear;
-  transition: background-color 100ms linear, color 100ms linear, opacity 100ms linear;
-}
-
-a:hover {
-  color: rgba(11, 157, 217, 1);
-}
 
 /* Layout stuff
 ---------------------------------
@@ -408,6 +327,8 @@ div {
 #documents .document .filter {
   float: left;
   font-style: italic;
+  background: rgba(234, 231, 35, 0.16);
+  
   font-size: 12px;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -465,6 +386,13 @@ div {
 #documents .document .subject {
   font-style: italic;
   color: #999;
+}
+
+.toggle-details {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .query-string {

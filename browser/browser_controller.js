@@ -101,7 +101,6 @@ BrowserController.Prototype = function() {
 
         return this.config.backend.getNameMap(function(err, names) {
           this.names = names;
-          console.log('le names', this.names);
           this.loadSearchResult(newState, cb);
         }.bind(this))
       }

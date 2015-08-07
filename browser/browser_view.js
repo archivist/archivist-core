@@ -41,6 +41,7 @@ var BrowserView = function(controller) {
 
   this.previewEl = $$('#preview');
 
+  this.modalEl = $$('#modal.modal.hidden');
 
   // Wrap what we have into a panel wrapper
   this.panelWrapperEl = $$('.panel-wrapper');
@@ -60,6 +61,8 @@ var BrowserView = function(controller) {
   this.$el.on('click', '.document .toggle-preview', _.bind(this.togglePreview, this));
 
   this.$el.on('click', '.document .filter a', _.bind(this.toggleFilter, this));
+
+  this.$el.on('click', '.toggle-details', _.bind(this.toggleDetails, this));
 
   // Each time the search query changes we re-render the facets panel
   // this.controller.searchQuery.on('query:changed', _.bind(this.renderFacets, this));
@@ -157,6 +160,23 @@ BrowserView.Prototype = function() {
     }
   };
 
+  // Shows a popup
+  this.renderDetails = function() {
+    // TODO:
+    console.log('rendering modal...');
+
+    var modalBodyEl = $$('.body', {
+      children: [
+        $$('.header.toolbar.clearfix.menubar.fill-light', {
+          html: '<div class="title float-left large">Details</div><div class="menu-group small"></div><button class="button toggle-details float-right"><i class="fa fa-close"></i></button>'
+        }),
+        $$('.content', {text: 'DETAIL_VIEW CONTENT GOES HERE'})
+      ]
+    });
+
+    this.modalEl.appendChild(modalBodyEl);
+  };
+
   this.renderFacets = function() {
     // this.facetsView = new FacetsView(this.controller.searchResult.getFacets());
     // this.facetsEl.innerHTML = "";
@@ -216,11 +236,12 @@ BrowserView.Prototype = function() {
         _.each(doc.facets, function(facet, facetKey) {
           _.each(facet, function(count, id) {
             var type = "subjects"; // TODO: determine based on object type
-            var filterEl = $$('.filter.selected', {
-              children: [
-                $$('i.fa.fa-check-square-o'),
-                $$('a', {"data-facet": facetKey, "data-value": id, href: '#', text: this.getName(id)+' ('+count+')'})
-              ]
+            var filterEl = $$('.filter', {
+              text: this.getName(id)+' ('+count+')'
+              // children: [
+              //   $$('i.fa.fa-check-square-o'),
+              //   // $$('a', {"data-facet": facetKey, "data-value": id, href: '#', text: this.getName(id)+' ('+count+')'})
+              // ]
             });
             filtersEl.appendChild(filterEl);
           }, this);
@@ -268,10 +289,6 @@ BrowserView.Prototype = function() {
           elems.push(filtersEl);  
         }
 
-        // if (relatedFiltersEl.childNodes.length > 0) {
-        //   elems.push(relatedFiltersEl);  
-        // }
-
         var documentEl = $$('.document', {
           "data-id": doc.id,
           children: elems
@@ -281,8 +298,6 @@ BrowserView.Prototype = function() {
         // Render preview
         // -----------
 
-        // var previewData = doc.fragments;
-        // var documentId = previewData.document.id;
 
         if (doc.fragments) {
           var previewEl = new PreviewView({
@@ -294,12 +309,12 @@ BrowserView.Prototype = function() {
           // Highlight previewed document in result list
           documentEl.appendChild(previewEl.render().el);
         }
-
-        // // TODO: replace this with check doc.matches_count > 0
-        // if (searchStr) {
-        //   var togglePreviewEl = $$('a.toggle-preview', {href: "#", html: '<i class="fa fa-eye"></i> Show matches for "'+searchStr+'"'});
-        //   documentEl.appendChild(togglePreviewEl);
-        // }
+        // Add detail view
+        documentEl.appendChild($$('a.toggle-details', {
+          "data-id": doc.id,
+          href: "#",
+          html: '<i class="fa fa-eye"></i> Show more'
+        }));
 
         this.documentsEl.appendChild(documentEl);
       }, this);
@@ -313,11 +328,24 @@ BrowserView.Prototype = function() {
     this.searchbarView.renderFilters();
   };
 
+  this.toggleDetails = function(e) {
+    e.preventDefault();
+
+    if ($(this.modalEl).hasClass('hidden')) {
+      this.renderDetails();
+      $(this.modalEl).removeClass('hidden');
+    } else {
+      $(this.modalEl).addClass('hidden');
+    }
+  };
+
   this.render = function() {
     this.el.innerHTML = "";
     this.el.appendChild(this.searchbarView.render().el);
     this.el.appendChild(this.panelWrapperEl);
     this.el.appendChild(this.progressbarEl);
+    this.el.appendChild(this.modalEl);
+
     return this;
   };
 
