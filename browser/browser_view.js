@@ -64,11 +64,21 @@ var BrowserView = function(controller) {
 
   this.$el.on('click', '.toggle-details', _.bind(this.toggleDetails, this));
 
+  $(this.facetsEl).on('click', _.bind(this.blockFiltering, this));
+
   // Each time the search query changes we re-render the facets panel
   // this.controller.searchQuery.on('query:changed', _.bind(this.renderFacets, this));
 };
 
 BrowserView.Prototype = function() {
+
+  this.blockFiltering = function(e) {
+    if (this.loading) {
+      e.preventDefault();
+      e.stopPropagation();      
+    }
+  };
+
 
   this._preventDefault = function(e) {
     e.preventDefault();
@@ -111,7 +121,9 @@ BrowserView.Prototype = function() {
 
   // Show the loading indicator
   this.showLoading = function() {
+    this.loading = true;
     $('.progress-bar').removeClass('done loading').show();
+    $('#facets').addClass('disabled');
     _.delay(function() {
       $('.progress-bar').addClass('loading');
     }, 10);
@@ -120,6 +132,9 @@ BrowserView.Prototype = function() {
   // Hide the loading indicator
   this.hideLoading = function() {
     $(this.loadingEl).hide();
+    this.loading = false;
+
+    $('#facets').removeClass('disabled');
     $('.progress-bar').addClass('done');
 
     _.delay(function() {
@@ -329,6 +344,7 @@ BrowserView.Prototype = function() {
   };
 
   this.toggleDetails = function(e) {
+    console.log('TOGGLING', e.currentTarget);
     e.preventDefault();
 
     if ($(this.modalEl).hasClass('hidden')) {
