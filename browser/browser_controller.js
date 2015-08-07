@@ -31,12 +31,13 @@ var BrowserController = function(app, config) {
 BrowserController.Prototype = function() {
 
   this.initialize = function(newState, cb) {
+    console.log('loading the map..');
     cb(null);
   };
 
-  this.DEFAULT_STATE = {
-    id: "main"
-  };
+  // this.DEFAULT_STATE = {
+  //   id: "main"
+  // };
 
   // Initiate a new search by making a state change
   // ------------------
@@ -72,7 +73,7 @@ BrowserController.Prototype = function() {
   };
 
   this.transition = function(newState, cb) {
-    // console.log("BrowserController.transition(%s -> %s)", this.state.id, newState.id);
+    console.log("BrowserController.transition(%s -> %s)", this.state.id, newState.id);
 
     // idem-potence
     // if (newState.id === this.state.id) {
@@ -97,6 +98,12 @@ BrowserController.Prototype = function() {
           newState.searchQuery = JSON.parse(JSON.stringify(query));
         }
         this.searchQuery.setQuery(query);
+
+        return this.config.backend.getNameMap(function(err, names) {
+          this.names = names;
+          console.log('le names', this.names);
+          this.loadSearchResult(newState, cb);
+        }.bind(this))
       }
       if (!_.isEqual(newState.searchQuery, this.state.searchQuery)) {
         // Search query has changed
@@ -136,7 +143,7 @@ BrowserController.Prototype = function() {
           result: result
         }, {});
 
-        console.log('searchresult', self.searchResult);
+        // console.log('searchresult', self.searchResult);
 
         // Add subjects model to the search result
         self.searchResult.subjects = subjects;
@@ -150,6 +157,15 @@ BrowserController.Prototype = function() {
     var newState = this.state;
     this.view.afterTransition(oldState, newState);
   };
+
+  this.getName = function(id) {
+    return this.names[id].name;
+  };
+
+  this.getType = function(id) {
+    return this.names[id].type;
+  };
+
 };
 
 BrowserController.Prototype.prototype = Controller.prototype;

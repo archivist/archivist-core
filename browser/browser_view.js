@@ -95,9 +95,6 @@ BrowserView.Prototype = function() {
     e.preventDefault();
     var facet = $(e.currentTarget).attr("data-facet");
     var facetValue = $(e.currentTarget).attr("data-value");
-
-    console.log('facet', facet);
-    console.log('facetValue', facetValue);
     this.controller.searchQuery.toggleFilter(facet, facetValue);
   };
 
@@ -178,11 +175,15 @@ BrowserView.Prototype = function() {
         onSelectionChanged: function(selectedNodes) {
           var selectedSubjects = Object.keys(selectedNodes);
           console.log('selected nodes', selectedSubjects);
-          this.controller.searchQuery.addFilter("subjects", selectedSubjects);
+          this.controller.searchQuery.setFilter("subjects", selectedSubjects);
         }.bind(this)
       }),
       this.facetsEl
     );
+  };
+
+  this.getName = function(id) {
+    return this.controller.getName(id);
   };
 
   // Display initial search result
@@ -218,12 +219,12 @@ BrowserView.Prototype = function() {
             var filterEl = $$('.filter.selected', {
               children: [
                 $$('i.fa.fa-check-square-o'),
-                $$('a', {"data-facet": facetKey, "data-value": id, href: '#', text: id+' ('+count+')'})
+                $$('a', {"data-facet": facetKey, "data-value": id, href: '#', text: this.getName(id)+' ('+count+')'})
               ]
             });
             filtersEl.appendChild(filterEl);
-          });
-        });
+          }, this);
+        }, this);
 
         // Suggested filters
         // --------------

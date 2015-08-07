@@ -168,7 +168,7 @@ SearchbarView.Prototype = function() {
     _.each(this.searchQuery.filters, function(filterValues, facet) {
       _.each(filterValues, function(filterVal) {
         var filterEl = $$('.search-field-filter', {
-          html: this.controller.searchResult.getNameForFilterValue(filterVal)
+          html: this.controller.getName(filterVal)
         });
         if (filterCount<3) {
           this.searchFieldFilters.appendChild(filterEl);  
