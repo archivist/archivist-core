@@ -25,12 +25,15 @@ class InfoPanel extends Panel {
 
   render() {
     var doc = this.props.doc;
+    var metadata = doc.getDocumentMeta();
 
     return $$("div", {className: "panel info-panel-component"},
       $$('div', {className: 'panel-content'},
-        $$('div', {className: 'prisons entities'}
-          // entityNodes
-          
+        $$('div', {className: 'abstract'},
+          metadata.abstract
+        ),
+        $$('div', {className: 'biography'},
+          metadata.interviewee_bio
         )
       )
     );

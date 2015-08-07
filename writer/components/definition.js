@@ -20,7 +20,7 @@ var Definition = React.createClass({
       $$("div", {className: "type"}, "Definition"),
       $$("div", {className: "title"}, this.props.title),
       $$("div", {className: "description"}, this.props.description),
-      $$("a", {className: "edit", target: "_blank", href: './definitions/' + this.props.id, onClick: this.handleEdit},
+      $$("a", {className: "edit", target: "_blank", href: '../definitions/' + this.props.id, onClick: this.handleEdit},
         $$("i", {className: "fa fa-pencil-square-o"})
       )
     );

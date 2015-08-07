@@ -18,7 +18,7 @@ var Person = React.createClass({
       $$("div", {className: "type"}, "Person"),
       $$("div", {className: "name"}, this.props.name),
       $$("div", {className: "description"}, this.props.description),
-      $$("a", {className: "edit", target: "_blank", href: './persons/' + this.props.id, onClick: this.handleEdit},
+      $$("a", {className: "edit", target: "_blank", href: '../persons/' + this.props.id, onClick: this.handleEdit},
         $$("i", {className: "fa fa-pencil-square-o"})
       )
     );
