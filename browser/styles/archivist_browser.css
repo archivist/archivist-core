@@ -402,14 +402,30 @@ div {
   padding: 10px 0px;
   padding-bottom: 3px;
   overflow: auto;
+
 }
 
 #documents .document .filter {
   float: left;
   font-style: italic;
-  font-size: 14px;
+  font-size: 12px;
   margin-right: 10px;
-  background: rgba(234, 231, 35, 0.16);
+  margin-bottom: 10px;
+  color: #999;
+}
+
+#documents .document .filter a {
+  padding-left: 4px;
+  color: #999;
+}
+
+#documents .document .filter.selected {
+  color: #333;
+}
+
+#documents .document .filter.selected a {
+
+  color: #333;
 }
 
 #documents .document .facet-occurence.highlighted {

@@ -5,22 +5,11 @@ var View = require("substance-application").View;
 var $$ = require("substance-application").$$;
 var SearchbarView = require("./searchbar_view");
 var PreviewView = require("./preview_view");
-var FacetsView = require("./facets_view");
+// var FacetsView = require("./facets_view");
 var util = require("./util");
 
 // React Component
 var TreeComponent = require("../shared/components/tree");
-
-var ARTICLE_TYPES = {
-  "Research article": "research-article",
-  "Feature article": "feature-article",
-  "Insight": "insight",
-  "Correction": "correction",
-  "Short report": "short-report",
-  "Editorial": "editorial",
-  "Research advance": "research-advance",
-  "Registered report": "registered-report",
-};
 
 // Browser.View Constructor
 // ========
@@ -64,15 +53,13 @@ var BrowserView = function(controller) {
     html: '<div class="progress loading"></div>'
   });
 
-
   // Event handlers
   // ------------
 
   this.$el.on('click', '.available-facets .value', _.bind(this.toggleFilter, this));
   this.$el.on('click', '.document .toggle-preview', _.bind(this.togglePreview, this));
-  this.$el.on('click', '.show-more', _.bind(this._preventDefault, this));
 
-  // this.$el.on('click', '.available-facets .value', _.bind(this.addEntity, this));
+  this.$el.on('click', '.document .filter a', _.bind(this.toggleFilter, this));
 
   // Each time the search query changes we re-render the facets panel
   // this.controller.searchQuery.on('query:changed', _.bind(this.renderFacets, this));
@@ -105,6 +92,16 @@ BrowserView.Prototype = function() {
   };
 
   this.toggleFilter = function(e) {
+    e.preventDefault();
+    var facet = $(e.currentTarget).attr("data-facet");
+    var facetValue = $(e.currentTarget).attr("data-value");
+
+    console.log('facet', facet);
+    console.log('facetValue', facetValue);
+    this.controller.searchQuery.toggleFilter(facet, facetValue);
+  };
+
+  this.addEntityFilter = function(e) {
     e.preventDefault();
     var facet = $(e.currentTarget).attr("data-facet");
     var facetValue = $(e.currentTarget).attr("data-value");
@@ -190,8 +187,10 @@ BrowserView.Prototype = function() {
 
   // Display initial search result
   this.renderSearchResult = function() {
-    var searchStr = this.controller.state.searchQuery.searchStr;
-    var filters = this.controller.state.searchQuery.filters;
+    var searchQuery = this.controller.state.searchQuery;
+    var searchResult = this.controller.searchResult;
+    var searchStr = searchQuery.searchStr;
+    var filters = searchQuery.filters;
 
     // Check if there's an actual search result
     if (!this.controller.searchResult) return;
@@ -199,8 +198,8 @@ BrowserView.Prototype = function() {
     this.documentsEl.innerHTML = "";
 
     // Get filtered documents
-    var documents = this.controller.searchResult.getDocuments();
-    var searchMetrics = this.controller.searchResult.getSearchMetrics();
+    var documents = searchResult.getDocuments();
+    var searchMetrics = searchResult.getSearchMetrics();
     
     if (documents.length > 0) {
 
@@ -215,7 +214,13 @@ BrowserView.Prototype = function() {
 
         _.each(doc.facets, function(facet, facetKey) {
           _.each(facet, function(count, id) {
-            var filterEl = $$('.filter', {text: id+" occured "+count+" times"});
+            var type = "subjects"; // TODO: determine based on object type
+            var filterEl = $$('.filter.selected', {
+              children: [
+                $$('i.fa.fa-check-square-o'),
+                $$('a', {"data-facet": facetKey, "data-value": id, href: '#', text: id+' ('+count+')'})
+              ]
+            });
             filtersEl.appendChild(filterEl);
           });
         });
@@ -223,15 +228,17 @@ BrowserView.Prototype = function() {
         // Suggested filters
         // --------------
 
-        var relatedFiltersEl = $$('.related-filters', {text: "Related: "});
-
         _.each(doc.suggestedEntities, function(entity, id) {
-          var filterEl = $$('a.related-filter', {
-            href: '#',
-            text: id,
-            "data-id": id
-          });
-          relatedFiltersEl.appendChild(filterEl);
+            // If not already filtered, display suggestion
+            if (!searchResult.isSelected('entities', id)) {
+              var filterEl = $$('.filter', {
+                children: [
+                  $$('i.fa.fa-square-o'),
+                  $$('a', {"data-facet": "entities", "data-value": id, href: '#', text: entity.name})
+                ]
+              });
+              filtersEl.appendChild(filterEl);
+            }
         });
 
         var elems = [
@@ -239,7 +246,6 @@ BrowserView.Prototype = function() {
             children: [
               // $$('.article-type.'+ARTICLE_TYPES[doc.article_type], {html: doc.article_type+" "}),
               // $$('.doi', {html: doc.doi+" "}),
-
               $$('.published-on', {text: "published on "+ util.formatDate(doc.published_on)})
             ]
           }),
@@ -257,17 +263,13 @@ BrowserView.Prototype = function() {
           }));
         }
 
-        // elems.push($$('.authors', {
-        //   html: doc.authors_string
-        // }));
-
         if (filtersEl.childNodes.length > 0) {
           elems.push(filtersEl);  
         }
 
-        if (relatedFiltersEl.childNodes.length > 0) {
-          elems.push(relatedFiltersEl);  
-        }
+        // if (relatedFiltersEl.childNodes.length > 0) {
+        //   elems.push(relatedFiltersEl);  
+        // }
 
         var documentEl = $$('.document', {
           "data-id": doc.id,
