@@ -30,3 +30,40 @@
 .writer-component .context-toggles a.toggle-context {
 	padding: 0px 14px;
 }
+
+.info-panel-component .panel-content {
+	padding: 20px;
+}
+
+.info-panel-component .panel-content > div {
+	font-size: 13px;
+  line-height: 25px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.annotation.timecode {
+  background: #fff;
+  color: #fff;
+  position: absolute;
+  overflow: hidden;
+  width: 20px;
+  height: 27px;
+  left: 18px;
+}
+
+.annotation.timecode::after {
+	font-family: FontAwesome;
+	content: "\f01d";
+	position: absolute;
+	top: 0px;
+	color: #999;
+	font-size: 15px;
+	left: 1px;
+	cursor: pointer;
+}
+
+.annotation.timecode:hover::after {
+	color: #444;
+}
