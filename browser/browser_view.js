@@ -11,6 +11,8 @@ var util = require("./util");
 // React Component
 var TreeComponent = require("../shared/components/tree");
 
+
+
 // Browser.View Constructor
 // ========
 //
@@ -252,7 +254,10 @@ BrowserView.Prototype = function() {
           _.each(facet, function(count, id) {
             var type = "subjects"; // TODO: determine based on object type
             var filterEl = $$('.filter', {
-              text: this.getName(id)+' ('+count+')'
+              // text: this.getName(id)+' ('+count+')'
+              children: [
+                $$('a', {href: 'http://localhost:5000/reader/#contextId=subjects;subjectId='+id, text: this.getName(id)+' ('+count+')'})
+              ]
               // children: [
               //   $$('i.fa.fa-check-square-o'),
               //   // $$('a', {"data-facet": facetKey, "data-value": id, href: '#', text: this.getName(id)+' ('+count+')'})
@@ -288,8 +293,7 @@ BrowserView.Prototype = function() {
           }),
           $$('.title', {
             children: [
-
-              $$('a', { href: 'http://ost.d4s.io/archivist/editor/'+doc.id, target: "_blank", html: doc.title })
+              $$('a', { href: 'http://localhost:5000/reader', target: "_blank", html: doc.title })
             ]
           }),
         ];
