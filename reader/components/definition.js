@@ -17,8 +17,8 @@ class Definition extends React.Component {
     var definition = this.props.entity;
 
     var className = ["entity definition"];
-    if (definition.active) className.push("active");
-    return $$("div", {className: className.join(" "), onClick: this.handleToggle},
+    if (this.props.active) className.push("active");
+    return $$("div", {"data-id": definition.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
       $$("div", {className: "type"}, "Definition"),
       $$("div", {className: "title"}, definition.title),
       $$("div", {className: "description"}, definition.description)

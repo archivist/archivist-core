@@ -5,10 +5,7 @@ module.exports = {
   
   // Panels
   "subjects": require("../../shared/components/subjects_panel"),
-  "prisons": require("./prisons_panel"),
-  "locations": require("./locations_panel"),
-  "persons": require("./persons_panel"),
-  "definitions": require("./definitions_panel"),
+  "entities": require("./entities_panel"),
   "info": require("./info_panel"),
 
   "prison": require("./prison"),

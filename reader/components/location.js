@@ -17,10 +17,10 @@ class Location extends React.Component {
     var location = this.props.entity;
 
     var className = ["entity location"];
-    if (location.active) className.push("active");
+    if (this.props.active) className.push("active");
 
     var name = (!location.current_name) ? location.name : location.current_name;
-    return $$("div", {className: className.join(" "), onClick: this.handleToggle},
+    return $$("div", {"data-id": location.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
       $$("div", {className: "type"}, "Location"),
       $$("div", {className: "name"}, name),
       $$("div", {className: "synonyms"}, "Known as: " + location.synonyms.join(', ')),

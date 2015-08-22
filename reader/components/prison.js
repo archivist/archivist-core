@@ -19,8 +19,9 @@ class Prison extends React.Component {
     var className = ["entity prison"];
     var prisonType = (prison.prison_type instanceof Array ? prison.prison_type.join(', ') : 'unknown');
     var name = prison.name.toLowerCase().indexOf("неизвестно") >= 0 ? prison.nearest_locality : prison.name;
-    if (prison.active) className.push("active");
-    return $$("div", {className: className.join(" "), onClick: this.handleToggle},
+    if (this.props.active) className.push("active");
+    
+    return $$("div", {"data-id": prison.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
       $$("div", {className: "type"}, "Prison"),
       $$("div", {className: "name"}, name),
       $$("div", {className: "prison-type"}, "Prison type: " + prisonType),

@@ -25,6 +25,15 @@ EntitiesModel.prototype.getEntity = function(entityId) {
   return this.entities[entityId];
 };
 
+
+EntitiesModel.prototype.getEntities = function(entityType) {
+  if (entityType) {
+    this.findByType(entityType);
+  } else {
+    return _.map(this.entities);
+  }
+};
+
 EntitiesModel.prototype.findByType = function(entityType) {
   return this.byType[entityType];
 };

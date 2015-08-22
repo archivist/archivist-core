@@ -5,6 +5,22 @@ var prevSelection;
 
 var stateHandlers = {
 
+  handleAnnotationToggle: function(app, annotationId) {
+    console.log('handling switch to annotation', annotationId);
+    var doc = app.doc;
+    
+    var anno = doc.get(annotationId);
+    if (anno.type === 'entity_reference') {
+      app.replaceState({
+        contextId: "entities",
+        entityId: anno.target,
+        noScroll: true
+      });
+    } else if (anno.type === "timecode") {
+      console.log('timecode clicked. TODO: switch to info panel / video panel and jump to video position');
+    }
+  },
+
   handleStateChange: function(app, newState, oldState) {
     var doc = app.doc;
 
@@ -34,6 +50,7 @@ var stateHandlers = {
 
       return [];
     }
+
     var oldActiveAnnos = _.compact(getActiveAnnotations(oldState));
     var activeAnnos = getActiveAnnotations(newState);
     if (oldActiveAnnos.length || activeAnnos.length) {
@@ -44,6 +61,7 @@ var stateHandlers = {
       _.each(oldActiveAnnos, function(anno) {
         anno.setActive(false);
       });
+
       _.each(activeAnnos, function(anno) {
         anno.setActive(true);
       });
@@ -82,14 +100,13 @@ var stateHandlers = {
     // When a subject has been clicked in the subjects panel
 
     // Let the extension handle which nodes should be highlighted
-    // if (state.contextId === "entities" && state.entityId) {
-    //   // Use reference handler
-    //   var references = Object.keys(doc.entityReferencesIndex.get(state.entityId));
-    //   return references;
-    // } else if (state.entityReferenceId) {
-    //   return [state.entityReferenceId];
-    // }
-
+    if (state.contextId === "entities" && state.entityId) {
+      // Use reference handler
+      var references = Object.keys(doc.entityReferencesIndex.get(state.entityId));
+      return references;
+    } else if (state.entityReferenceId) {
+      return [state.entityReferenceId];
+    }
   }
 };
 

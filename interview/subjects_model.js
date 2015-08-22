@@ -65,7 +65,7 @@ SubjectsModel.prototype.getAllReferencedSubjects = function() {
           console.log('You have outdated subjects in this interview')
         } else {
           subjects.push(subject);
-        }  
+        }
       }
     }, this);
   }, this);
