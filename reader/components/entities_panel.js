@@ -37,7 +37,7 @@ class EntitiesPanel extends Panel {
 
   updateScroll() {
     var app = this.context.app;
-    if (app.state.entityId) {
+    if (app.state.entityId && !app.state.noResourceScroll) {
       this.scrollToNode(app.state.entityId);
     }
   }

@@ -6,16 +6,22 @@ var prevSelection;
 var stateHandlers = {
 
   handleAnnotationToggle: function(app, annotationId) {
-    console.log('handling switch to annotation', annotationId);
     var doc = app.doc;
+    var state = app.state;
     
     var anno = doc.get(annotationId);
     if (anno.type === 'entity_reference') {
-      app.replaceState({
-        contextId: "entities",
-        entityId: anno.target,
-        noScroll: true
-      });
+      if (state.entityId === anno.target) {
+        app.replaceState({
+          contextId: "entities"
+        });
+      } else {
+        app.replaceState({
+          contextId: "entities",
+          entityId: anno.target,
+          noScroll: true
+        });
+      }
     } else if (anno.type === "timecode") {
       console.log('timecode clicked. TODO: switch to info panel / video panel and jump to video position');
     }
