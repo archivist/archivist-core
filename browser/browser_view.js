@@ -256,7 +256,7 @@ BrowserView.Prototype = function() {
             var filterEl = $$('.filter', {
               // text: this.getName(id)+' ('+count+')'
               children: [
-                $$('a', {href: 'http://localhost:5000/reader/#contextId=subjects;subjectId='+id, text: this.getName(id)+' ('+count+')'})
+                $$('a', {href: '/documents/'+doc.id+'#contextId=subjects;subjectId='+id, text: this.getName(id)+' ('+count+')'})
               ]
               // children: [
               //   $$('i.fa.fa-check-square-o'),
@@ -293,7 +293,7 @@ BrowserView.Prototype = function() {
           }),
           $$('.title', {
             children: [
-              $$('a', { href: 'http://localhost:5000/reader', target: "_blank", html: doc.title })
+              $$('a', { href: '/documents/'+doc.id, target: "_blank", html: doc.title })
             ]
           }),
         ];
