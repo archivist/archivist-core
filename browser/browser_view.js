@@ -62,7 +62,8 @@ var BrowserView = function(controller) {
   this.$el.on('click', '.available-facets .value', _.bind(this.toggleFilter, this));
   this.$el.on('click', '.document .toggle-preview', _.bind(this.togglePreview, this));
 
-  this.$el.on('click', '.document .filter a', _.bind(this.toggleFilter, this));
+  // commenting this out cause we need to use it as link
+  //this.$el.on('click', '.document .filter a', _.bind(this.toggleFilter, this));
 
   this.$el.on('click', '.toggle-details', _.bind(this.toggleDetails, this));
 
@@ -256,7 +257,7 @@ BrowserView.Prototype = function() {
             var filterEl = $$('.filter', {
               // text: this.getName(id)+' ('+count+')'
               children: [
-                $$('a', {href: '/documents/'+doc.id+'#contextId=subjects;subjectId='+id, text: this.getName(id)+' ('+count+')'})
+                $$('a', {href: '/documents/'+doc.id+'#contextId=subjects;subjectId='+id, target: "_blank", text: this.getName(id)+' ('+count+')'})
               ]
               // children: [
               //   $$('i.fa.fa-check-square-o'),
