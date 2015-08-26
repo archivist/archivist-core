@@ -26,7 +26,7 @@ class SourcePanel extends Panel {
     return $$("div", {className: "panel sorce-panel-component"},
       $$('div', {className: 'panel-content'},
         $$('div', {className: 'source'},
-          _renderSource(metadata)
+          this._renderSource(metadata)
         )
         //$$('div', {className: 'biography', ref: 'biography'})
       )
