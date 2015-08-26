@@ -3,7 +3,8 @@
 var $$ = React.createElement;
 var _ = require("substance/helpers");
 var Panel = require("substance-ui/panel");
-
+var Interview = require("../../interview");
+var exporter = new Interview.HtmlExporter();
 // Abstract class!
 
 class InfoPanel extends Panel {
@@ -26,14 +27,17 @@ class InfoPanel extends Panel {
   render() {
     var doc = this.props.doc;
     var metadata = doc.getDocumentMeta();
+    
+    var abstract = exporter.convertProperty(doc, ['document', 'abstract']);
+    var bio = exporter.convertProperty(doc, ['document', 'interviewee_bio']);
 
     return $$("div", {className: "panel info-panel-component"},
       $$('div', {className: 'panel-content'},
         $$('div', {className: 'abstract'},
-          metadata.abstract
+          abstract
         ),
         $$('div', {className: 'biography'},
-          metadata.interviewee_bio
+          bio
         )
       )
     );
