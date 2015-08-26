@@ -3,7 +3,7 @@
   "description": "Archivist Core Modules",
   "repository": "https://github.com/substance/archivist-core.git",
   "dependencies": {
-    "substance": "michael/substance#master",
+    "substance": "oliver----/substance-legacy#master",
     "substance-ui": "substance/ui#master",
     "underscore": "*",
     "substance-application": "substance/application.git#json-in-app-states",
