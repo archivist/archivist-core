@@ -27,21 +27,30 @@ class InfoPanel extends Panel {
   render() {
     var doc = this.props.doc;
     var metadata = doc.getDocumentMeta();
-    
-    var abstract = exporter.convertProperty(doc, ['document', 'abstract']);
-    var bio = exporter.convertProperty(doc, ['document', 'interviewee_bio']);
 
     return $$("div", {className: "panel info-panel-component"},
       $$('div', {className: 'panel-content'},
-        $$('div', {className: 'abstract'},
-          abstract
-        ),
-        $$('div', {className: 'biography'},
-          bio
-        )
+        $$('div', {className: 'abstract', ref: 'abstract'}),
+        $$('div', {className: 'biography', ref: 'biography'})
       )
     );
   }
+
+  _renderContent() {
+    var $abstract = exporter.convertProperty(doc, ['document', 'abstract']);
+    var $bio = exporter.convertProperty(doc, ['document', 'interviewee_bio']);
+    $(React.findDOMNode(this.refs.abstract)).empty().append($abstract);
+    $(React.findDOMNode(this.refs.biography)).empty().append($bio);
+  }
+
+  componentDidMount() {
+    this._renderContent();
+  }
+
+  componentDidUpdate() {
+    this._renderContent();
+  }
+
 }
 
 InfoPanel.contextTypes = {
