@@ -21,6 +21,8 @@ class SourcePanel extends Panel {
   }
 
   render() {
+    var app = this.context.app;
+    var state = app.state;
     var doc = this.props.doc;
     var metadata = doc.getDocumentMeta();
     return $$("div", {className: "panel sorce-panel-component"},
@@ -48,16 +50,34 @@ class SourcePanel extends Panel {
     }
   }
 
-  _renderContent() {
-    
+  updateSourceTime() {
+    var app = this.context.app;
+    var time = app.state.time;
+    if(time) {
+      var iframe = $('#video_player')[0];
+      var player = $f(iframe);
+      player.api('seekTo', this.hmsToSecondsOnly(time));
+    }
+  }
+
+  hmsToSecondsOnly(str) {
+    var p = str.split(':'),
+        s = 0, m = 1;
+
+    while (p.length > 0) {
+        s += m * parseInt(p.pop(), 10);
+        m *= 60;
+    }
+
+    return s;
   }
 
   componentDidMount() {
-    //this._renderContent();
+    this.updateSourceTime();
   }
 
   componentDidUpdate() {
-    //this._renderContent();
+    this.updateSourceTime();
   }
 
 }

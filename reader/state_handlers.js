@@ -23,7 +23,14 @@ var stateHandlers = {
         });
       }
     } else if (anno.type === "timecode") {
-      console.log('timecode clicked. TODO: switch to info panel / video panel and jump to video position');
+      var content = anno.getText();
+      var regex = /\{([^}]+)\}/;
+      var timecode = content.match(regex);
+      if(timecode !== null) timecode = timecode[1];
+      app.replaceState({
+        contextId: "source",
+        time: timecode
+      });
     }
   },
 
