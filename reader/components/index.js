@@ -4,6 +4,7 @@ module.exports = {
   "unsupported_node": require('../../shared/components/unsupported_node'),
   
   // Panels
+  "source": require("./source_panel"),
   "subjects": require("../../shared/components/subjects_panel"),
   "entities": require("./entities_panel"),
   "info": require("./info_panel"),
