@@ -11,12 +11,26 @@
   top: 0px;
 }
 
+.content-panel-component .panel-content {
+  left: 20px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.content-panel-component .content-node.paragraph {
+  padding-bottom: 10px;
+}
+
 .container-annotation.comment.annotation-fragment {
   background: none;
 }
 
 .content-editor-component .subject-references .subject-reference {
   display: none;
+}
+
+.content-editor-component .subject-references .subject-reference.active {
+  border-width: 1px;
 }
 
 .content-editor-component .subject-references .subject-reference.active {
@@ -35,6 +49,8 @@
 	padding: 0px 14px;
 }
 
+// Info panel
+
 .info-panel-component .panel-content {
 	padding: 20px;
 }
@@ -48,6 +64,8 @@
   white-space: pre-wrap;
 }
 
+// Timecodes
+
 .annotation.timecode {
   background: #fff;
   color: #fff;
@@ -60,15 +78,43 @@
 
 .annotation.timecode::after {
 	font-family: FontAwesome;
-	content: "\f01d";
-	position: absolute;
-	top: 0px;
-	color: #999;
-	font-size: 15px;
-	left: 1px;
-	cursor: pointer;
+  content: "\f01d";
+  position: absolute;
+  top: 0px;
+  color: rgb(60, 60, 60);
+  font-size: 15px;
+  left: 1px;
+  cursor: pointer;
+  font-weight: 100;
+  opacity: 0.3;
 }
 
 .annotation.timecode:hover::after {
-	color: #444;
+	opacity: 1;
+}
+
+// Source panel
+
+.source-panel-component .panel-content > div {
+  font-size: 13px;
+  line-height: 25px;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 10px;
+  white-space: pre-wrap;
+}
+
+.video-source {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 35px;
+  height: 0;
+  overflow: hidden;
+}
+
+.video-source iframe {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

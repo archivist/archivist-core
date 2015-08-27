@@ -25,7 +25,7 @@ class SourcePanel extends Panel {
     var state = app.state;
     var doc = this.props.doc;
     var metadata = doc.getDocumentMeta();
-    return $$("div", {className: "panel sorce-panel-component"},
+    return $$("div", {className: "panel source-panel-component"},
       $$('div', {className: 'panel-content'},
         $$('div', {className: 'source'},
           this._renderSource(metadata)
@@ -40,9 +40,9 @@ class SourcePanel extends Panel {
     var id = metadata.media_id;
     if(type == 'video') {
       var src = "https://player.vimeo.com/video/" + id + "?api=1&player_id=video_player";
-      var width = "630";
-      var height = "354";
-      return $$('iframe', {id: 'video_player', src: src, width: width, height: height, frameborder: "0", webkitallowfullscreen: "true", mozallowfullscreen: "true", allowfullscreen: "true"});
+      return $$('div', {className: 'video-source'},
+        $$('iframe', {id: 'video_player', src: src, frameborder: "0", webkitallowfullscreen: "true", mozallowfullscreen: "true", allowfullscreen: "true"})
+      );
     } else if (type == 'audio') {
       return $$('div',{}, "audio-conteiner");
     } else {
