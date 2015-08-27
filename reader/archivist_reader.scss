@@ -39,6 +39,10 @@
 
 .entity-reference.annotation {
   cursor: pointer;
+  background: rgba(145, 187, 4, 0.1);
+  border-bottom: 1px solid rgba(180, 202, 108, 0.6);
+  cursor: pointer;
+  padding: 0px 1px;
 }
 
 .container-annotation.active.annotation-fragment {
