@@ -103,14 +103,14 @@ class ContentContainer extends React.Component {
       // $$(TitleEditor, {doc: this.props.doc}),
       // doc.get([metaNode.id, "title"])
 
-      // $$("div", {className: "document-title"},
-      //   $$(TextProperty, {
-      //     doc: this.props.doc,
-      //     tagName: "div",
-      //     className: "title",
-      //     path: ["document", "title"]
-      //   })
-      // ),
+      $$("div", {className: "document-title"},
+        $$(TextProperty, {
+          doc: this.props.doc,
+          tagName: "div",
+          className: "title",
+          path: ["document", "title"]
+        })
+      ),
 
       $$(ContainerComponent, {
         ref: 'contentContainer',

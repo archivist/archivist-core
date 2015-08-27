@@ -74,8 +74,8 @@ EntitiesPanel.contextTypes = {
   componentRegistry: React.PropTypes.object.isRequired
 };
 
-EntitiesPanel.displayName = 'Entities';
+EntitiesPanel.displayName = i18n.t('panels.entities');
 EntitiesPanel.contextId = "entities";
-EntitiesPanel.icon = "fa-bullseye";
+EntitiesPanel.icon = "fa-comment-o";
 
 module.exports = EntitiesPanel;

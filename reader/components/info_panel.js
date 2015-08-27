@@ -58,8 +58,8 @@ InfoPanel.contextTypes = {
   componentRegistry: React.PropTypes.object.isRequired
 };
 
-InfoPanel.displayName = 'Info';
+InfoPanel.displayName = i18n.t('panels.info');
 InfoPanel.contextId = "info";
-InfoPanel.icon = "fa-info";
+InfoPanel.icon = "fa-info-circle";
 
 module.exports = InfoPanel;

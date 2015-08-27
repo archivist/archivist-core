@@ -17,6 +17,19 @@
   line-height: 24px;
 }
 
+.content-panel-component .panel-content-inner {
+  position: relative;
+  padding: 20px 40px;
+  padding-right: 80px;
+}
+
+.content-panel-component .document-title {
+  padding-bottom: 20px;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
 .content-panel-component .content-node.paragraph {
   padding-bottom: 10px;
 }
@@ -49,8 +62,29 @@
   background: none;
 }
 
+.writer-component .context-toggles {
+  background-color: #fff;
+}
+
 .writer-component .context-toggles a.toggle-context {
 	padding: 0px 14px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.writer-component .context-toggles a.toggle-context.active {
+  background: rgba(0, 0, 0, 0.05);
+  color: #444;
+}
+
+.writer-component .context-toggles a.toggle-context:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+// Panels
+
+.resource-container {
+  box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 // Info panel
@@ -99,11 +133,16 @@
 
 // Source panel
 
+.source-panel-component .panel-content {
+  padding: 20px;
+}
+
 .source-panel-component .panel-content > div {
   font-size: 13px;
   line-height: 25px;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
   border-bottom: 1px solid #e5e5e5;
-  padding: 10px;
   white-space: pre-wrap;
 }
 
@@ -121,4 +160,24 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.technical-info {
+  border-bottom: none!important;
+}
+
+.technical-info > .container {
+  margin-bottom: 10px;
+  line-height: 20px;
+  font-size: 13px;
+}
+
+.technical-info .label {
+  float: left;
+  width: 130px;
+  color: #757575;
+}
+
+.technical-info .value {
+  margin-left: 160px;
 }

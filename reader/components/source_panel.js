@@ -29,8 +29,15 @@ class SourcePanel extends Panel {
       $$('div', {className: 'panel-content'},
         $$('div', {className: 'source'},
           this._renderSource(metadata)
+        ),
+        $$('div', {className: 'technical-info'},
+          this._renderLabelValue(metadata, "project_name", i18n.t('metadata.project_name')),
+          this._renderLabelValue(metadata, "conductor", i18n.t('metadata.conductor')),
+          this._renderLabelValue(metadata, "operator", i18n.t('metadata.operator')),
+          this._renderLabelValue(metadata, "sound_operator", i18n.t('metadata.sound_operator')),
+          this._renderLabelValue(metadata, "interview_location", i18n.t('metadata.interview_location')),
+          this._renderLabelValue(metadata, "interview_date", i18n.t('metadata.interview_date'))
         )
-        //$$('div', {className: 'biography', ref: 'biography'})
       )
     );
   }
@@ -48,6 +55,17 @@ class SourcePanel extends Panel {
     } else {
       return $$('div',{}, "no source specified");
     }
+  }
+
+  _renderLabelValue(metadata, prop, label) {
+    var value = metadata[prop];
+    if(!value) {
+      return;
+    }
+    return $$('div', {className: 'container ' + prop},
+      $$('div', {className: 'label'}, label),
+      $$('div', {className: 'value'}, value)
+    );
   }
 
   updateSourceTime() {
@@ -87,7 +105,7 @@ SourcePanel.contextTypes = {
   componentRegistry: React.PropTypes.object.isRequired
 };
 
-SourcePanel.displayName = 'Source';
+SourcePanel.displayName = i18n.t('panels.source');;
 SourcePanel.contextId = "source";
 SourcePanel.icon = "fa-youtube-play";
 

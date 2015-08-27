@@ -22,6 +22,10 @@ var components = require('./components');
 var stateHandlers = require('./state_handlers');
 var panelOrder = ["source", "subjects", "entities", "info"];
 
+// Override subject's panel name and icon
+components.subjects.displayName = i18n.t('panels.subjects');
+components.subjects.icon = "fa-book";
+
 // Specify a Notification service
 // ---------------
 //
