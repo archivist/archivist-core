@@ -27,6 +27,20 @@ class EntitiesPanel extends Panel {
     }
   }
 
+  handleFilter(type) {
+    var app = this.context.app;
+    if (app.state.filterByType === type) {
+      app.replaceState({
+        contextId: "entities"
+      });
+    } else {
+      app.replaceState({
+        contextId: "entities",
+        filterByType: type
+      });
+    }
+  }
+
   componentDidMount() {
     this.updateScroll();
   }
@@ -43,6 +57,8 @@ class EntitiesPanel extends Panel {
   }
 
   render() {
+    var self = this;
+
     var doc = this.props.doc;
     var app = this.context.app;
     var state = app.state;
@@ -50,7 +66,28 @@ class EntitiesPanel extends Panel {
     var entities = doc.entities.getEntities();
     var componentRegistry = this.context.componentRegistry;
 
+    var entityTypes = {
+      "toponym": {
+        icon: "fa-globe"
+      },
+      "prison": {
+        icon: "fa-table"
+      },
+      "person": {
+        icon: "fa-users"
+      },
+      "definition": {
+        icon: "fa-book"
+      }
+    };
+
     var entityEls = [];
+    var entityUsedTypes = _.uniq(_.pluck(entities, 'type'));
+    if(state.filterByType) {
+      entities = _.filter(entities, function(entity) {
+        return entity.type === state.filterByType;
+      });
+    }
     _.each(entities, function(entity) {
       entityEls.push($$(componentRegistry.get(entity.type), {
         entity: entity,
@@ -59,8 +96,24 @@ class EntitiesPanel extends Panel {
       }));
     }, this);
 
+    var entityFilters = [];
+    _.each(entityUsedTypes, function(type){
+      var classNames = ["entity-filter", "filter-" + type];
+      if(type === state.filterByType) classNames.push('active');
+      entityFilters.push($$('span', {
+          className: classNames.join(" "),
+          onClick: self.handleFilter.bind(self, type)
+        },
+        $$('i', {className: "fa " + entityTypes[type].icon}),
+        i18n.t('entity.type.' + type)
+      ));
+    });
+
     return $$("div", {className: "panel entity-panel-component"},
       $$('div', {className: 'panel-content', ref: "panelContent"},
+        $$('div', {className: "entity-filters"},
+          entityFilters
+        ),
         $$('div', {className: 'entities panel-content-inner'},
           entityEls
         )

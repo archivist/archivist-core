@@ -50,35 +50,51 @@
   display: block;
 }
 
+// Entities
+
 .entity-reference.annotation {
   cursor: pointer;
-  background: rgba(145, 187, 4, 0.1);
+  background: rgba(255, 254, 99, 0.15);
   border-bottom: 1px solid rgba(180, 202, 108, 0.6);
   cursor: pointer;
   padding: 0px 1px;
 }
 
+.entity-reference.annotation.active {
+  background: rgba(255, 254, 99, 0.3);
+}
+
+.entity.active {
+  border-left: 2px solid rgba(255, 254, 99, 0.3);
+}
+
+
+
 .container-annotation.active.annotation-fragment {
   background: none;
 }
 
-.writer-component .context-toggles {
+.reader-component .context-toggles {
   background-color: #fff;
 }
 
-.writer-component .context-toggles a.toggle-context {
+.reader-component .context-toggles a.toggle-context {
 	padding: 0px 14px;
   color: rgba(0, 0, 0, 0.4);
 }
 
-.writer-component .context-toggles a.toggle-context.active {
-  background: rgba(0, 0, 0, 0.05);
-  color: #444;
+.reader-component .context-toggles a.toggle-context.active {
+  background: rgba(0, 0, 0, 0.05)!important;
+  color: #444!important;
 }
 
-.writer-component .context-toggles a.toggle-context:hover {
+.reader-component .context-toggles a.toggle-context:hover {
   background: rgba(0, 0, 0, 0.03);
   color: rgba(0, 0, 0, 0.5);
+}
+
+.reader-component .context-toggles span {
+  padding-left: 2px;
 }
 
 // Panels
@@ -180,4 +196,42 @@
 
 .technical-info .value {
   margin-left: 160px;
+}
+
+// Entities panel 
+
+.entity-panel-component .entity-filters {
+  background: #fff;
+  font-size: 13px;
+  min-height: 32px;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  border-bottom: 1px solid #ddd;
+}
+
+.entity-panel-component .entity-filters .entity-filter {
+  padding: 4px 14px;
+  color: rgba(0, 0, 0, 0.4);
+  display: block;
+  float: left;
+  cursor: pointer;
+}
+
+.entity-panel-component .entity-filters .entity-filter.active {
+  background: rgba(0, 0, 0, 0.05)!important;
+  color: #444!important;
+}
+
+.entity-panel-component .entity-filters .entity-filter:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.entity-panel-component .entity-filters .entity-filter span {
+  padding-left: 3px;
+}
+
+.entity-panel-component .entities {
+  top: 32px;
 }
