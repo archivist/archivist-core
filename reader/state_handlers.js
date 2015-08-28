@@ -11,6 +11,7 @@ var stateHandlers = {
     
     var anno = doc.get(annotationId);
     if (anno.type === 'entity_reference') {
+      var entity = doc.entities.getEntity(anno.target);
       if (state.entityId === anno.target) {
         app.replaceState({
           contextId: "entities"
@@ -19,6 +20,7 @@ var stateHandlers = {
         app.replaceState({
           contextId: "entities",
           entityId: anno.target,
+          filterByType: entity.type,
           noScroll: true
         });
       }

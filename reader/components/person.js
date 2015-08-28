@@ -10,7 +10,7 @@ class Person extends React.Component {
 
   handleToggle(e) {
     e.preventDefault();
-    this.props.handleToggle(this.props.entity.id);
+    this.props.handleToggle(this.props.entity.id, this.props.entity.type);
   }
 
   render() {

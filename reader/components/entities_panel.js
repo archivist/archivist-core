@@ -11,7 +11,7 @@ class EntitiesPanel extends Panel {
   // Event handlers
   // -----------------
 
-  handleToggle(entityId) {
+  handleToggle(entityId, entityType) {
     var app = this.context.app;
 
     if (app.state.entityId === entityId) {
@@ -22,21 +22,22 @@ class EntitiesPanel extends Panel {
       app.replaceState({
         contextId: "entities",
         entityId: entityId,
+        filterByType: entityType,
         noResourceScroll: true
       });
     }
   }
 
-  handleFilter(type) {
+  handleFilter(entityType) {
     var app = this.context.app;
-    if (app.state.filterByType === type) {
+    if (app.state.filterByType === entityType) {
       app.replaceState({
         contextId: "entities"
       });
     } else {
       app.replaceState({
         contextId: "entities",
-        filterByType: type
+        filterByType: entityType
       });
     }
   }
