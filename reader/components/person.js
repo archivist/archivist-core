@@ -19,7 +19,6 @@ class Person extends React.Component {
     var className = ["entity person"];
     if (this.props.active) className.push("active");
     return $$("div", {"data-id": person.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
-      $$("div", {className: "type"}, "Person"),
       $$("div", {className: "name"}, person.name),
       $$("div", {className: "description"}, person.description)
     );

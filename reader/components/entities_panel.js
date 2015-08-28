@@ -89,6 +89,11 @@ class EntitiesPanel extends Panel {
         return entity.type === state.filterByType;
       });
     }
+    entities = _.sortBy(entities, function(entity) {
+      // Trick for sorting by type and name
+      var name = entity.title ? entity.title.toLowerCase() : entity.name.toLowerCase();
+      return [entity.type, name].join("_");
+    });
     _.each(entities, function(entity) {
       entityEls.push($$(componentRegistry.get(entity.type), {
         entity: entity,

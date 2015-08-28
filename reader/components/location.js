@@ -14,18 +14,24 @@ class Location extends React.Component {
   }
 
   render() {
-    var location = this.props.entity;
+    var toponym = this.props.entity;
 
     var className = ["entity location"];
     if (this.props.active) className.push("active");
 
-    var name = (!location.current_name) ? location.name : location.current_name;
-    return $$("div", {"data-id": location.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
-      $$("div", {className: "type"}, "Location"),
-      $$("div", {className: "name"}, name),
-      $$("div", {className: "synonyms"}, "Known as: " + location.synonyms.join(', ')),
-      $$("div", {className: "country"}, "Country: " + location.country),
-      $$("div", {className: "description"}, location.description)
+    var location = toponym.country;
+
+    if(toponym.name !== toponym.current_name && toponym.current_name) location = location + ", " + toponym.current_name;
+
+    return $$("div", {"data-id": toponym.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
+      $$("div", {className: "resource-header"},
+        $$("div", {className: "name"}, toponym.name),
+        $$("div", {className: "location"}, location)
+      ),
+      $$("a", {className: "show-on-map", href: "/map/" + toponym.id}, 
+        $$("i", {className: "fa fa-map-o"})
+      ),
+      $$("div", {className: "description"}, toponym.description)
     );
   }
 }

@@ -235,3 +235,56 @@
 .entity-panel-component .entities {
   top: 32px;
 }
+
+.entity-panel-component .entities .resource-header {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.entity-panel-component .entities .resource-header .entity-type {
+  font-weight: normal;
+  font-size: 12px;
+  color: #888;
+}
+
+.entity-panel-component .entities .resource-header .location {
+  position: absolute;
+  right: 0px;
+  overflow: auto;
+  float: right;
+  font-size: 12px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+  top: 0px;
+}
+
+.entity-panel-component .entity {
+  min-height: 100px;
+}
+
+.entity-panel-component .entity .name {
+  margin-right: 0px;
+}
+
+.entity-panel-component .entity.prison .name {
+  margin-right: 50px;
+}
+
+.entity-panel-component .entity.location .name, {
+  margin-right: 160px;
+}
+
+.entity-panel-component .entities a.show-on-map {
+  position: absolute;
+  right: 20px;
+  font-size: 20px;
+}
+
+.entity-panel-component .entities .description {
+  margin-right: 0px;
+}
+
+.entity-panel-component .entity.location .description {
+  padding-top: 0px;
+  margin-right: 50px;
+}
