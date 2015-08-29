@@ -50,6 +50,7 @@ class InfoPanel extends Panel {
   }
 
   _renderContent() {
+    var doc = this.props.doc;
     var abstract_prop, bio_prop;
     var storage = window.storage || window.localStorage;
     var locale = storage.getItem('locale') || "ru";
