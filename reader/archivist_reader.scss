@@ -292,3 +292,14 @@
   padding-top: 0px;
   margin-right: 50px;
 }
+
+/* overrides for brackets */
+
+.content-editor-component .subject-references .subject-reference.level-0,
+.content-editor-component .subject-references .subject-reference.level-1,
+.content-editor-component .subject-references .subject-reference.level-2 {
+  border-top: none;
+  border-width: 1px;
+  border-bottom: none;
+  right: 15px;
+}

@@ -28,11 +28,11 @@ class Brackets {
   }
 
   onDocumentChanged(change) {
-    Substance.tic();
+    // Substance.tic();
     // Rerender
     this.render();
     this.updateBrackets();
-    console.log('time for brackets updating', Substance.toc());
+    // console.log('time for brackets updating', Substance.toc());
   }
 
   // Event Handlers
