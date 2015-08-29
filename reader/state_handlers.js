@@ -40,6 +40,9 @@ var stateHandlers = {
     var doc = app.doc;
 
     function getActiveAnnotations(state) {
+
+      if (!state) return [];
+
       // Subjects-specific
       // --------------------
       //
