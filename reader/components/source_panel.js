@@ -3,50 +3,9 @@
 var $$ = React.createElement;
 var _ = require("substance/helpers");
 var Panel = require("substance-ui/panel");
-
+// Abstract class!
 
 class SourcePanel extends Panel {
-
-  // Create video element the first time, but reuse when already there
-  getSourceElement() {
-    // Use the cached sourceElement
-    if (window.sourceEl) return window.sourceEl;
-
-    var doc = this.props.doc;
-    var metadata = doc.getDocumentMeta();
-    var type = metadata.record_type;
-    var id = metadata.media_id;
-    var sourceEl;
-
-    if(type == 'video') {
-      var src = "https://player.vimeo.com/video/" + id + "?api=1&player_id=video_player";
-      sourceEl = $('<div>').addClass('video-source').append(
-        $('<iframe>').attr({id: 'video_player', src: src, frameborder: "0", webkitallowfullscreen: "true", mozallowfullscreen: "true", allowfullscreen: "true"})
-      );
-    } else if (type == 'audio') {
-      sourceEl = $('<div>').addClass('audio-container');
-    } else {
-      sourceEl = $('<div>').addClass('no-source').append('No source specified');
-    }
-
-    window.sourceEl = sourceEl;
-    return sourceEl;
-  }
-
-  // _renderSource(metadata) {
-  //   var type = metadata.record_type;
-  //   var id = metadata.media_id;
-  //   if(type == 'video') {
-  //     var src = "https://player.vimeo.com/video/" + id + "?api=1&player_id=video_player";
-  //     return $$('div', {className: 'video-source'},
-  //       $$('iframe', {id: 'video_player', src: src, frameborder: "0", webkitallowfullscreen: "true", mozallowfullscreen: "true", allowfullscreen: "true"})
-  //     );
-  //   } else if (type == 'audio') {
-  //     return $$('div',{}, "audio-conteiner");
-  //   } else {
-  //     return $$('div',{}, "no source specified");
-  //   }
-  // }
 
   // Event handlers
   // -----------------
@@ -66,10 +25,11 @@ class SourcePanel extends Panel {
     var state = app.state;
     var doc = this.props.doc;
     var metadata = doc.getDocumentMeta();
-
     return $$("div", {className: "panel source-panel-component"},
       $$('div', {className: 'panel-content'},
-        $$('div', {className: 'source', ref: 'sourceElWrapper'}),
+        $$('div', {className: 'source'},
+          this._renderSource(metadata)
+        ),
         $$('div', {className: 'technical-info'},
           this._renderLabelValue(metadata, "project_name", i18n.t('metadata.project_name')),
           this._renderLabelValue(metadata, "conductor", i18n.t('metadata.conductor')),
@@ -82,6 +42,21 @@ class SourcePanel extends Panel {
     );
   }
 
+  _renderSource(metadata) {
+    var type = metadata.record_type;
+    var id = metadata.media_id;
+    if(type == 'video') {
+      var src = "https://player.vimeo.com/video/" + id + "?api=1&player_id=video_player";
+      return $$('div', {className: 'video-source'},
+        $$('iframe', {id: 'video_player', src: src, frameborder: "0", webkitallowfullscreen: "true", mozallowfullscreen: "true", allowfullscreen: "true"})
+      );
+    } else if (type == 'audio') {
+      return $$('div',{}, "audio-conteiner");
+    } else {
+      return $$('div',{}, "no source specified");
+    }
+  }
+
   _renderLabelValue(metadata, prop, label) {
     var value = metadata[prop];
     if(!value) {
@@ -91,14 +66,6 @@ class SourcePanel extends Panel {
       $$('div', {className: 'label'}, label),
       $$('div', {className: 'value'}, value)
     );
-  }
-
-  updateSource() {
-    var sourceElWrapper = this.refs.sourceElWrapper.getDOMNode();
-    var sourceEl = this.getSourceElement();
-
-    $(sourceElWrapper).append(sourceEl);
-    this.updateSourceTime();
   }
 
   updateSourceTime() {
@@ -114,21 +81,21 @@ class SourcePanel extends Panel {
   hmsToSecondsOnly(str) {
     var p = str.split(':'),
         s = 0, m = 1;
+
     while (p.length > 0) {
         s += m * parseInt(p.pop(), 10);
         m *= 60;
     }
+
     return s;
   }
 
   componentDidMount() {
-    this.updateSource();
-    // this.updateSourceTime();
+    this.updateSourceTime();
   }
 
   componentDidUpdate() {
-    this.updateSource();
-    // this.updateSourceTime();
+    this.updateSourceTime();
   }
 
 }
@@ -138,7 +105,7 @@ SourcePanel.contextTypes = {
   componentRegistry: React.PropTypes.object.isRequired
 };
 
-SourcePanel.displayName = i18n.t('panels.source');
+SourcePanel.displayName = i18n.t('panels.source');;
 SourcePanel.contextId = "source";
 SourcePanel.icon = "fa-youtube-play";
 
