@@ -118,6 +118,25 @@
   max-width: 100%;
 }
 
+.panel-content .section-title {
+  display: block;
+  padding-bottom: 5px;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.panel-content .complete {
+  display: none;
+}
+
+.panel-content .more {
+  background: #E0E0E0;
+  padding: 3px 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  border-radius: 3px;
+}
+
 // Timecodes
 
 .annotation.timecode {

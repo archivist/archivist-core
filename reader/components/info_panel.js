@@ -33,7 +33,9 @@ class InfoPanel extends Panel {
       $$('div', {className: 'panel-content'},
         photo,
         $$('div', {className: 'abstract', ref: 'abstract'}),
-        $$('div', {className: 'biography', ref: 'biography'})
+        $$('div', {className: 'biography', ref: 'biography'},
+          $$('span', {className: 'section-title', id: 'biography'}, i18n.t('metadata.interviewee_bio'))
+        )
       )
     );
   }
@@ -48,10 +50,43 @@ class InfoPanel extends Panel {
   }
 
   _renderContent() {
-    var $abstract = exporter.convertProperty(doc, ['document', 'abstract']);
-    var $bio = exporter.convertProperty(doc, ['document', 'interviewee_bio']);
-    $(React.findDOMNode(this.refs.abstract)).empty().append($abstract);
-    $(React.findDOMNode(this.refs.biography)).empty().append($bio);
+    var abstract_prop, bio_prop;
+    var storage = window.storage || window.localStorage;
+    var locale = storage.getItem('locale') || "ru";
+    if(locale == "ru") {
+      abstract_prop = "abstract";
+      bio_prop = "interviewee_bio";
+    } else if (locale == "en") {
+      abstract_prop = "abstract_en";
+      bio_prop = "interviewee_bio_en";
+    } else if (locale == "de") {
+      abstract_prop = "abstract_de";
+      bio_prop = "interviewee_bio_de";
+    }
+    var $abstract = exporter.convertProperty(doc, ['document', abstract_prop]);
+    var $bio = exporter.convertProperty(doc, ['document', bio_prop]);
+    var splitted_abstract = $abstract.text().split('\n');
+    var teaser_abstract = splitted_abstract.shift();
+    var $teaser_abstract = $("<span/>", { class: "teaser" }).append(teaser_abstract);
+    var complete_abstract = splitted_abstract.join('\n');
+    var $complete_abstract = $("<span/>", { class: "complete" }).append(complete_abstract);
+    var $more = $("<span/>", { class: "more", text: i18n.t('metadata.show_more')});
+    $more.click(function(){
+      var $complete = $(this).siblings('.complete');
+      var $teaser = $(this).siblings('.teaser');
+      var isFullText = $complete.is(':visible');
+      if(isFullText) {
+        $complete.hide();
+        $teaser.css('display', 'inline');
+        $(this).text(i18n.t('metadata.show_more'));
+      } else {
+        $complete.show();
+        $teaser.css('display', 'block');
+        $(this).text(i18n.t('metadata.show_less'));
+      } 
+    });
+    $(React.findDOMNode(this.refs.abstract)).empty().append($teaser_abstract, $complete_abstract, $more);
+    $(React.findDOMNode(this.refs.biography)).append($bio);
   }
 
   componentDidMount() {
