@@ -48,22 +48,10 @@ class ContentContainer extends React.Component {
   }
 
   onBracketToggled(subjectReferenceId) {
-    console.log('TODO: override. doing nothing for now...');
-
-    // var app = this.context.app;
-    // var state = app.state;
-
-    // if (state.contextId === "editSubjectReference" && state.subjectReferenceId === subjectReferenceId) {
-    //   app.replaceState({
-    //     contextId: "subjects"
-    //   });
-    // } else {
-    //   app.replaceState({
-    //     contextId: "editSubjectReference",
-    //     subjectReferenceId: subjectReferenceId,
-    //     noScroll: true
-    //   });
-    // }
+    var app = this.context.app;
+    app.replaceState({
+      contextId: "subjects"
+    });
   }
 
   // Lifecycle

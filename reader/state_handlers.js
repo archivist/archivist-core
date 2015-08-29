@@ -109,7 +109,8 @@ var stateHandlers = {
     // When a subject has been clicked in the subjects panel
 
     if (state.contextId === "subjects" && state.subjectId) {
-      return doc.subjects.getReferencesForSubject(state.subjectId);
+      var highlights =  doc.subjects.getReferencesForSubject(state.subjectId);
+      return highlights;
     }
 
     // Entities-specific
