@@ -406,6 +406,10 @@ var MetadataPanel = React.createClass({
           label("Interview date"),
           this.renderTextProperty('interview_date'),
 
+          // Photo of respondent
+          label("Respondent photo"),
+          this.renderTextProperty('interviewee_photo'),
+
           // The interviewer
           label("Interviewer"),
           this.renderTextProperty('conductor'),

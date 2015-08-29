@@ -35,6 +35,7 @@ var DocumentNode = Substance.Document.Node.extend({
     "interviewee_bio_de": "string",
     "interviewee_category": "string",
     "interviewee_forced_labor_type": "string",
+    "interviewee_photo": "string",
     "interviewee_waypoints": ["array", "waypoint"],
 
     // Workflow
