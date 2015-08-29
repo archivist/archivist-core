@@ -27,12 +27,23 @@ class InfoPanel extends Panel {
   render() {
     var doc = this.props.doc;
     var metadata = doc.getDocumentMeta();
+    var photo = this._renderPhoto(metadata);
 
     return $$("div", {className: "panel info-panel-component"},
       $$('div', {className: 'panel-content'},
+        photo,
         $$('div', {className: 'abstract', ref: 'abstract'}),
         $$('div', {className: 'biography', ref: 'biography'})
       )
+    );
+  }
+
+  _renderPhoto(metadata) {
+    var filename = metadata.interviewee_photo;
+    if(!filename) return '';
+    var path = window.mediaServer + '/photos/' + filename;
+    return $$('div', {className: 'photo'},
+      $$('img', {src: path})
     );
   }
 
