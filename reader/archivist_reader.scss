@@ -54,20 +54,16 @@
 
 .entity-reference.annotation {
   cursor: pointer;
-  background: rgba(255, 254, 99, 0.15);
-  border-bottom: 1px solid rgba(180, 202, 108, 0.6);
+  background: rgba(11, 157, 217, 0.05);
+  border-bottom: 1px solid rgba(11, 157, 217, 0.2);
   cursor: pointer;
   padding: 0px 1px;
 }
 
-.entity-reference.annotation.active {
-  background: rgba(255, 254, 99, 0.3);
+.entity-reference.annotation:not(.active):hover {
+  background: rgba(11, 157, 217, 0.1);
+  border-bottom: 1px solid rgba(11, 157, 217, 0.4);
 }
-
-.entity.active {
-  border-left: 2px solid rgba(255, 254, 99, 0.3);
-}
-
 
 
 .container-annotation.active.annotation-fragment {
