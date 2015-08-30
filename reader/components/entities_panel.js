@@ -13,16 +13,18 @@ class EntitiesPanel extends Panel {
 
   handleToggle(entityId, entityType) {
     var app = this.context.app;
+    var filterByType = app.state.filterByType;
 
     if (app.state.entityId === entityId) {
       app.replaceState({
-        contextId: "entities"
+        contextId: "entities",
+        filterByType: entityType
       });
     } else {
       app.replaceState({
         contextId: "entities",
         entityId: entityId,
-        filterByType: entityType,
+        filterByType: filterByType,
         noResourceScroll: true
       });
     }
