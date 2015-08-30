@@ -3,6 +3,10 @@
 
 // Overrides for ArchivistReader
 
+$big: "(min-width: 1165px)";
+$middle: "(min-width: 1000px) and (max-width: 1165px)";
+$small: "(max-width: 1000px)";
+
 .reader-component {
   bottom: 0px;
 }
@@ -96,6 +100,18 @@
 
 .resource-container {
   box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+@media #{$middle} {
+  a.toggle-context i.fa {
+    display: none;
+  }
+}
+
+@media #{$small} {
+  a.toggle-context span.label {
+    display: none;
+  }
 }
 
 // Info panel
