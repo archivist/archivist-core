@@ -46,6 +46,7 @@ class ContentEditor extends React.Component {
 
     this.brackets = new Brackets({
       doc: this.props.doc,
+      panel: this.props.panel,
       contentContainerEl: contentContainerEl,
       onBracketToggled: this.onBracketToggled.bind(this)
     });
