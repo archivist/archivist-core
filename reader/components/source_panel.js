@@ -107,6 +107,7 @@ SourcePanel.contextTypes = {
 
 SourcePanel.displayName = i18n.t('panels.source');;
 SourcePanel.contextId = "source";
+SourcePanel.persistent = true;
 SourcePanel.icon = "fa-youtube-play";
 
 module.exports = SourcePanel;

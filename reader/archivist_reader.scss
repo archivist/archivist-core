@@ -333,3 +333,12 @@ $small: "(max-width: 1000px)";
   border-bottom: none;
   right: 15px;
 }
+
+
+.source-panel-component {
+  display: none;
+}
+
+.panels.source .source-panel-component {
+  display: block;
+}
