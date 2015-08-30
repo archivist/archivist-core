@@ -66,7 +66,6 @@ class Brackets {
       }
     });
 
-
     // Collects all events for the sweep algorithm
     var events = [];
 
@@ -78,8 +77,8 @@ class Brackets {
         return;
       }
 
-      var startTop = $(anchorPair.start).position().top;
-      var endTop = $(anchorPair.end).position().top + $(anchorPair.end).height();
+      var startTop = this.props.panel.getPanelOffsetForElement(anchorPair.start);
+      var endTop = this.props.panel.getPanelOffsetForElement(anchorPair.end) + $(anchorPair.end).height();
       var height = endTop - startTop;
 
       // Add start and end events
