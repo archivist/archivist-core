@@ -46,9 +46,9 @@ class SourcePanel extends Panel {
     var type = metadata.record_type;
     var id = metadata.media_id;
     if(type == 'video') {
-      var src = "https://player.vimeo.com/video/" + id + "?api=1&player_id=video_player";
+      var src = "https://player.vimeo.com/video/" + id + "?api=1";
       return $$('div', {className: 'video-source'},
-        $$('iframe', {id: 'video_player', src: src, frameborder: "0", webkitallowfullscreen: "true", mozallowfullscreen: "true", allowfullscreen: "true"})
+        $$('iframe', {src: src, frameBorder: "0", mozallowfullscreen: "true", allowFullScreen: "true"})
       );
     } else if (type == 'audio') {
       return $$('div',{}, "audio-conteiner");
@@ -68,13 +68,22 @@ class SourcePanel extends Panel {
     );
   }
 
-  updateSourceTime() {
+  updateSourceTime(init) {
+    var self = this;
     var app = this.context.app;
     var time = app.state.time;
     if(time) {
-      var iframe = $('#video_player')[0];
+      var iframe = $('iframe')[0];
       var player = $f(iframe);
-      player.api('seekTo', this.hmsToSecondsOnly(time));
+      if(init){
+        player.addEvent('ready', function() {
+          player.api('seekTo', self.hmsToSecondsOnly(time));
+          player.api('pause');
+        });
+      } else {
+        player.api('seekTo', this.hmsToSecondsOnly(time));
+        player.api('play');
+      }
     }
   }
 
@@ -91,7 +100,7 @@ class SourcePanel extends Panel {
   }
 
   componentDidMount() {
-    this.updateSourceTime();
+    this.updateSourceTime(true);
   }
 
   componentDidUpdate() {

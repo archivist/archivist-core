@@ -3,6 +3,10 @@
 
 // Overrides for ArchivistReader
 
+body {
+  font: 16px/20px Arial, Helvetica, sans-serif;
+}
+
 $big: "(min-width: 1165px)";
 $middle: "(min-width: 1000px) and (max-width: 1165px)";
 $small: "(max-width: 1000px)";
@@ -131,6 +135,9 @@ $small: "(max-width: 1000px)";
 
 .info-panel-component .photo img {
   max-width: 100%;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
 .panel-content .section-title {

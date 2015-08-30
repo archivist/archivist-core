@@ -35,10 +35,10 @@ var SearchbarView = function(controller, options) {
   this.searchFieldFilters = $$('.search-field-filters');
   this.searchFieldEl.appendChild(this.searchFieldFilters);
 
-  this.searchFieldInputEl = $$('input.search-field-input', {type: "text", placeholder: "Enter search term"});
+  this.searchFieldInputEl = $$('input.search-field-input', {type: "text", placeholder: i18n.t("browser.search_placeholder")});
   this.searchFieldEl.appendChild(this.searchFieldInputEl);
 
-  this.searchButton = $$('a.search-button' , {href: "#", text: 'Search'});
+  this.searchButton = $$('a.search-button' , {href: "#", text: i18n.t("browser.search_button")});
   this.searchFieldEl.appendChild(this.searchButton);
 
   // Suggestions
@@ -184,7 +184,7 @@ SearchbarView.Prototype = function() {
 
     if (filterCount>0) {
       var clearFiltersEl = $$('.search-field-filter', {
-        children: [$$('a.clear-filters', {href: "#", text: "Clear Filters"})]
+        children: [$$('a.clear-filters', {href: "#", text: i18n.t("browser.clear_filters")})]
       });
       this.searchFieldFilters.appendChild(clearFiltersEl);      
     }

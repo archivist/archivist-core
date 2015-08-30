@@ -39,7 +39,7 @@ var BrowserView = function(controller) {
 
   this.facetsEl = $$('#facets');
   this.documentsEl = $$('#documents');
-  this.documentsEl.appendChild($$('.no-result', {text: "Loading documents ..."}));
+  this.documentsEl.appendChild($$('.no-result', {text: i18n.t("browser.loading")}));
 
   this.previewEl = $$('#preview');
 
@@ -239,13 +239,20 @@ BrowserView.Prototype = function() {
     // Get filtered documents
     var documents = searchResult.getDocuments();
     var searchMetrics = searchResult.getSearchMetrics();
+
+    // i18n
+    var storage = window.storage || window.localStorage;
+    var locale = storage.getItem('locale') || "ru";
     
     if (documents.length > 0) {
 
-      this.documentsEl.appendChild($$('.no-result', {text: searchMetrics.hits + " articles found"}));
+      this.documentsEl.appendChild($$('.no-result', {text: searchMetrics.hits + " " + i18n.t("browser.found")}));
 
       _.each(documents, function(doc, index) {
 
+        // TODO: remove it
+        doc.summary = "Интервью с Варварой Калистратовной Гриценко —  это скорее не рассказ, а отрывистые ответы на вопросы интервьюера, сбивчивые воспоминания с немногочисленными фактами и описаниями. На момент взятия интервью здоровье Варвары Калистратовны было существенно подорвано; у неё сильно болели ноги, а главное, болела голова – она жаловалась на давление и забывчивость."
+        doc.interviewee_photo = "gricenko.jpg";
         // Matching filters
         // --------------
 
@@ -283,13 +290,23 @@ BrowserView.Prototype = function() {
               filtersEl.appendChild(filterEl);
             }
         });
-
+        
+        var summary;
+        if(locale == "en" || locale == "de") {
+          summary = doc.summary_en;
+        } else if (locale == 'ru') {
+          summary = doc.summary;
+        }
+        var sourceTypeIcon = doc.record_type === 'video' ? 'fa-video-camera' : 'fa-volume-up';
         var elems = [
           $$('.meta-info', {
             children: [
-              // $$('.article-type.'+ARTICLE_TYPES[doc.article_type], {html: doc.article_type+" "}),
-              // $$('.doi', {html: doc.doi+" "}),
-              $$('.published-on', {text: "published on "+ util.formatDate(doc.published_on)})
+              $$('.project', {text: doc.project_name + " "}),
+              $$('.length', {text: doc.interview_duration + " " + i18n.t("browser.minutes") + " "}),
+              $$('.date', {text: util.formatDate(doc.interview_date)}),
+              $$('.source-type', {children: [
+                $$('i', { class: "fa " + sourceTypeIcon })
+              ]}),
             ]
           }),
           $$('.title', {
@@ -298,10 +315,15 @@ BrowserView.Prototype = function() {
             ]
           }),
         ];
+        
+        if(doc.interviewee_photo) {
+          var path = window.mediaServer + '/photos/' + doc.interviewee_photo;
+          elems.unshift($$('.photo', { style: "background-image: url(" + path + ")" }));
+        }
 
-        if (doc.intro) {
+        if (summary) {
           elems.push($$('.intro', {
-            html: doc.intro
+            html: summary
           }));
         }
 
@@ -330,11 +352,11 @@ BrowserView.Prototype = function() {
           documentEl.appendChild(previewEl.render().el);
         }
         // Add detail view
-        documentEl.appendChild($$('a.toggle-details', {
-          "data-id": doc.id,
-          href: "#",
-          html: '<i class="fa fa-eye"></i> Show more'
-        }));
+        // documentEl.appendChild($$('a.toggle-details', {
+        //   "data-id": doc.id,
+        //   href: "#",
+        //   html: '<i class="fa fa-eye"></i> Show more'
+        // }));
 
         this.documentsEl.appendChild(documentEl);
       }, this);

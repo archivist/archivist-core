@@ -1,6 +1,9 @@
 // General purpose Substance Styles
 @import '../node_modules/substance-ui/styles/index';
 
+body {
+  font: 16px/20px Arial, Helvetica, sans-serif;
+}
 
 /* Layout stuff
 ---------------------------------
@@ -174,6 +177,7 @@ div {
 .search-field-filter a {
   font-weight: 600;
   font-style: normal;
+  font-size: 11px;
 }
 
 .search-field-input {
@@ -184,7 +188,7 @@ div {
   padding-left: 5px;
   font-family: 'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
   width: 100%;
-  font-size: 18px;
+  font-size: 15px;
   border: none;
 }
 
@@ -257,7 +261,7 @@ div {
   overflow: auto;
   color: #888;
   font-style: italic;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 #documents .document .meta-info > div {
@@ -290,10 +294,23 @@ div {
   padding-bottom: 5px;
 }
 
+#documents .document .photo {
+  float: left;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+  width: 140px;
+  height: 125px;
+  margin: 3px 20px 0px 0px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
 #documents .document .title {
   display: block;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 26px;
   padding-bottom: 5px;
 }
@@ -370,7 +387,7 @@ div {
   color: rgba(0,0,0,0.6);
   padding-bottom: 10px;
   line-height: 20px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 #documents .document .categories {

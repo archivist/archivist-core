@@ -103,7 +103,7 @@ class ArchivistReader extends React.Component {
         doc: this.state.doc,
         id: "writer",
         contentContainer: 'content',
-        contextId: 'subjects'
+        contextId: 'source'
       });
     } else if (this.state.errorMessage) {
       return $$('div', {className: 'error-message'}, this.state.errorMessage);
