@@ -74,6 +74,7 @@ BrowserController.Prototype = function() {
 
   this.transition = function(newState, cb) {
     console.log("BrowserController.transition(%s -> %s)", this.state.id, newState.id);
+    var self = this;
 
     // idem-potence
     // if (newState.id === this.state.id) {
@@ -89,7 +90,6 @@ BrowserController.Prototype = function() {
         // Set the initial search query from app state
         // TODO: this could be done in a onInitialize hook?
         // console.log('setting initial query', newState.searchQuery);
-
         var query;
         if (newState.searchQuery) {
           query = JSON.parse(JSON.stringify(newState.searchQuery));
@@ -99,10 +99,17 @@ BrowserController.Prototype = function() {
         }
         this.searchQuery.setQuery(query);
 
-        return this.config.backend.getNameMap(function(err, names) {
-          this.names = names;
-          this.loadSearchResult(newState, cb);
-        }.bind(this))
+        // Initialization of name map and subjectsmodel
+        this.config.backend.getNameMap(function(err, names) {
+          self.names = names;
+
+          self.config.backend.getSubjectsModel(function(err, subjects) {
+            self.subjects = subjects;
+            self.loadSearchResult(newState, cb);
+          });
+        });
+
+        return;
       }
       if (!_.isEqual(newState.searchQuery, this.state.searchQuery)) {
         // Search query has changed
@@ -133,22 +140,16 @@ BrowserController.Prototype = function() {
     var self = this;
 
     this.config.backend.findDocuments(searchQuery, function(err, result, subjects) {
-      // console.log('search result:', result);
-      // console.log(JSON.stringify(result.aggregations, null, "  "));
 
-      self.config.backend.getSubjectsModel(function(err, subjects) {
-        self.searchResult = new SearchResult({
-          searchQuery: self.searchQuery,
-          result: result
-        }, {});
+      self.searchResult = new SearchResult({
+        searchQuery: self.searchQuery,
+        result: result
+      }, {});
 
-        // console.log('searchresult', self.searchResult);
-
-        // Add subjects model to the search result
-        self.searchResult.subjects = subjects;
-        self.previewData = null;
-        cb(null);
-      });
+      // Add subjects model to the search result
+      self.searchResult.subjects = self.subjects;
+      self.previewData = null;
+      cb(null);
     });
   };
 
