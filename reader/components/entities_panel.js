@@ -137,6 +137,6 @@ EntitiesPanel.contextTypes = {
 
 EntitiesPanel.displayName = i18n.t('panels.entities');
 EntitiesPanel.contextId = "entities";
-EntitiesPanel.icon = "fa-map-signs";
+EntitiesPanel.icon = "fa-book";
 
 module.exports = EntitiesPanel;

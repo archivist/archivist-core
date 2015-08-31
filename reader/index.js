@@ -24,7 +24,7 @@ var panelOrder = ["source", "subjects", "entities", "info"];
 
 // Override subject's panel name and icon
 components.subjects.displayName = i18n.t('panels.subjects');
-components.subjects.icon = "fa-book";
+components.subjects.icon = "fa-map-signs";
 
 // Specify a Notification service
 // ---------------
