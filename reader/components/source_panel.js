@@ -51,7 +51,11 @@ class SourcePanel extends Panel {
         $$('iframe', {src: src, frameBorder: "0", mozallowfullscreen: "true", allowFullScreen: "true"})
       );
     } else if (type == 'audio') {
-      return $$('div',{}, "audio-conteiner");
+      return $$('ul',{className:"playlist"},
+        $$('li',{},
+          $$('a',{href: window.mediaServer + "/audio/"+id+".mp3"},"Test")
+        )
+      );
     } else {
       return $$('div',{}, "no source specified");
     }
