@@ -107,13 +107,15 @@ $small: "(max-width: 1000px)";
 }
 
 @media #{$middle} {
-  a.toggle-context i.fa {
+  a.toggle-context i.fa,
+  span.entity-filter i.fa {
     display: none;
   }
 }
 
 @media #{$small} {
-  a.toggle-context span.label {
+  a.toggle-context span.label,
+  span.entity-filter > span {
     display: none;
   }
 }
