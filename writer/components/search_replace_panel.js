@@ -4,6 +4,7 @@ var $$ = React.createElement;
 var _ = require("substance/helpers");
 var Panel = require("substance-ui/panel");
 var Icon = require("substance-ui/font_awesome_icon");
+var searchReplaceTransformation = require("../transformations/search_replace");
 
 
 class SearchReplacePanel extends Panel {
@@ -15,17 +16,32 @@ class SearchReplacePanel extends Panel {
     super(props);
   }
 
-  handleSave(e) {
+  componentDidMount() {
+    // push surface selection state so that we can recover it when closing
+    this.context.surfaceManager.pushState();
+  }
+
+  componentWillUnmount() {
+    this.context.surfaceManager.popState();
+  }
+
+  performAction(e) {
     e.preventDefault();
 
-    // var htmlEditor = this.refs.htmlEditor;
-    // var doc = this.getDocument();
-    // doc.transaction(function(tx) {
-    //   tx.set([this.state.comment.id, "content"], htmlEditor.getContent());
-    // }.bind(this));
+    var doc = this.getDocument();
+    var searchStr = React.findDOMNode(this.refs.searchStr).value;
+    var replaceStr = React.findDOMNode(this.refs.replaceStr).value;
 
-    // // Go back to show dialog
-    // this.handleCancel(e);
+    doc.transaction(function(tx) {
+      searchReplaceTransformation(tx, {
+        containerId: 'content',
+        searchStr: searchStr,
+        replaceStr: replaceStr
+      });
+    }.bind(this));
+
+    var app = this.context.app;
+    app.closeModal();
   }
 
   render() {
@@ -37,7 +53,11 @@ class SearchReplacePanel extends Panel {
       ),
 
       $$('div', {className: 'content'},
-        "SEARCH AND REPLACE PANEL"
+        $$('div', {className: 'label'}, 'Find what'),
+        $$('input', {type: 'text', ref: 'searchStr'}),
+        $$('div', {className: 'label'}, 'Replace with'),
+        $$('input', {type: 'text', ref: 'replaceStr'}),
+        $$('button', {className: 'button action save-comment', onClick: this.performAction.bind(this)}, 'Replace All')
       )
     );
   }
@@ -46,7 +66,8 @@ class SearchReplacePanel extends Panel {
 
 SearchReplacePanel.displayName = 'SearchReplacePanel';
 SearchReplacePanel.contextTypes = {
-  app: React.PropTypes.object.isRequired
+  app: React.PropTypes.object.isRequired,
+  surfaceManager: React.PropTypes.object.isRequired
 };
 
 // Panel Configuration
@@ -54,5 +75,7 @@ SearchReplacePanel.contextTypes = {
 
 SearchReplacePanel.icon = 'fa-comment';
 SearchReplacePanel.isDialog = true;
+
+SearchReplacePanel.modalSize = "medium";
 
 module.exports = SearchReplacePanel;

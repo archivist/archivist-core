@@ -440,6 +440,29 @@
 }
 
 
+/* Search And Replace Panel 
+-----------------------------------------------------*/
+
+.search-replace-panel-component .label {
+  padding: 10px 0px;
+  font-size: 16px;
+  color: #888;
+}
+
+.search-replace-panel-component .content input {
+  width: 300px;
+}
+
+.search-replace-panel-component .content {
+  padding: 20px;
+}
+
+.search-replace-panel-component .content .button {
+  margin-top: 30px;
+
+  background: #444;
+  color: #fff;
+}
 
 
 /* Metadata Panel
