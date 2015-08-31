@@ -81,14 +81,8 @@ class SourcePanel extends Panel {
             ),
             $$('div', {className: "jp-time-holder"},
               $$('div', {className: "jp-current-time", role: "timer", "aria-label": "time"}, " "),
-              $$('div', {className: "jp-duration", role: "timer", "aria-label": "duration"}, " "),
-              $$('div', {className: "jp-toggles"},
-                $$('button', {className: "jp-repeat", role: "button", tabindex: "0"}, "repeat")
-              )
+              $$('div', {className: "jp-duration", role: "timer", "aria-label": "duration"}, " ")
             )
-          ),
-          $$('div', {className: "jp-details"},
-            $$('div', {className: "jp-title", "aria-label": "title"}, " ")
           ),
           $$('div', {className: "jp-no-solution"},
             $$('span', {}, "Update Required"),
