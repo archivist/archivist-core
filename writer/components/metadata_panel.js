@@ -181,8 +181,8 @@ var MetadataPanel = React.createClass({
     var selected = app.doc.get('document').record_type;
 
     return $$('select', {contentEditable: false, onChange: this.handleInterviewTypeState, defaultValue: selected},
-      $$('option', 'video', "Video"),
-      $$('option', 'audio', "Audio")
+      $$('option', {value: 'video'}, "Video"),
+      $$('option', {value: 'audio'}, "Audio")
     );
   },
 
