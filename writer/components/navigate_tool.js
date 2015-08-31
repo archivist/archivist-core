@@ -5,6 +5,7 @@ var _ = require("substance/helpers");
 // ----------------
 // 
 // Just used to trigger app state changes
+// 
 
 var NavigateTool = React.createClass({
   displayName: "NavigateTool",
@@ -27,14 +28,14 @@ var NavigateTool = React.createClass({
   },
 
   render: function() {
-    var classNames = ['option'];
+    var classNames = ['button'];
 
     return $$("button", {
       className: classNames.join(' '),
       title: this.props.title,
       onMouseDown: this.handleMouseDown,
       onClick: this.handleClick
-    }, this.props.title);
+    }, (this.props.children));
   }
 });
 

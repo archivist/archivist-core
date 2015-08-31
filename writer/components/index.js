@@ -12,6 +12,7 @@ module.exports = {
   "selectProjectLocation": require("./select_location_panel"),
   "showEntityReference": require("./show_entity_reference_panel"),
   "editSubjectReference": require("./edit_subject_reference_panel"),
+  "searchReplace": require("./search_replace_panel"),
   "comments": require("./comments_panel"),
   "show-comment": require("./show_comment_panel"),
   "edit-comment": require("./edit_comment_panel"),
