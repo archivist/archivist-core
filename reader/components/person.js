@@ -20,7 +20,7 @@ class Person extends React.Component {
     if (this.props.active) className.push("active");
     return $$("div", {"data-id": person.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
       $$("div", {className: "name"}, person.name),
-      $$("div", {className: "description"}, person.description)
+      $$("div", {className: "description", dangerouslySetInnerHTML: person.description})
     );
   }
 }

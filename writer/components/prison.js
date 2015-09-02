@@ -21,7 +21,7 @@ var Prison = React.createClass({
       $$("div", {className: "prison-type"}, "Prison type: " + prisonType),
       $$("div", {className: "synonyms"}, "Known as: "+ this.props.synonyms.join(', ')),
       $$("div", {className: "country"}, "Country: "+this.props.country),
-      $$("div", {className: "description"}, this.props.description),
+      $$("div", {className: "description", dangerouslySetInnerHTML: this.props.description}),
       $$("a", {className: "edit", target: "_blank", href: '../prisons/' + this.props.id, onClick: this.handleEdit},
         $$("i", {className: "fa fa-pencil-square-o"})
       )

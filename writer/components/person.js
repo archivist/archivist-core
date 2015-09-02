@@ -17,7 +17,7 @@ var Person = React.createClass({
     return $$("div", {className: className.join(" "), onClick: this.handleToggle},
       $$("div", {className: "type"}, "Person"),
       $$("div", {className: "name"}, this.props.name),
-      $$("div", {className: "description"}, this.props.description),
+      $$("div", {className: "description", dangerouslySetInnerHTML: this.props.description}),
       $$("a", {className: "edit", target: "_blank", href: '../persons/' + this.props.id, onClick: this.handleEdit},
         $$("i", {className: "fa fa-pencil-square-o"})
       )
