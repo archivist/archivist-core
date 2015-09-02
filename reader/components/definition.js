@@ -20,7 +20,10 @@ class Definition extends React.Component {
     if (this.props.active) className.push("active");
     return $$("div", {"data-id": definition.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
       $$("div", {className: "title"}, definition.title),
-      $$("div", {className: "description", dangerouslySetInnerHTML: definition.description})
+      $$("div", {
+        className: "description", 
+        dangerouslySetInnerHTML: {__html: definition.description }
+      })
     );
   }
 }

@@ -32,7 +32,10 @@ class Prison extends React.Component {
         $$("i", {className: "fa fa-map-o"})
       ),
       $$("div", {className: "name"}, name),
-      $$("div", {className: "description", dangerouslySetInnerHTML: prison.description})
+      $$("div", {
+        className: "description",
+        dangerouslySetInnerHTML: {__html: prison.description }
+      })
     );
   }
 }

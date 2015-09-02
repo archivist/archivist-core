@@ -31,7 +31,10 @@ class Location extends React.Component {
       $$("a", {className: "show-on-map", href: "/map/" + toponym.id}, 
         $$("i", {className: "fa fa-map-o"})
       ),
-      $$("div", {className: "description", dangerouslySetInnerHTML: toponym.description})
+      $$("div", {
+        className: "description", 
+        dangerouslySetInnerHTML: {__html: toponym.description }
+      })
     );
   }
 }
