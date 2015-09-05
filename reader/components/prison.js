@@ -28,7 +28,7 @@ class Prison extends React.Component {
         $$("div", {className: "entity-type"}, prisonType),
         $$("div", {className: "location"}, location)
       ),
-      $$("a", {className: "show-on-map", href: "/maps#" + prison.id}, 
+      $$("a", {className: "show-on-map", href: "/maps#" + prison.id, target: "_blank"}, 
         $$("i", {className: "fa fa-crosshairs"})
       ),
       $$("div", {className: "name"}, name),
