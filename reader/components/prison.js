@@ -9,7 +9,7 @@ class Prison extends React.Component {
   }
 
   handleToggle(e) {
-    e.preventDefault();
+    //e.preventDefault();
     this.props.handleToggle(this.props.entity.id, this.props.entity.type);
   }
 
@@ -28,8 +28,8 @@ class Prison extends React.Component {
         $$("div", {className: "entity-type"}, prisonType),
         $$("div", {className: "location"}, location)
       ),
-      $$("a", {className: "show-on-map", href: "/map/" + prison.id}, 
-        $$("i", {className: "fa fa-map-o"})
+      $$("a", {className: "show-on-map", href: "/maps#" + prison.id}, 
+        $$("i", {className: "fa fa-crosshairs"})
       ),
       $$("div", {className: "name"}, name),
       $$("div", {

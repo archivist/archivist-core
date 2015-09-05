@@ -9,7 +9,7 @@ class Location extends React.Component {
   }
 
   handleToggle(e) {
-    e.preventDefault();
+    //e.preventDefault();
     this.props.handleToggle(this.props.entity.id, this.props.entity.type);
   }
 
@@ -28,8 +28,8 @@ class Location extends React.Component {
         $$("div", {className: "name"}, toponym.name),
         $$("div", {className: "location"}, location)
       ),
-      $$("a", {className: "show-on-map", href: "/map/" + toponym.id}, 
-        $$("i", {className: "fa fa-map-o"})
+      $$("a", {className: "show-on-map", href: "/maps#" + toponym.id}, 
+        $$("i", {className: "fa fa-crosshairs"})
       ),
       $$("div", {
         className: "description", 
