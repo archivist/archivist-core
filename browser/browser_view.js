@@ -247,7 +247,7 @@ BrowserView.Prototype = function() {
     if (documents.length > 0) {
       var suggested = [];
       _.each(searchResult.rawResult.suggestedEntities, function(entity, key) {
-        var el = $$('a.entity', {href: "/resources/" + key, target: "_blank", text: entity.name});
+        var el = $$('a.entity', {href: "/resources/" + key + window.location.hash, text: entity.name});
         suggested.push(el);
       });
 

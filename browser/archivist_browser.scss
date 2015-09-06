@@ -195,10 +195,13 @@ div {
 /* Suggestions */
 
 .suggested {
-  float: right;
-  padding-top: 20px;
+  padding-top: 18px;
+  padding-bottom: 20px;
   color: #888;
+  margin-left: 200px;
   font-size: 13px;
+  line-height: 30px;
+  text-align: right;
 }
 
 .suggested .entity {
@@ -265,6 +268,8 @@ div {
   font-style: italic;
   color: #888;
   width: 180px;
+  position: absolute;
+  top: 20px;
 }
 
 #documents .document {
