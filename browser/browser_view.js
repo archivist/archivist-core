@@ -245,6 +245,16 @@ BrowserView.Prototype = function() {
     var locale = storage.getItem('locale') || "ru";
     
     if (documents.length > 0) {
+      var suggested = [];
+      _.each(searchResult.rawResult.suggestedEntities, function(entity, key) {
+        var el = $$('a.entity', {href: "/resources/" + key, target: "_blank", text: entity.name});
+        suggested.push(el);
+      });
+
+      if(suggested) {
+        var suggestedEl = $$('.suggested', {text: i18n.t("browser.entity_suggestion"), children: suggested});
+        this.documentsEl.appendChild(suggestedEl);
+      }
 
       this.documentsEl.appendChild($$('.no-result', {text: searchMetrics.hits + " " + i18n.t("browser.found")}));
 
