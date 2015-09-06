@@ -13,6 +13,10 @@ class Location extends React.Component {
     this.props.handleToggle(this.props.entity.id, this.props.entity.type);
   }
 
+  handleClick(e) {
+    e.stopPropagation();
+  }
+
   render() {
     var toponym = this.props.entity;
 
@@ -28,7 +32,10 @@ class Location extends React.Component {
         $$("div", {className: "name"}, toponym.name),
         $$("div", {className: "location"}, location)
       ),
-      $$("a", {className: "show-on-map", href: "/maps#" + toponym.id, target: "_blank"}, 
+      $$("a", {className: "show-resources", href: "/resources/" + toponym.id, target: "_blank", title: i18n.t("reader.show_resources")}, 
+        $$("i", {className: "fa fa-book"})
+      ),
+      $$("a", {className: "show-on-map", href: "/maps/" + toponym.id, target: "_blank", title: i18n.t("reader.show_on_map")}, 
         $$("i", {className: "fa fa-crosshairs"})
       ),
       $$("div", {

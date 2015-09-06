@@ -13,6 +13,10 @@ class Definition extends React.Component {
     this.props.handleToggle(this.props.entity.id, this.props.entity.type);
   }
 
+  handleClick(e) {
+    e.stopPropagation();
+  }
+
   render() {
     var definition = this.props.entity;
 

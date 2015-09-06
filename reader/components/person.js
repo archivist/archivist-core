@@ -13,6 +13,10 @@ class Person extends React.Component {
     this.props.handleToggle(this.props.entity.id, this.props.entity.type);
   }
 
+  handleClick(e) {
+    e.stopPropagation();
+  }
+
   render() {
     var person = this.props.entity;
 
@@ -20,6 +24,9 @@ class Person extends React.Component {
     if (this.props.active) className.push("active");
     return $$("div", {"data-id": person.id, className: className.join(" "), onClick: this.handleToggle.bind(this)},
       $$("div", {className: "name"}, person.name),
+      $$("a", {className: "show-resources", href: "/resources/" + toponym.id, target: "_blank", title: i18n.t("reader.show_resources"), onClick: this.handleClick.bind(this)}, 
+        $$("i", {className: "fa fa-book"})
+      ),
       $$("div", {
         className: "description",
         dangerouslySetInnerHTML: {__html: person.description }

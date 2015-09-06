@@ -9,8 +9,12 @@ class Prison extends React.Component {
   }
 
   handleToggle(e) {
-    //e.preventDefault();
+    e.preventDefault();
     this.props.handleToggle(this.props.entity.id, this.props.entity.type);
+  }
+
+  handleClick(e) {
+    e.stopPropagation();
   }
 
   render() {
@@ -28,7 +32,10 @@ class Prison extends React.Component {
         $$("div", {className: "entity-type"}, prisonType),
         $$("div", {className: "location"}, location)
       ),
-      $$("a", {className: "show-on-map", href: "/maps#" + prison.id, target: "_blank"}, 
+      $$("a", {className: "show-resources", href: "/resources/" + toponym.id, target: "_blank", title: i18n.t("reader.show_resources"), onClick: this.handleClick.bind(this)}, 
+        $$("i", {className: "fa fa-book"})
+      ),
+      $$("a", {className: "show-on-map", href: "/maps#" + prison.id, target: "_blank", title: i18n.t("reader.show_on_map"), onClick: this.handleClick.bind(this)}, 
         $$("i", {className: "fa fa-crosshairs"})
       ),
       $$("div", {className: "name"}, name),
