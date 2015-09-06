@@ -206,8 +206,11 @@ div {
 
 .suggested .entity {
   padding: 5px;
-  background-color: rgba(51, 51, 51, 0.1);
+  background-color: rgba(132, 132, 132, 0.1);
   margin-left: 5px;
+  font-style: italic;
+  color: #555;
+  cursor: pointer;
 }
 
 .search-field-suggestions {
@@ -267,7 +270,7 @@ div {
   font-size: 20px;
   font-style: italic;
   color: #888;
-  width: 300px;
+  width: 430px;
 }
 
 #documents.has-suggestions .no-result {

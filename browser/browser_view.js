@@ -247,14 +247,20 @@ BrowserView.Prototype = function() {
     if (documents.length > 0) {
       var suggested = [];
       _.each(searchResult.rawResult.suggestedEntities, function(entity, key) {
-        var el = $$('a.entity', {href: "/resources/" + key + window.location.hash, text: entity.name});
+        var el = $$('span.entity', {
+          text: entity.name
+        });
+        $(el).click(function(){
+          window.location.href = "/resources/" + key + window.location.hash;
+        });
         suggested.push(el);
       });
 
       if(suggested.length > 0) {
         var suggestedEl = $$('.suggested', {text: i18n.t("browser.entity_suggestion"), children: suggested});
-        this.documentsEl.className = 'has-suggestions';
         this.documentsEl.appendChild(suggestedEl);
+      } else {
+        this.documentsEl.className = 'has-suggestions';
       }
 
       this.documentsEl.appendChild($$('.no-result', {text: searchMetrics.hits + " " + i18n.t("browser.found")}));
@@ -371,7 +377,7 @@ BrowserView.Prototype = function() {
 
     } else {
       // Render no search result
-      this.documentsEl.appendChild($$('.no-result', {text: "Your search did not match any documents"}));
+      this.documentsEl.appendChild($$('.no-result', {text: i18n.t("browser.no_results")}));
     }
 
     this.renderFacets();
