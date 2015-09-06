@@ -251,7 +251,7 @@ BrowserView.Prototype = function() {
         suggested.push(el);
       });
 
-      if(suggested) {
+      if(suggested.length > 0) {
         var suggestedEl = $$('.suggested', {text: i18n.t("browser.entity_suggestion"), children: suggested});
         this.documentsEl.appendChild(suggestedEl);
       }

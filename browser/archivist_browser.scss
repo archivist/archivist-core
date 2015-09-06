@@ -198,7 +198,6 @@ div {
   float: right;
   padding-top: 20px;
   color: #888;
-  margin-left: 200px;
   font-size: 13px;
 }
 
@@ -265,11 +264,13 @@ div {
   font-size: 20px;
   font-style: italic;
   color: #888;
+  width: 180px;
 }
 
 #documents .document {
   padding: 20px;
   position: relative;
+  min-height: 170px;
 }
 
 #documents .document .meta-info {
