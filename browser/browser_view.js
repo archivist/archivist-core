@@ -244,25 +244,26 @@ BrowserView.Prototype = function() {
     var storage = window.storage || window.localStorage;
     var locale = storage.getItem('locale') || "ru";
     
-    if (documents.length > 0) {
-      var suggested = [];
-      _.each(searchResult.rawResult.suggestedEntities, function(entity, key) {
-        var el = $$('span.entity', {
-          text: entity.name
-        });
-        $(el).click(function(){
-          window.location.href = "/resources/" + key + window.location.hash;
-        });
-        suggested.push(el);
+    var suggested = [];
+    _.each(searchResult.rawResult.suggestedEntities, function(entity, key) {
+      var el = $$('span.entity', {
+        text: entity.name
       });
+      $(el).click(function(){
+        window.location.href = "/resources/" + key + window.location.hash;
+      });
+      suggested.push(el);
+    });
 
-      if(suggested.length > 0) {
-        var suggestedEl = $$('.suggested', {text: i18n.t("browser.entity_suggestion"), children: suggested});
-        this.documentsEl.className = 'has-suggestions';
-        this.documentsEl.appendChild(suggestedEl);
-      } else {
-        this.documentsEl.className = '';
-      }
+    if(suggested.length > 0) {
+      var suggestedEl = $$('.suggested', {text: i18n.t("browser.entity_suggestion"), children: suggested});
+      this.documentsEl.className = 'has-suggestions';
+      this.documentsEl.appendChild(suggestedEl);
+    } else {
+      this.documentsEl.className = '';
+    }
+
+    if (documents.length > 0) {
 
       this.documentsEl.appendChild($$('.no-result', {text: searchMetrics.hits + " " + i18n.t("browser.found")}));
 

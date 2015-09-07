@@ -14,7 +14,8 @@ var stateHandlers = {
       var entity = doc.entities.getEntity(anno.target);
       if (state.entityId === anno.target) {
         app.replaceState({
-          contextId: "entities"
+          contextId: "entities",
+          filterByType: entity.type
         });
       } else {
         app.replaceState({
@@ -57,7 +58,9 @@ var stateHandlers = {
       // --------------------
       //
       // When a subject has been clicked in the subjects panel
-
+      if (state.contextId === "entities" && !state.filterByType) {
+        app.setState({contextId: "entities", filterByType: "toponym"});
+      }
       // Let the extension handle which nodes should be highlighted
       if (state.contextId === "entities" && state.entityId) {
         // Use reference handler

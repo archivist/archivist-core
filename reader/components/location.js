@@ -32,10 +32,10 @@ class Location extends React.Component {
         $$("div", {className: "name"}, toponym.name),
         $$("div", {className: "location"}, location)
       ),
-      $$("a", {className: "show-resources", href: "/resources/" + toponym.id, target: "_blank", title: i18n.t("reader.show_resources")}, 
+      $$("a", {className: "show-resources", href: "/resources/" + toponym.id, target: "_blank", title: i18n.t("reader.show_resources"), onClick: this.handleClick.bind(this)}, 
         $$("i", {className: "fa fa-book"})
       ),
-      $$("a", {className: "show-on-map", href: "/maps/" + toponym.id, target: "_blank", title: i18n.t("reader.show_on_map")}, 
+      $$("a", {className: "show-on-map", href: "/maps/" + toponym.id, target: "_blank", title: i18n.t("reader.show_on_map"), onClick: this.handleClick.bind(this)}, 
         $$("i", {className: "fa fa-crosshairs"})
       ),
       $$("div", {

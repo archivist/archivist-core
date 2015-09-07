@@ -66,10 +66,6 @@ div {
   overflow: auto;
 }
 
-#documents {
-
-}
-
 
 /* Preview
 ---------------------------------
@@ -198,19 +194,23 @@ div {
   padding-top: 18px;
   padding-bottom: 20px;
   color: #888;
-  margin-left: 200px;
+  margin-left: 560px;
   font-size: 13px;
   line-height: 30px;
   text-align: right;
 }
 
 .suggested .entity {
-  padding: 5px;
+  padding: 0px 5px;
   background-color: rgba(132, 132, 132, 0.1);
-  margin-left: 5px;
   font-style: italic;
   color: #555;
   cursor: pointer;
+  display: block;
+  float: right;
+  margin: 0px 0px 5px 5px;
+  position: relative;
+  line-height: 25px;
 }
 
 .search-field-suggestions {
@@ -263,6 +263,7 @@ div {
   position: relative;
   overflow: auto;
   padding: 20px;
+  min-height: 200px;
 }
 
 #documents .no-result {
@@ -270,7 +271,7 @@ div {
   font-size: 20px;
   font-style: italic;
   color: #888;
-  width: 430px;
+  width: 560px;
 }
 
 #documents.has-suggestions .no-result {
@@ -415,6 +416,7 @@ div {
   padding-bottom: 10px;
   line-height: 20px;
   font-size: 13px;
+  min-height: 80px;
 }
 
 #documents .document .categories {

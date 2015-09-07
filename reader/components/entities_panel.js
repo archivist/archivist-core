@@ -32,16 +32,10 @@ class EntitiesPanel extends Panel {
 
   handleFilter(entityType) {
     var app = this.context.app;
-    if (app.state.filterByType === entityType) {
-      app.replaceState({
-        contextId: "entities"
-      });
-    } else {
-      app.replaceState({
-        contextId: "entities",
-        filterByType: entityType
-      });
-    }
+    app.replaceState({
+      contextId: "entities",
+      filterByType: entityType
+    });
   }
 
   componentDidMount() {
