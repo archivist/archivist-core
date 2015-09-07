@@ -363,7 +363,7 @@ $small: "(max-width: 1000px)";
 }
 
 .entity-panel-component .entity.prison .name {
-  margin-right: 50px;
+  margin-right: 60px;
 }
 
 .entity-panel-component .entity.location .name, {
@@ -375,7 +375,7 @@ $small: "(max-width: 1000px)";
   right: 20px;
   font-size: 20px;
   color: #999;
-  &:hover: {
+  &:hover {
     color: #777;
   }
 }
@@ -385,7 +385,7 @@ $small: "(max-width: 1000px)";
   right: 50px;
   font-size: 20px;
   color: #999;
-  &:hover: {
+  &:hover {
     color: #777;
   }
 }
@@ -396,12 +396,12 @@ $small: "(max-width: 1000px)";
 }
 
 .entity-panel-component .entities .description {
-  margin-right: 0px;
+  margin-right: 50px;
 }
 
 .entity-panel-component .entity.location .description {
   padding-top: 0px;
-  margin-right: 50px;
+  margin-right: 60px;
 }
 
 /* overrides for brackets */

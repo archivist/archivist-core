@@ -258,9 +258,10 @@ BrowserView.Prototype = function() {
 
       if(suggested.length > 0) {
         var suggestedEl = $$('.suggested', {text: i18n.t("browser.entity_suggestion"), children: suggested});
+        this.documentsEl.className = 'has-suggestions';
         this.documentsEl.appendChild(suggestedEl);
       } else {
-        this.documentsEl.className = 'has-suggestions';
+        this.documentsEl.className = '';
       }
 
       this.documentsEl.appendChild($$('.no-result', {text: searchMetrics.hits + " " + i18n.t("browser.found")}));
