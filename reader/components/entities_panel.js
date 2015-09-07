@@ -112,10 +112,8 @@ class EntitiesPanel extends Panel {
     });
 
     return $$("div", {className: "panel entity-panel-component"},
+      $$('div', {className: "entity-filters"}, entityFilters),
       $$('div', {className: 'panel-content', ref: "panelContent"},
-        $$('div', {className: "entity-filters"},
-          entityFilters
-        ),
         $$('div', {className: 'entities panel-content-inner'},
           entityEls
         )

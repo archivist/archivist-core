@@ -62,7 +62,7 @@ $small: "(max-width: 1000px)";
 
 .entity-reference.annotation {
   cursor: pointer;
-  background: rgba(11, 157, 217, 0.05);
+  background: rgba(11, 157, 217, 0.1);
   border-bottom: 1px solid rgba(11, 157, 217, 0.2);
   cursor: pointer;
   padding: 0px 1px;
@@ -307,7 +307,7 @@ $small: "(max-width: 1000px)";
 }
 
 .entity-panel-component .entity-filters .entity-filter {
-  padding: 4px 14px;
+  padding: 6px 14px;
   color: rgba(0, 0, 0, 0.4);
   display: block;
   float: left;
@@ -328,8 +328,8 @@ $small: "(max-width: 1000px)";
   padding-left: 3px;
 }
 
-.entity-panel-component .entities {
-  top: 32px;
+.entities .panel-content {
+  top: 33px;
 }
 
 .entity-panel-component .entities .resource-header {
