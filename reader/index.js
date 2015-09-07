@@ -108,7 +108,7 @@ class ArchivistReader extends React.Component {
     } else if (this.state.errorMessage) {
       return $$('div', {className: 'error-message'}, this.state.errorMessage);
     } else {
-      return $$('div', {className: 'loading-message'}, 'Loading document... This may take a few seconds.');
+      return $$('div', {className: 'loading-message'}, l18n.t("loading_message"));
     }
   }
 }

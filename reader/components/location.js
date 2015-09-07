@@ -9,7 +9,7 @@ class Location extends React.Component {
   }
 
   handleToggle(e) {
-    //e.preventDefault();
+    e.preventDefault();
     this.props.handleToggle(this.props.entity.id, this.props.entity.type);
   }
 

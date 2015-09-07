@@ -374,6 +374,25 @@ $small: "(max-width: 1000px)";
   position: absolute;
   right: 20px;
   font-size: 20px;
+  color: #999;
+  &:hover: {
+    color: #777;
+  }
+}
+
+.entity-panel-component .entities a.show-resources {
+  position: absolute;
+  right: 50px;
+  font-size: 20px;
+  color: #999;
+  &:hover: {
+    color: #777;
+  }
+}
+
+.entity-panel-component .entities .person a.show-resources,
+.entity-panel-component .entities .definition a.show-resources {
+  right: 20px;
 }
 
 .entity-panel-component .entities .description {
