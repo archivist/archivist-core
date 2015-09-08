@@ -39,7 +39,7 @@ var BrowserView = function(controller) {
 
   this.facetsEl = $$('#facets');
   this.documentsEl = $$('#documents');
-  this.documentsEl.appendChild($$('.no-result', {text: i18n.t("browser.loading")}));
+  this.documentsEl.appendChild($$('.stats', {text: i18n.t("browser.loading")}));
 
   this.previewEl = $$('#preview');
 
@@ -258,14 +258,16 @@ BrowserView.Prototype = function() {
     if(suggested.length > 0) {
       var suggestedEl = $$('.suggested', {text: i18n.t("browser.entity_suggestion"), children: suggested});
       this.documentsEl.className = 'has-suggestions';
+      if (documents.length == 0) this.documentsEl.className = 'no-results';
       this.documentsEl.appendChild(suggestedEl);
     } else {
       this.documentsEl.className = '';
+      if (documents.length == 0) this.documentsEl.className = 'no-results';
     }
 
     if (documents.length > 0) {
 
-      this.documentsEl.appendChild($$('.no-result', {text: searchMetrics.hits + " " + i18n.t("browser.found")}));
+      this.documentsEl.appendChild($$('.stats', {text: searchMetrics.hits + " " + i18n.t("browser.found")}));
 
       _.each(documents, function(doc, index) {
 
@@ -332,10 +334,9 @@ BrowserView.Prototype = function() {
           }),
         ];
         
-        if(doc.interviewee_photo) {
-          var path = window.mediaServer + '/photos/' + doc.interviewee_photo;
-          elems.unshift($$('.photo', { style: "background-image: url(" + path + ")" }));
-        }
+        var photo = doc.interviewee_photo;
+        var path = photo ? window.mediaServer + '/photos/' + doc.interviewee_photo : window.mediaServer + '/photos/default.png';
+        elems.unshift($$('.photo', { style: "background-image: url(" + path + ")" }));
 
         if (summary) {
           elems.push($$('.intro', {
@@ -379,7 +380,7 @@ BrowserView.Prototype = function() {
 
     } else {
       // Render no search result
-      this.documentsEl.appendChild($$('.no-result', {text: i18n.t("browser.no_results")}));
+      this.documentsEl.appendChild($$('.stats', {text: i18n.t("browser.no_results")}));
     }
 
     this.renderFacets();

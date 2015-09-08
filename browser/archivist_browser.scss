@@ -194,10 +194,14 @@ div {
   padding-top: 18px;
   padding-bottom: 20px;
   color: #888;
-  margin-left: 560px;
+  margin-left: 270px;
   font-size: 13px;
   line-height: 30px;
   text-align: right;
+}
+
+.no-results .suggested {
+  margin-left: 560px;
 }
 
 .suggested .entity {
@@ -208,7 +212,7 @@ div {
   cursor: pointer;
   display: block;
   float: right;
-  margin: 0px 0px 5px 5px;
+  margin: 2px 0px 5px 5px;
   position: relative;
   line-height: 25px;
 }
@@ -266,15 +270,19 @@ div {
   min-height: 200px;
 }
 
-#documents .no-result {
+#documents .stats {
   padding: 20px;
   font-size: 20px;
   font-style: italic;
   color: #888;
+  width: 270px;
+}
+
+#documents.no-results .stats { 
   width: 560px;
 }
 
-#documents.has-suggestions .no-result {
+#documents.has-suggestions .stats {
   position: absolute;
   top: 20px;
 }
