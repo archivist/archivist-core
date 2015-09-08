@@ -56,6 +56,7 @@ var MetadataPanel = React.createClass({
 
   getInitialState: function() {
     var app = this.context.app;
+    var doc = app.doc;
 
     this.surface = new Surface(this.context.surfaceManager, doc, new Surface.FormEditor(), {name: 'metadata'});
     return null;
@@ -157,6 +158,7 @@ var MetadataPanel = React.createClass({
 
   renderTextProperty: function(property) {
     var app = this.context.app;
+    
     return $$(TextProperty, {
       doc: app.doc,
       path: [ "document", property]
