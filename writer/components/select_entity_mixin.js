@@ -41,9 +41,7 @@ var EntityView = React.createClass({
 
     if (this.props.type == 'person') {
       var description = this.props.description || '';
-      // Trim person description if it's too long
-      if (description.length > 100) description = description.substring(0, 100) + '...';
-      props.push($$("div", {className: "description"}, description));
+      props.push($$("div", {className: "description", dangerouslySetInnerHTML: {__html: description}}));
     }
 
     return $$("div", {
