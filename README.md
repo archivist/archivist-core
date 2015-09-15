@@ -2,6 +2,6 @@
 
 Core implementations of the Archivist app.
 
-For component development see: https://github.com/substance/archivist-dev
+For component development see: https://github.com/archivist/archivist-dev
 
-For a complete integration see: https://github.com/substance/archivist
+For a complete integration see: https://github.com/archivist/archivist
