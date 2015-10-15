@@ -150,7 +150,20 @@ var stateHandlers = {
     if (state.contextId === "entities" && state.entityId) {
       // Use reference handler
       var references = Object.keys(doc.entityReferencesIndex.get(state.entityId));
-      return references;
+      
+      var highlights = [];
+
+      var container = doc.get('content');
+
+      _.each(references, function(h) {
+        var anno = doc.get(h);
+        var pos = container.getPosition(anno.path[0]);
+        highlights.push({highlight: h, pos: pos});
+      });
+
+      highlights = _.sortBy(highlights, "pos");
+
+      return _.pluck(highlights, "highlight");
     } else if (state.entityReferenceId) {
       return [state.entityReferenceId];
     }
