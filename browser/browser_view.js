@@ -37,8 +37,10 @@ var BrowserView = function(controller) {
   // ------------
   // 
 
-  this.facetsEl = $$('#facets');
-  this.facetsEl.appendChild($$('.facets_title', {text: i18n.t("browser.facets_title")}));
+  this.facetsEl = $$('#facet_filters');
+  this.facetsWrapperEl = $$('#facets');
+  this.facetsWrapperEl.appendChild($$('.subjects_title', {text: i18n.t("browser.subjects_title")}));
+  this.facetsWrapperEl.appendChild(this.facetsEl);
 
   this.documentsEl = $$('#documents');
   this.documentsEl.appendChild($$('.stats', {text: i18n.t("browser.loading")}));
@@ -49,7 +51,7 @@ var BrowserView = function(controller) {
 
   // Wrap what we have into a panel wrapper
   this.panelWrapperEl = $$('.panel-wrapper');
-  this.panelWrapperEl.appendChild(this.facetsEl);
+  this.panelWrapperEl.appendChild(this.facetsWrapperEl);
   this.panelWrapperEl.appendChild(this.documentsEl);
   this.panelWrapperEl.appendChild(this.previewEl);
   
