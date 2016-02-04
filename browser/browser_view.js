@@ -39,7 +39,7 @@ var BrowserView = function(controller) {
 
   this.facetsEl = $$('#facet_filters');
   this.facetsWrapperEl = $$('#facets');
-  this.facetsWrapperEl.appendChild($$('.subjects_title', {text: i18n.t("browser.subjects_title")}));
+  this.facetsWrapperEl.appendChild($$('.facets_title', {text: i18n.t("browser.facets_title")}));
   this.facetsWrapperEl.appendChild(this.facetsEl);
 
   this.documentsEl = $$('#documents');
