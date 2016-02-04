@@ -38,6 +38,8 @@ var BrowserView = function(controller) {
   // 
 
   this.facetsEl = $$('#facets');
+  this.facetsEl.appendChild($$('.facets_title', {text: i18n.t("browser.facets_title")}));
+
   this.documentsEl = $$('#documents');
   this.documentsEl.appendChild($$('.stats', {text: i18n.t("browser.loading")}));
 
