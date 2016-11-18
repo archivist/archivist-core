@@ -17,7 +17,7 @@ var getDay = function(date) {
   var index = date.getDate();
   var indexStr = index.toString();
   if(indexStr.length > 1) return indexStr;
-  return indexStr + '0';
+  return '0' + indexStr;
 }
 
 var getMonth = function(date) {
