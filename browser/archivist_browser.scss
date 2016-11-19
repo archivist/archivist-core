@@ -65,7 +65,9 @@ div {
   padding: 20px;
   overflow: auto;
   border: 1px #000 solid;
-  margin: 20px 40px 0px 0px
+  margin: 20px 40px 0px 0px;
+  border: 1px #ddd solid;
+  min-height: calc(100vh - 200px);
 }
 
 .facets_title {
