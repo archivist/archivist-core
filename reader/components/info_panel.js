@@ -70,12 +70,7 @@ class InfoPanel extends Panel {
     var teaser_abstract = splitted_abstract.shift();
     var $teaser_abstract = $("<span/>", { class: "teaser" }).append(teaser_abstract);
     var complete_abstract = splitted_abstract.join('\n');
-    var $complete_abstract = $$('div', { 
-      className: "complete", 
-      dangerouslySetInnerHTML: {
-        __html: '<p>' + complete_abstract.split('\n').join('</p><p>') + '</p>' 
-      } 
-    });
+    var $complete_abstract = $("<span/>", { class: "complete" }).append('<p>' + complete_abstract.split('\n').join('</p><p>') + '</p>');
     var $more = $("<span/>", { class: "more", text: i18n.t('metadata.show_more')});
     $more.click(function(){
       var $complete = $(this).siblings('.complete');
