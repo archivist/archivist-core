@@ -38,6 +38,18 @@ var DocumentNode = Substance.Document.Node.extend({
     "interviewee_photo": "string",
     "interviewee_waypoints": ["array", "waypoint"],
 
+    // Person data
+    "detention_place_type": ["array", "string"],
+    "forced_labor_type": ["array", "string"],
+    "person_state": "string",
+    "military_service": "boolean",
+    "sex": "string",
+    "place_of_birth": "string",
+    "project": "string",
+    "year_of_birth": "string",
+    "enslaving_year": "string",
+    "homecoming_year": "string",
+
     // Workflow
     "transcripted": "boolean",
     "verified": "boolean",

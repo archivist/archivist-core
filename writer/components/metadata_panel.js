@@ -81,6 +81,8 @@ var MetadataPanel = React.createClass({
     var refId = this.props.subjectReferenceId;
 
     if (change.isAffected(["document", "interviewee_waypoints"]) ||
+        change.isAffected(["document", "forced_labor_type"]) ||
+        change.isAffected(["document", "detention_place_type"]) ||
         change.isAffected(["document", "project_location"]) ||
         change.isAffected(["document", "record_type"]) ||
         change.isAffected(["document", "transcripted"]) ||
@@ -178,6 +180,28 @@ var MetadataPanel = React.createClass({
     });
   },
 
+  renderCheckboxProperties: function(property, list) {
+    var app = this.context.app;
+    var checked = app.doc.get('document')[property];
+
+    var checkboxes = list.map(function(item) {
+      var active = checked === undefined ? false : checked.indexOf(item.id) > -1;
+      return $$('div', {className: 'checkbox-wrapper', contentEditable: false}, 
+        $$('input', {contentEditable: false, name: item.id, onChange: this.handleCheckboxesChange.bind(this, property), checked: active, type: 'checkbox'}),
+        $$('div', {className: 'label', contentEditable: false}, item.label)
+      );
+    }.bind(this));
+
+    return $$('div', {className: 'checkboxes-wrapper', contentEditable: false}, checkboxes);
+  },
+
+  // getCheckboxValue: function(prop, value) {
+  //   var app = this.context.app;
+  //   var node = app.doc.get('document')[property];
+  //   if(node === undefined) return false;
+  //   return node.indexOf(value) > -1;
+  // }
+
   renderInterviewType: function() {
     var app = this.context.app;
     var selected = app.doc.get('document').record_type;
@@ -188,6 +212,27 @@ var MetadataPanel = React.createClass({
     );
   },
 
+  renderSelectList: function(prop, list) {
+    var app = this.context.app;
+    var selected = app.doc.get('document')[prop];
+
+    var options = list.map(function(item) { 
+      return $$('option', {value: item}, item)
+    });
+
+    return $$('select', {contentEditable: false, onChange: this.handleSelectListState.bind(this, prop), defaultValue: selected}, options);
+  },
+
+  handleSelectListState: function(prop, e) {
+    var app = this.context.app;
+    var doc = app.doc;
+    var value = e.currentTarget.value;
+
+    doc.transaction(function(tx) {
+      tx.set(["document", prop], value);
+    });
+  },
+
   handleCheckboxChange: function(e) {
     var app = this.context.app;
     var doc = app.doc;
@@ -196,6 +241,30 @@ var MetadataPanel = React.createClass({
 
     doc.transaction(function(tx) {
       tx.set(["document", property], checked);
+    });
+  },
+
+  handleCheckboxesChange: function(property, e) {
+    var app = this.context.app;
+    var doc = app.doc;
+    var value = e.currentTarget.name;
+    var checked = e.currentTarget.checked;
+    var currentValue = app.doc.get('document')[property];
+    var result = []
+    if(currentValue === undefined) {
+      result.push(value)
+    } else {
+      var index = currentValue.indexOf(value)
+      result = currentValue
+      if(index > -1) {
+        result.splice(index, 1);
+      } else {
+        result.push(value)
+      }
+    }
+
+    doc.transaction(function(tx) {
+      tx.set(["document", property], result);
     });
   },
 
@@ -429,6 +498,74 @@ var MetadataPanel = React.createClass({
 
           // $$('div', {className: "This interview was created on XX and published on YY. Last update was made"})
         ),
+
+        $$('div', {className: 'person section'},
+          $$('h3', {contentEditable: false}, "Person Details"),
+
+          label("Detention place type"),
+          this.renderCheckboxProperties('detention_place_type', [
+            {id: 'Промышленность и строительство', label: 'Промышленность и строительство'}, 
+            {id: 'Производство и хранение оружия', label: '→→ Производство и хранение оружия'},
+            {id: 'Добыча ископаемых', label: '→→ Добыча ископаемых'}, 
+            {id: 'Железная дорога, транспорт', label: '→→ Железная дорога, транспорт'}, 
+            {id: 'Металлургия', label: '→→ Металлургия'}, 
+            {id: 'Строительство', label: '→→ Строительство'}, 
+            {id: 'Землеустроительные работы', label: '→→ Землеустроительные работы'}, 
+            {id: 'Судоверфи', label: '→→ Судоверфи'}, 
+            {id: 'Авиационная промышленность', label: '→→ Авиационная промышленность'}, 
+            {id: 'Станкостроение и приборостроение', label: '→→ Станкостроение и приборостроение'}, 
+            {id: 'Текстильная промышленность', label: '→→ Текстильная промышленность'}, 
+            {id: 'Пищевая промышленность', label: '→→ Пищевая промышленность'}, 
+            {id: 'Лесная промышленность', label: '→→ Лесная промышленность'}, 
+            {id: 'Химический завод', label: '→→ Химический завод'}, 
+            {id: 'Сельское хозяйство', label: 'Сельское хозяйство'}, 
+            {id: 'Частный сектор и сфера услуг', label: 'Частный сектор и сфера услуг'}
+          ]),
+
+          label("Forced labor type"),
+          this.renderCheckboxProperties('forced_labor_type', [
+            {id: 'рабочий лагерь', label: 'рабочий лагерь'},
+            {id: 'штрафной лагерь', label: 'штрафной лагерь'},
+            {id: 'концентрационный лагерь, лагерь смерти', label: 'концентрационный лагерь, лагерь смерти'},
+            {id: 'частное хозяйство (ферма)', label: 'частное хозяйство (ферма)'},
+            {id: 'частный дом (город)', label: 'частный дом (город)'}
+          ]),
+
+          label("Person state"),
+          this.renderSelectList('person_state', [
+            'военнопленный',
+            'ост'
+          ]),
+
+          this.renderCheckboxProperty('military_service'),
+          label("Military service"),
+
+          label("Sex"),
+          this.renderSelectList('sex', [
+            'мужчина',
+            'женщина'
+          ]),
+
+          label("Place of birth (region)"),
+          this.renderTextProperty('place_of_birth'),
+
+          label("Project"),
+          this.renderSelectList('project', [
+            'Международный проект документации рабского и принудительного труда',
+            'Выжившие в Маутхаузене',
+            'Коллекция №1'
+          ]),
+
+          label("Year of birth"),
+          this.renderTextProperty('year_of_birth'),
+
+          label("Year of enslaving"),
+          this.renderTextProperty('enslaving_year'),
+
+          label("Year of homecoming"),
+          this.renderTextProperty('homecoming_year')
+        ),
+
         $$('div', {className: 'status section', contentEditable: false},
           $$('h3', {contentEditable: false}, "Workflow"),
 
