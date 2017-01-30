@@ -517,6 +517,20 @@
   margin: 3px 0px 10px;
 }
 
+.metadata-panel-component .checkbox-wrapper {
+  clear: both;
+  cursor: pointer;
+}
+
+.metadata-panel-component .checkbox-wrapper .label,
+.metadata-panel-component .status .label {
+  margin-top: 0px;
+}
+
+.metadata-panel-component .label {
+  margin-top: 10px;
+}
+
 .metadata-panel-component input[type="checkbox"] {
   float: left;
   margin: 6px 8px 0px 0px;

@@ -186,8 +186,8 @@ var MetadataPanel = React.createClass({
 
     var checkboxes = list.map(function(item) {
       var active = checked === undefined ? false : checked.indexOf(item.id) > -1;
-      return $$('div', {className: 'checkbox-wrapper', contentEditable: false}, 
-        $$('input', {contentEditable: false, name: item.id, onChange: this.handleCheckboxesChange.bind(this, property), checked: active, type: 'checkbox'}),
+      return $$('div', {className: 'checkbox-wrapper', contentEditable: false, onClick: this.handleCheckboxesChange.bind(this, property)}, 
+        $$('input', {contentEditable: false, name: item.id, checked: active, type: 'checkbox'}),
         $$('div', {className: 'label', contentEditable: false}, item.label)
       );
     }.bind(this));
@@ -247,8 +247,8 @@ var MetadataPanel = React.createClass({
   handleCheckboxesChange: function(property, e) {
     var app = this.context.app;
     var doc = app.doc;
-    var value = e.currentTarget.name;
-    var checked = e.currentTarget.checked;
+    var value = e.currentTarget.childNodes[0].name;
+    var checked = e.currentTarget.childNodes[0].checked;
     var currentValue = app.doc.get('document')[property];
     var result = []
     if(currentValue === undefined) {
@@ -502,7 +502,7 @@ var MetadataPanel = React.createClass({
         $$('div', {className: 'person section'},
           $$('h3', {contentEditable: false}, "Person Details"),
 
-          label("Detention place type"),
+          label("Тип принудительной работы"),
           this.renderCheckboxProperties('detention_place_type', [
             {id: 'Промышленность и строительство', label: 'Промышленность и строительство'}, 
             {id: 'Производство и хранение оружия', label: '→→ Производство и хранение оружия'},
@@ -522,7 +522,7 @@ var MetadataPanel = React.createClass({
             {id: 'Частный сектор и сфера услуг', label: 'Частный сектор и сфера услуг'}
           ]),
 
-          label("Forced labor type"),
+          label("Тип места заключения"),
           this.renderCheckboxProperties('forced_labor_type', [
             {id: 'рабочий лагерь', label: 'рабочий лагерь'},
             {id: 'штрафной лагерь', label: 'штрафной лагерь'},
@@ -531,22 +531,22 @@ var MetadataPanel = React.createClass({
             {id: 'частный дом (город)', label: 'частный дом (город)'}
           ]),
 
-          label("Person state"),
+          label("Статус"),
           this.renderSelectList('person_state', [
             'военнопленный',
             'ост'
           ]),
 
           this.renderCheckboxProperty('military_service'),
-          label("Military service"),
+          label("Служба в советской армии"),
 
-          label("Sex"),
+          label("Пол"),
           this.renderSelectList('sex', [
             'мужчина',
             'женщина'
           ]),
 
-          label("Place of birth (region)"),
+          label("Место рождения (регион)"),
           this.renderTextProperty('place_of_birth'),
 
           label("Project"),
@@ -556,13 +556,13 @@ var MetadataPanel = React.createClass({
             'Коллекция №1'
           ]),
 
-          label("Year of birth"),
+          label("Год рождения"),
           this.renderTextProperty('year_of_birth'),
 
-          label("Year of enslaving"),
+          label("Год угона"),
           this.renderTextProperty('enslaving_year'),
 
-          label("Year of homecoming"),
+          label("Год возвращения домой"),
           this.renderTextProperty('homecoming_year')
         ),
 
