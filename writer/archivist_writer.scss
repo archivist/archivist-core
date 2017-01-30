@@ -515,6 +515,7 @@
 .metadata-panel-component select {
   display: block;
   margin: 3px 0px 10px;
+  padding-bottom: 10px;
 }
 
 .metadata-panel-component .checkbox-wrapper {
@@ -522,9 +523,14 @@
   cursor: pointer;
 }
 
-.metadata-panel-component .checkbox-wrapper .label,
-.metadata-panel-component .status .label {
+.metadata-panel-component .checkbox-wrapper .label
   margin-top: 0px;
+  line-height: 24px;
+}
+
+.metadata-panel-component .status .label {
+  margin-top: 4px;
+  line-height: 24px;
 }
 
 .metadata-panel-component .label {
@@ -533,7 +539,13 @@
 
 .metadata-panel-component input[type="checkbox"] {
   float: left;
-  margin: 6px 8px 0px 0px;
+  margin: 0px 8px 0px 0px;
+  clear: both;
+}
+
+.metadata-panel-component .status input[type="checkbox"] {
+  margin: 10px 8px 0px 0px;
+  clear: both;
 }
 
 /* prisons list */
