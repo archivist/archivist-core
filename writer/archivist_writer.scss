@@ -515,7 +515,6 @@
 .metadata-panel-component select {
   display: block;
   margin: 3px 0px 10px;
-  padding-bottom: 10px;
 }
 
 .metadata-panel-component .checkbox-wrapper {
@@ -525,26 +524,35 @@
 
 .metadata-panel-component .checkbox-wrapper .label {
   margin-top: 0px;
-  line-height: 24px;
+  line-height: 18px;
+  font-weight: normal;
+  margin-bottom: 0px;
 }
 
 .metadata-panel-component .status .label {
-  margin-top: 4px;
-  line-height: 24px;
+  margin-top: 0px;
+  line-height: 15px;
 }
 
 .metadata-panel-component .label {
   margin-top: 10px;
+  font-weight: bold;
+  margin-bottom: 6px;
 }
 
 .metadata-panel-component input[type="checkbox"] {
   float: left;
-  margin: 0px 8px 0px 0px;
+  margin: 6px 8px 0px 0px;
   clear: both;
+  min-height: 10px;
+}
+
+.metadata-panel-component .checkbox-wrapper input[type="checkbox"] {
+  margin: 4px 8px 0px 0px;
 }
 
 .metadata-panel-component .status input[type="checkbox"] {
-  margin: 10px 8px 0px 0px;
+  margin: 2px 8px 0px 0px;
   clear: both;
 }
 
